@@ -1,10 +1,14 @@
 # ArisuFxPy
 
-[![Telegram Channel](https://img.shields.io/badge/Telegram-HackInjectLab-blue?logo=telegram)](https://t.me/hackinjectlab)
-[![PyPI supported Python versions](https://img.shields.io/pypi/pyversions/arisufxpy.svg)](https://pypi.python.org/pypi/arisufxpy)
-[![Win/Mac/Linux](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-informational)]()
-[![MIT](https://img.shields.io/github/license/arisugpt/ArisuFxPy)](https://github.com/arisugpt/ArisuFxPy/blob/master/LICENSE)
-![Test](https://github.com/arisugpt/ArisuFxPy/workflows/Test/badge.svg)
+# ArisuFxPy
+
+[![Telegram](https://img.shields.io/badge/Telegram-HackInjectLab-blue?logo=telegram&logoColor=white)](https://t.me/hackinjectlab)
+[![PyPI](https://img.shields.io/pypi/v/arisufxpy.svg)](https://pypi.org/project/arisufxpy/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/arisufxpy.svg)](https://pypi.org/project/arisufxpy/)
+[![Platform](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightblue)](https://pypi.org/project/arisufxpy/)
+[![License](https://img.shields.io/github/license/arisugpt/ArisuFxPy)](https://github.com/arisugpt/ArisuFxPy/blob/main/LICENSE)
+
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/arisugpt/ArisuFxPy/build.yml?label=build)
 
 A Unity asset extractor for Python based on [AssetStudio](https://github.com/Perfare/AssetStudio).
 Maintained and customized by ArisuGpt. Based on the original UnityPy core by K0lb3.
