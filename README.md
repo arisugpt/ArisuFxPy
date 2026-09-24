@@ -1,6 +1,5 @@
 # ArisuFxPy
 
-# ArisuFxPy
 
 [![Telegram](https://img.shields.io/badge/Telegram-HackInjectLab-blue?logo=telegram&logoColor=white)](https://t.me/hackinjectlab)
 [![PyPI](https://img.shields.io/pypi/v/arisufxpy.svg)](https://pypi.org/project/arisufxpy/)
