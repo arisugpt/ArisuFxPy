@@ -3,7 +3,7 @@
 
 [![Telegram](https://img.shields.io/badge/Telegram-HackInjectLab-blue?logo=telegram&logoColor=white)](https://t.me/hackinjectlab)
 [![PyPI](https://img.shields.io/pypi/v/arisufxpy.svg)](https://pypi.org/project/arisufxpy/)
-[![Python Versions](https://img.shields.io/pypi/pyversions/arisufxpy.svg)](https://pypi.org/project/arisufxpy/)
+![Python Versions](https://img.shields.io/badge/python-3.8%2B-blue)
 [![Platform](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightblue)](https://pypi.org/project/arisufxpy/)
 [![License](https://img.shields.io/github/license/arisugpt/ArisuFxPy)](https://github.com/arisugpt/ArisuFxPy/blob/main/LICENSE)
 
