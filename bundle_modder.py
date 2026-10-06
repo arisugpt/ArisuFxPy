@@ -1,8 +1,37 @@
 import os
+import sys
 import json
 import struct
-import ArisuFxPy
-from tabulate import tabulate
+
+# Smart import for ArisuFxPy (with folder-shadowing fix & fallback)
+try:
+    import ArisuFxPy
+    # If shadowed by parent directory named 'ArisuFxPy'
+    if not hasattr(ArisuFxPy, "load"):
+        try:
+            import ArisuFxPy.ArisuFxPy as _mod
+            ArisuFxPy = _mod
+        except ImportError:
+            pass
+except ImportError:
+    try:
+        # Fallback to UnityPy if ArisuFxPy is not yet installed on mobile/Termux
+        import UnityPy as ArisuFxPy
+    except ImportError:
+        print("[-] Error: Neither 'ArisuFxPy' nor 'UnityPy' is installed!")
+        print("[-] To install ArisuFxPy on Termux/PC, run:")
+        print("    pip install git+https://github.com/arisugpt/ArisuFxPy.git\n")
+        sys.exit(1)
+
+# Safe tabulate import
+try:
+    from tabulate import tabulate
+except ImportError:
+    def tabulate(data, headers, tablefmt="grid"):
+        lines = ["\t".join(headers), "-" * 50]
+        for row in data:
+            lines.append("\t".join(str(c) for c in row))
+        return "\n".join(lines)
 
 def get_download_path():
     termux_down = "/sdcard/Download"
