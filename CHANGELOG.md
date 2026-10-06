@@ -1,11 +1,11 @@
-# Change Log
+﻿# Change Log
 
 ## 1.20
 
 - overall type-hint improvements
-- **UnityPy.classes**
-  - replace hard-coded UnityPy.classes with generated class stubs
-    - UnityPy.classes.legacy_patch to provide backward compatibility
+- **ArisuFxPy.classes**
+  - replace hard-coded ArisuFxPy.classes with generated class stubs
+    - ArisuFxPy.classes.legacy_patch to provide backward compatibility
     - classes are all parsed and dumped/stored using typetrees now
 - **TypeTree**
   - use a hierarchical instead of a flat structure

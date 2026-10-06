@@ -1,4 +1,4 @@
-import os
+﻿import os
 import re
 import subprocess
 from typing import Literal, cast, get_args
@@ -16,7 +16,7 @@ System = Literal["Windows", "Linux", "Darwin"]
 Arch = Literal["x64", "x86", "arm", "arm64", "x86_64"]
 
 INSTALL_DIR = os.path.dirname(os.path.realpath(__file__))
-UNITYPYBOOST_DIR = os.path.join(INSTALL_DIR, "UnityPyBoost")
+ARISUFXPYBOOST_DIR = os.path.join(INSTALL_DIR, "ArisuFxPyBoost")
 
 
 class BuildExt(build_ext):
@@ -51,7 +51,7 @@ class BuildExt(build_ext):
 class SDist(sdist):
     def make_distribution(self) -> None:
         # add all fmod libraries to the distribution
-        for root, _dirs, files in os.walk("UnityPy/lib/FMOD"):
+        for root, _dirs, files in os.walk("ArisuFxPy/lib/FMOD"):
             for file in files:
                 fp = f"{root}/{file}"
                 if fp not in self.filelist.files:
@@ -103,21 +103,21 @@ class BDistWheel(bdist_wheel):  # type: ignore
             system = "Darwin" if platform_tag.startswith("macosx") else "Linux"
 
         if arch and arch in get_args(Arch):
-            self.distribution.package_data["UnityPy"].append(get_fmod_path(system, cast(Arch, arch)))
+            self.distribution.package_data["ArisuFxPy"].append(get_fmod_path(system, cast(Arch, arch)))
         super().run()
 
 
 setup(
-    name="UnityPy",
+    name="ArisuFxPy",
     packages=find_packages(),
-    package_data={"UnityPy": ["resources/lzma.tpk"]},
+    package_data={"ArisuFxPy": ["resources/lzma.tpk"]},
     ext_modules=[
         Extension(
-            "UnityPy.UnityPyBoost",
-            [f"UnityPyBoost/{f}" for f in os.listdir(UNITYPYBOOST_DIR) if f.endswith(".cpp")],
-            depends=[f"UnityPyBoost/{f}" for f in os.listdir(UNITYPYBOOST_DIR) if f.endswith(".hpp")],
+            "ArisuFxPy.ArisuFxPyBoost",
+            [f"ArisuFxPyBoost/{f}" for f in os.listdir(ARISUFXPYBOOST_DIR) if f.endswith(".cpp")],
+            depends=[f"ArisuFxPyBoost/{f}" for f in os.listdir(ARISUFXPYBOOST_DIR) if f.endswith(".hpp")],
             language="c++",
-            include_dirs=[UNITYPYBOOST_DIR],
+            include_dirs=[ARISUFXPYBOOST_DIR],
         )
     ],
     cmdclass={"build_ext": BuildExt, "sdist": SDist, "bdist_wheel": BDistWheel},

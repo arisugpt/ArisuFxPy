@@ -1,10 +1,10 @@
-import struct
+﻿import struct
 
 import astc_encoder
 import pytest
 
-from UnityPy.enums import TextureFormat as TF
-from UnityPy.export.Texture2DConverter import CONV_TABLE
+from ArisuFxPy.enums import TextureFormat as TF
+from ArisuFxPy.export.Texture2DConverter import CONV_TABLE
 
 # the colour astcenc returns for a block it cannot decode in the selected profile
 ERROR_COLOUR = (255, 0, 255, 255)

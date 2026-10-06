@@ -1,10 +1,10 @@
-# UnityPy
+﻿# ArisuFxPy
 
 [![Discord server invite](https://discordapp.com/api/guilds/603359898507673630/embed.png)](https://discord.gg/C6txv7M)
-[![PyPI supported Python versions](https://img.shields.io/pypi/pyversions/UnityPy.svg)](https://pypi.python.org/pypi/UnityPy)
+[![PyPI supported Python versions](https://img.shields.io/pypi/pyversions/ArisuFxPy.svg)](https://pypi.python.org/pypi/UnityPy)
 [![Win/Mac/Linux](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-informational)]()
-[![MIT](https://img.shields.io/github/license/K0lb3/UnityPy)](https://github.com/K0lb3/UnityPy/blob/master/LICENSE)
-![Test](https://github.com/K0lb3/UnityPy/workflows/Test/badge.svg)
+[![MIT](https://img.shields.io/github/license/arisugpt/ArisuFxPy)](https://github.com/arisugpt/ArisuFxPy/blob/master/LICENSE)
+![Test](https://github.com/arisugpt/ArisuFxPy/workflows/Test/badge.svg)
 
 A Unity asset extractor for Python based on [AssetStudio](https://github.com/Perfare/AssetStudio).
 
@@ -35,7 +35,7 @@ make sure to make a note of the used UnityPy version in your README or add a che
 e.g.
 
 ```python
-if UnityPy.__version__ != '1.9.6':
+if ArisuFxPy.__version__ != '1.9.6':
     raise ImportError("Invalid UnityPy version detected. Please use version 1.9.6")
 ```
 
@@ -53,13 +53,13 @@ if UnityPy.__version__ != '1.9.6':
 Install via PyPI:
 
 ```bash
-pip install UnityPy
+pip install ArisuFxPy
 ```
 
 Install from source code:
 
 ```bash
-git clone https://github.com/K0lb3/UnityPy.git
+git clone https://github.com/arisugpt/ArisuFxPy.git
 cd UnityPy
 python -m pip install .
 ```
@@ -70,8 +70,8 @@ python -m pip install .
 
 Visual C++ Redistributable is required for the brotli dependency.
 In case a new(ish) Python version is used, it can happen that the C-dependencies of UnityPy might not be precompiled for this version.
-In such cases the user either has to report this as issue or follow the steps of [this issue](https://github.com/K0lb3/UnityPy/issues/223) to compile it oneself.
-Another option for the user is downgrading Python to the latest version supported by UnityPy. For this see the Python version badge at the top of the README.
+In such cases the user either has to report this as issue or follow the steps of [this issue](https://github.com/arisugpt/ArisuFxPy/issues/223) to compile it oneself.
+Another option for the user is downgrading Python to the latest version supported by ArisuFxPy. For this see the Python version badge at the top of the README.
 
 #### Crash without warning/error
 
@@ -84,7 +84,7 @@ The following is a simple example.
 
 ```python
 import os
-import UnityPy
+import ArisuFxPy
 
 def unpack_all_assets(source_folder: str, destination_folder: str):
     # iterate over all files in source folder
@@ -92,8 +92,8 @@ def unpack_all_assets(source_folder: str, destination_folder: str):
         for file_name in files:
             # generate file_path
             file_path = os.path.join(root, file_name)
-            # load that file via UnityPy.load
-            env = UnityPy.load(file_path)
+            # load that file via ArisuFxPy.load
+            env = ArisuFxPy.load(file_path)
 
             # iterate over internal objects
             for obj in env.objects:
@@ -154,14 +154,14 @@ which itself is a simple recursive iterator.
 
 ```python
 import io
-import UnityPy
+import ArisuFxPy
 
 # all of the following would work
 src = "file_path"
 src = b"bytes"
 src = io.BytesIO(b"Streamable")
 
-env = UnityPy.load(src)
+env = ArisuFxPy.load(src)
 
 for obj in env.objects:
     ...
@@ -196,7 +196,7 @@ For object types with ``m_Name`` you can use ``.peek_name()`` to only read the n
 
 There are two general parsing functions, ``.parse_as_object()`` and ``.parse_as_dict()``.
 ``parse_as_dict`` parses the object data into a dict.
-``parse_as_object`` parses the object data into a class. If the class is a Unity class, it's stub class from ``UnityPy.classes(.generated)`` will be used, if it's an unknown one, then it will be parsed into an ``UnknownObject``, which simply acts as interface for the otherwise parsed dict.
+``parse_as_object`` parses the object data into a class. If the class is a Unity class, it's stub class from ``ArisuFxPy.classes(.generated)`` will be used, if it's an unknown one, then it will be parsed into an ``UnknownObject``, which simply acts as interface for the otherwise parsed dict.
 Some special classes, namely those below, have additional handlers added to their class for easier interaction with them.
 
 The ``.patch(item)`` function can be used on all object (readers) to replace their data with the changed item, which has to be either a dict or of the class the object represents.
@@ -235,7 +235,7 @@ The modern versions are equivalent to them and have a more correct type hints.
 
 ## Important Object Types
 
-Now UnityPy uses [auto generated classes](UnityPy/classes/generated.py) with some useful extension methods and properties defined in [legacy_patch](UnityPy/classes/legacy_patch/). You can search for a specific classes in the module `UnityPy.classes` with your IDE's autocompletion.
+Now UnityPy uses [auto generated classes](UnityPy/classes/generated.py) with some useful extension methods and properties defined in [legacy_patch](UnityPy/classes/legacy_patch/). You can search for a specific classes in the module `ArisuFxPy.classes` with your IDE's autocompletion.
 
 ### Texture2D
 
@@ -345,8 +345,8 @@ UnityPy can generate the typetrees of MonoBehaviours from the game assemblies us
 UnityPy will automatically try to generate the typetree of MonoBehaviours if the typetree is missing in the assets and ``env.typetree_generator`` is set.
 
 ```python
-import UnityPy
-from UnityPy.helpers.TypeTreeGenerator import TypeTreeGenerator
+import ArisuFxPy
+from ArisuFxPy.helpers.TypeTreeGenerator import TypeTreeGenerator
 
 # create generator
 GAME_ROOT_DIR: str
@@ -362,7 +362,7 @@ generator.load_local_game(GAME_ROOT_DIR)
 # generator.load_dll(dll: bytes)
 # generator.load_il2cpp(il2cpp: bytes, metadata: bytes)
 
-env = UnityPy.load(fp)
+env = ArisuFxPy.load(fp)
 # assign generator to env
 env.typetree_generator = generator
 for obj in objects:
@@ -460,7 +460,7 @@ for obj in env.objects:
 
 ## Configurations
 
-There're several configurations and interfaces that provide the customizability to UnityPy.
+There're several configurations and interfaces that provide the customizability to ArisuFxPy.
 
 ### Unity CN Decryption
 
@@ -468,8 +468,8 @@ The Chinese version of Unity has its own builtin option to encrypt AssetBundles/
 To enable encryption simply use the code as follow, with `key` being the value that the game that loads the bundles passes to `AssetBundle.SetAssetBundleDecryptKey`.
 
 ```python
-import UnityPy
-UnityPy.set_assetbundle_decrypt_key(key)
+import ArisuFxPy
+ArisuFxPy.set_assetbundle_decrypt_key(key)
 ```
 
 ### Unity Fallback Version
@@ -477,16 +477,16 @@ UnityPy.set_assetbundle_decrypt_key(key)
 In case UnityPy failed to detect the Unity version of the game assets, you can set a fallback version. e.g.
 
 ```python
-import UnityPy.config
-UnityPy.config.FALLBACK_UNITY_VERSION = "2.5.0f5"
+import ArisuFxPy.config
+ArisuFxPy.config.FALLBACK_UNITY_VERSION = "2.5.0f5"
 ```
 
 ### Disable Typetree C-Implementation
 
-The [C-implementation](UnityPyBoost/) of typetree reader can boost the parsing of typetree by a lot. If you want to disable it and use pure Python reader, you can put the following 2 lines in your main file.
+The [C-implementation](ArisuFxPyBoost/) of typetree reader can boost the parsing of typetree by a lot. If you want to disable it and use pure Python reader, you can put the following 2 lines in your main file.
 
 ```python
-from UnityPy.helpers import TypeTreeHelper
+from ArisuFxPy.helpers import TypeTreeHelper
 TypeTreeHelper.read_typetree_boost = False
 ```
 
@@ -495,10 +495,10 @@ TypeTreeHelper.read_typetree_boost = False
 Some game assets have non-standard compression/decompression algorithm applied on the block data. If you wants to customize the compression/decompression function, you can modify the corresponding function mapping. e.g.
 
 ```python
-from UnityPy.enums.BundleFile import CompressionFlags
+from ArisuFxPy.enums.BundleFile import CompressionFlags
 flag = CompressionFlags.LZHAM
 
-from UnityPy.helpers import CompressionHelper
+from ArisuFxPy.helpers import CompressionHelper
 CompressionHelper.COMPRESSION_MAP[flag] = custom_compress
 CompressionHelper.DECOMPRESSION_MAP[flag] = custom_decompress
 ```
@@ -512,7 +512,7 @@ UnityPy uses [fsspec](https://github.com/fsspec/filesystem_spec) under the hood 
 This allows using various different types of filesystems without having to change UnityPy's code.
 It also means that you can use your own custom filesystem to e.g. handle indirection via catalog files, load assets on demand from a server, or decrypt files.
 
-Following methods of the filesystem have to be implemented for using it in UnityPy.
+Following methods of the filesystem have to be implemented for using it in ArisuFxPy.
 
 -   `sep` (not a function, just the separator as character)
 -   `isfile(self, path: str) -> bool`
@@ -523,6 +523,9 @@ Following methods of the filesystem have to be implemented for using it in Unity
 -   `makedirs(self, path: str, exist_ok: bool = False) -> bool`
 
 ## Credits
+
+- **Original Author & Upstream:** [K0lb3](https://github.com/K0lb3) - [UnityPy](https://github.com/arisugpt/ArisuFxPy)
+- **Forked, Enhanced & Maintained by:** [ArisuGpt](https://github.com/arisugpt) - [ArisuFxPy](https://github.com/arisugpt/ArisuFxPy)
 
 First of all,
 thanks a lot to all contributors of UnityPy and all of its users.

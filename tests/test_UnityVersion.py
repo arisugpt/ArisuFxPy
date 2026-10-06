@@ -1,6 +1,6 @@
-import pytest
+﻿import pytest
 
-from UnityPy.helpers.UnityVersion import UnityVersion, UnityVersionType
+from ArisuFxPy.helpers.UnityVersion import UnityVersion, UnityVersionType
 
 
 @pytest.mark.parametrize(

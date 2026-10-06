@@ -1,4 +1,4 @@
-import gc
+﻿import gc
 import math
 import os
 import random
@@ -6,12 +6,12 @@ from typing import List, Tuple, Type, TypeVar, Union
 
 import psutil
 
-from UnityPy.classes.generated import GameObject
-from UnityPy.helpers.Tpk import get_typetree_node
-from UnityPy.helpers.TypeTreeHelper import read_typetree, write_typetree
-from UnityPy.helpers.TypeTreeNode import TypeTreeNode
-from UnityPy.helpers.UnityVersion import UnityVersion
-from UnityPy.streams import EndianBinaryReader, EndianBinaryWriter
+from ArisuFxPy.classes.generated import GameObject
+from ArisuFxPy.helpers.Tpk import get_typetree_node
+from ArisuFxPy.helpers.TypeTreeHelper import read_typetree, write_typetree
+from ArisuFxPy.helpers.TypeTreeNode import TypeTreeNode
+from ArisuFxPy.helpers.UnityVersion import UnityVersion
+from ArisuFxPy.streams import EndianBinaryReader, EndianBinaryWriter
 
 PROCESS = psutil.Process(os.getpid())
 

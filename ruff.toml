@@ -1,13 +1,13 @@
-target-version = "py38"
+﻿target-version = "py38"
 include = [
-    "UnityPy/*.py",
-    "UnityPy/*.pyi",
+    "ArisuFxPy/*.py",
+    "ArisuFxPy/*.pyi",
     "tests/*py",
     "setup.py",
     "generators/*.py",
     "examples/*.py",
 ]
-exclude = ["UnityPy/classes/generated.py"]
+exclude = ["ArisuFxPy/classes/generated.py"]
 line-length = 120
 
 [lint]
@@ -30,4 +30,4 @@ convention = "numpy"
 # Ignore docstring requirements for test files
 "tests/**/*.py" = ["D"]
 # Ignore undefined names
-"UnityPy/streams/EndianBinaryReader.py" = ["F821"]
+"ArisuFxPy/streams/EndianBinaryReader.py" = ["F821"]

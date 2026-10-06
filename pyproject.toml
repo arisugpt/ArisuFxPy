@@ -1,11 +1,11 @@
-[build-system]
+﻿[build-system]
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "UnityPy"
-authors = [{ name = "Rudolf Kolbe", email = "rkolbe96@gmail.com" }]
-description = "A Unity extraction and patching package"
+name = "ArisuFxPy"
+authors = [{ name = "ArisuGpt", email = "arisujod@gmail.com" }, { name = "Rudolf Kolbe", email = "rkolbe96@gmail.com" }]
+description = "A Unity extraction and patching package (ArisuFxPy edition)"
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.8"
@@ -58,21 +58,21 @@ dependencies = [
 dynamic = ["version"]
 
 [project.scripts]
-UnityPy = "UnityPy.cli:main"
+ArisuFxPy = "ArisuFxPy.cli:main"
 
 [project.optional-dependencies]
 # optional dependencies must be lowercase/normalized
 ttgen = ["typetreegeneratorapi>=0.0.10"]
-full = ["unitypy[ttgen]"]
-tests = ["pytest", "pillow", "psutil", "unitypy[full]"]
-dev = ["ruff", "unitypy[tests]"]
+full = ["arisufxpy[ttgen]"]
+tests = ["pytest", "pillow", "psutil", "arisufxpy[full]"]
+dev = ["ruff", "arisufxpy[tests]"]
 
 [project.urls]
-"Homepage" = "https://github.com/K0lb3/UnityPy"
-"Bug Tracker" = "https://github.com/K0lb3/UnityPy/issues"
+"Homepage" = "https://github.com/arisugpt/ArisuFxPy"
+"Bug Tracker" = "https://github.com/arisugpt/ArisuFxPy/issues"
 
 [tool.setuptools.dynamic]
-version = { attr = "UnityPy.__version__" }
+version = { attr = "ArisuFxPy.__version__" }
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

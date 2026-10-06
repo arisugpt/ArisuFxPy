@@ -1,13 +1,13 @@
-import os
+﻿import os
 from tempfile import TemporaryDirectory
 
-from UnityPy.tools.extractor import extract_assets
+from ArisuFxPy.tools.extractor import extract_assets
 
 SAMPLES = os.path.join(os.path.dirname(os.path.abspath(__file__)), "samples")
 
 
 def test_extractor():
-    temp_dir = TemporaryDirectory(prefix="unitypy_test")
+    temp_dir = TemporaryDirectory(prefix="arisufxpy_test")
     extract_assets(
         SAMPLES,
         temp_dir.name,

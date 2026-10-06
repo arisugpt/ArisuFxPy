@@ -1,15 +1,15 @@
-import os
+﻿import os
 
 import pytest
 
-import UnityPy
-from UnityPy.helpers.MeshHelper import MeshHandler
+import ArisuFxPy
+from ArisuFxPy.helpers.MeshHelper import MeshHandler
 
 SAMPLES = os.path.join(os.path.dirname(os.path.abspath(__file__)), "samples")
 
 
 def load_mesh():
-    env = UnityPy.load(os.path.join(SAMPLES, "xinzexi_2_n_tex"))
+    env = ArisuFxPy.load(os.path.join(SAMPLES, "xinzexi_2_n_tex"))
     return next(obj.parse_as_object() for obj in env.objects if obj.type.name == "Mesh")
 
 
