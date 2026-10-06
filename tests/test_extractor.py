@@ -1,4 +1,4 @@
-﻿import os
+import os
 from tempfile import TemporaryDirectory
 
 from ArisuFxPy.tools.extractor import extract_assets

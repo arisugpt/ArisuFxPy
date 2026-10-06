@@ -1,4 +1,4 @@
-﻿# based on: https://github.com/Razmoth/PGRStudio/blob/master/AssetStudio/PGR/PGR.cs
+# based on: https://github.com/Razmoth/PGRStudio/blob/master/AssetStudio/PGR/PGR.cs
 import re
 from typing import Optional, Tuple, Union
 

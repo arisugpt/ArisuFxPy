@@ -1,4 +1,4 @@
-﻿from ArisuFxPy.classes import PPtr
+from ArisuFxPy.classes import PPtr
 from ArisuFxPy.classes.generated import Component
 from ArisuFxPy.classes.legacy_patch import GameObject
 

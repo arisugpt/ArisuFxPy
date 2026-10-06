@@ -1,4 +1,4 @@
-﻿from argparse import ArgumentParser
+from argparse import ArgumentParser
 
 from ArisuFxPy.cli.update_tpk import update_tpk
 

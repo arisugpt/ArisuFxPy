@@ -1,4 +1,4 @@
-﻿# ArisuFxPy
+# ArisuFxPy
 
 [![Discord server invite](https://discordapp.com/api/guilds/603359898507673630/embed.png)](https://discord.gg/C6txv7M)
 [![PyPI supported Python versions](https://img.shields.io/pypi/pyversions/ArisuFxPy.svg)](https://pypi.python.org/pypi/UnityPy)

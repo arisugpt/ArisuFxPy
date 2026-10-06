@@ -1,4 +1,4 @@
-﻿import pytest
+import pytest
 
 from ArisuFxPy.helpers.UnityVersion import UnityVersion, UnityVersionType
 

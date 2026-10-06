@@ -1,4 +1,4 @@
-﻿from typing import List, Optional, Tuple, Union
+from typing import List, Optional, Tuple, Union
 
 from ArisuFxPy.classes import PPtr
 from ArisuFxPy.classes.generated import GUID, NamedObject, SerializedShader, Texture

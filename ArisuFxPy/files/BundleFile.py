@@ -1,4 +1,4 @@
-﻿# TODO: implement encryption for saving files
+# TODO: implement encryption for saving files
 import re
 from typing import Optional, Union, cast
 

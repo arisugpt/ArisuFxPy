@@ -1,4 +1,4 @@
-﻿from typing import List, Optional, Union
+from typing import List, Optional, Union
 
 from ArisuFxPy.classes.generated import (
     AABB,

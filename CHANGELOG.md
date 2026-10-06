@@ -1,4 +1,4 @@
-﻿# Change Log
+# Change Log
 
 ## 1.20
 

@@ -1,4 +1,4 @@
-﻿"""Generates the classes for the UnityPy objects from the TypeTree of the TPK files."""
+"""Generates the classes for the UnityPy objects from the TypeTree of the TPK files."""
 
 from __future__ import annotations
 

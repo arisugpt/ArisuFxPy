@@ -1,4 +1,4 @@
-﻿import io
+import io
 import ntpath
 import os
 import re

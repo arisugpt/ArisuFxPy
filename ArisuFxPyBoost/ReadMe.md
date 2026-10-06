@@ -1,4 +1,4 @@
-﻿# ArisuFxPyBoost
+# ArisuFxPyBoost
 
 A C-extension for ArisuFxPy that accelerates various parts of ArisuFxPy (by a lot).
 

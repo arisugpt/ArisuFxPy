@@ -1,4 +1,4 @@
-﻿import warnings
+import warnings
 
 from .exceptions import UnityVersionFallbackError, UnityVersionFallbackWarning
 

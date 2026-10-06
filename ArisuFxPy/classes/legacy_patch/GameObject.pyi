@@ -1,4 +1,4 @@
-﻿from typing import List, Tuple, Union
+from typing import List, Tuple, Union
 
 from ArisuFxPy.classes import Component, PPtr
 from ArisuFxPy.classes.generated import ComponentPair, EditorExtension

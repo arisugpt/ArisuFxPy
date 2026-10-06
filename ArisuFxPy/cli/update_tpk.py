@@ -1,4 +1,4 @@
-﻿import os
+import os
 
 from tpk_ar.utils import download_tpk
 

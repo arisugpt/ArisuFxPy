@@ -1,4 +1,4 @@
-﻿import struct
+import struct
 
 import astc_encoder
 import pytest

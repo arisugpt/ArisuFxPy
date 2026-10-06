@@ -1,4 +1,4 @@
-﻿import os
+import os
 import re
 import subprocess
 from typing import Literal, cast, get_args
