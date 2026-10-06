@@ -1,5 +1,7 @@
 # ArisuFxPy
 
+[![PyPI Version](https://img.shields.io/pypi/v/ArisuFxPy.svg?logo=pypi&logoColor=white)](https://pypi.org/project/ArisuFxPy/)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/ArisuFxPy.svg)](https://pypi.org/project/ArisuFxPy/)
 [![Telegram Channel](https://img.shields.io/badge/Telegram-hackinjectlab-2CA5E0?logo=telegram&logoColor=white)](https://t.me/hackinjectlab)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-3776AB.svg?logo=python&logoColor=white)](https://www.python.org)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20Android%20Termux-blue)]()
@@ -50,9 +52,13 @@ if ArisuFxPy.__version__ != '1.9.6':
 
 **Python 3.8 or higher is required.**
 
-### 💻 PC (Windows / Linux / macOS)
+### 💻 PC & Termux Quick Install (via PyPI)
 
-Quick install directly from GitHub:
+```bash
+pip install ArisuFxPy
+```
+
+Or install bleeding-edge from GitHub:
 ```bash
 pip install git+https://github.com/arisugpt/ArisuFxPy.git
 ```
