@@ -1,0 +1,59 @@
+﻿name: Upstream Sync Check
+
+on:
+  schedule:
+    - cron: '0 0 * * 1' # Runs every Monday
+  workflow_dispatch:   # Manual button click in Actions tab
+
+jobs:
+  check_upstream:
+    name: Check Updates from K0lb3/UnityPy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Check for upstream changes
+        id: sync
+        run: |
+          git remote add upstream https://github.com/K0lb3/UnityPy.git
+          git fetch upstream master
+          COMMITS=$(git log HEAD..upstream/master --oneline)
+          if [ -n "$COMMITS" ]; then
+            echo "updates_found=true" >> $GITHUB_OUTPUT
+            echo "NEW COMMITS DETECTED:"
+            echo "$COMMITS"
+            git checkout -b upstream-sync-branch
+            git merge upstream/master -m "Merge upstream updates from K0lb3/UnityPy" --allow-unrelated-histories || true
+            git push origin upstream-sync-branch --force
+          else
+            echo "updates_found=false" >> $GITHUB_OUTPUT
+            echo "No new updates from upstream."
+          fi
+
+      - name: Create Pull Request for Approval
+        if: steps.sync.outputs.updates_found == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: upstream-sync-branch
+          title: "ðŸ”„ Upstream Updates Available from K0lb3/UnityPy"
+          body: |
+            ### Upstream Sync Notification
+            The original author (K0lb3/UnityPy) has published new commits.
+            
+            This Pull Request has been automatically generated for you to review and approve.
+            
+            **No changes have been made to your main branch.**
+            Review the commits, check compatibility, and click **Merge pull request** when you are ready!
+          base: main

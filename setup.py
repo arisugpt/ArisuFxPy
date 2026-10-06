@@ -21,31 +21,35 @@ ARISUFXPYBOOST_DIR = os.path.join(INSTALL_DIR, "ArisuFxPyBoost")
 
 class BuildExt(build_ext):
     def build_extensions(self):
-        cpp_version_flag: str
-        compiler = self.compiler
-        # msvc - only ever used c++20, never c++2a
-        if compiler.compiler_type == "msvc":
-            cpp_version_flag = "/std:c++20"
-        # gnu & clang
-        elif compiler.compiler_type == "unix":
-            res = subprocess.run(
-                [compiler.compiler[0], "-v"],
-                capture_output=True,
-            )
-            # for some reason g++ and clang++ return this as error
-            text = (res.stdout or res.stderr).decode("utf-8")
-            version = re.search(r"version\s+(\d+)\.", text)
-            if version is None:
-                raise Exception("Failed to determine compiler version")
-            version = int(version.group(1))
-            cpp_version_flag = "-std=c++2a" if version < 10 else "-std=c++20"
-        else:
-            cpp_version_flag = "-std=c++20"
+        try:
+            cpp_version_flag: str
+            compiler = self.compiler
+            # msvc - only ever used c++20, never c++2a
+            if compiler.compiler_type == "msvc":
+                cpp_version_flag = "/std:c++20"
+            # gnu & clang
+            elif compiler.compiler_type == "unix":
+                res = subprocess.run(
+                    [compiler.compiler[0], "-v"],
+                    capture_output=True,
+                )
+                text = (res.stdout or res.stderr).decode("utf-8")
+                version = re.search(r"version\s+(\d+)\.", text)
+                if version is None:
+                    raise Exception("Failed to determine compiler version")
+                version = int(version.group(1))
+                cpp_version_flag = "-std=c++2a" if version < 10 else "-std=c++20"
+            else:
+                cpp_version_flag = "-std=c++20"
 
-        for ext in self.extensions:
-            ext.extra_compile_args = [cpp_version_flag]
+            for ext in self.extensions:
+                ext.extra_compile_args = [cpp_version_flag]
 
-        build_ext.build_extensions(self)
+            build_ext.build_extensions(self)
+        except Exception as e:
+            print(f"\n[ArisuFxPy] NOTICE: C++ build skipped or compiler not found ({e}).")
+            print("[ArisuFxPy] Successfully falling back to 100% Pure Python implementation.\n")
+            self.extensions = []
 
 
 class SDist(sdist):
