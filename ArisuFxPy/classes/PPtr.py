@@ -32,11 +32,11 @@ class PPtr(Generic[T]):
     def type(self) -> ClassIDType:
         return self.deref().type
 
-    # backwards compatibility - to be removed in UnityPy 2
+    # backwards compatibility - to be removed in ArisuFxPy 2
     def read(self):
         return self.deref_parse_as_object()
 
-    # backwards compatibility - to be removed in UnityPy 2
+    # backwards compatibility - to be removed in ArisuFxPy 2
     def read_typetree(self):
         return self.deref_parse_as_dict()
 

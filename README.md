@@ -10,7 +10,7 @@
 
 A Unity asset extractor for Python based on [AssetStudio](https://github.com/Perfare/AssetStudio).
 
-Next to extraction, UnityPy also supports editing Unity assets.
+Next to extraction, ArisuFxPy also supports editing Unity assets.
 Via the typetree structure all object types can be edited in their native forms.
 
 ```python
@@ -27,18 +27,18 @@ Via the typetree structure all object types can be edited in their native forms.
 If you need advice, want to discuss game modding / data-mining, or need support,
 feel free to join our official **[Telegram Group (@hackinjectlab)](https://t.me/hackinjectlab)**.
 
-If you're using UnityPy for a commercial project,
+If you're using ArisuFxPy for a commercial project,
 a donation to a charitable cause or a sponsorship of this project is expected.
 
-**As UnityPy is still in active development, breaking changes can happen.**
+**As ArisuFxPy is still in active development, breaking changes can happen.**
 These changes are usually limited to minor versions (x.y) and not to patch versions (x.y.z).
 So in case that you don't want to actively maintain your project,
-make sure to make a note of the used UnityPy version in your README or add a check in your code.
+make sure to make a note of the used ArisuFxPy version in your README or add a check in your code.
 e.g.
 
 ```python
 if ArisuFxPy.__version__ != '1.9.6':
-    raise ImportError("Invalid UnityPy version detected. Please use version 1.9.6")
+    raise ImportError("Invalid ArisuFxPy version detected. Please use version 1.9.6")
 ```
 
 1. [Installation](#installation)
@@ -111,7 +111,7 @@ python bundle_modder.py
 #### Windows
 
 Visual C++ Redistributable is required for the brotli dependency.
-In case a new(ish) Python version is used, it can happen that the C-dependencies of UnityPy might not be precompiled for this version.
+In case a new(ish) Python version is used, it can happen that the C-dependencies of ArisuFxPy might not be precompiled for this version.
 In such cases the user either has to report this as issue or follow the steps of [this issue](https://github.com/arisugpt/ArisuFxPy/issues/223) to compile it oneself.
 Another option for the user is downgrading Python to the latest version supported by ArisuFxPy. For this see the Python version badge at the top of the README.
 
@@ -172,14 +172,14 @@ def unpack_all_assets(source_folder: str, destination_folder: str):
 You probably have to read [Important Classes](#important-classes)
 and [Important Object Types](#important-object-types) to understand how it works.
 
-Users with slightly advanced Python skills should look at [UnityPy/tools/extractor.py](UnityPy/tools/extractor.py) for a more advanced example.
+Users with slightly advanced Python skills should look at [ArisuFxPy/tools/extractor.py](ArisuFxPy/tools/extractor.py) for a more advanced example.
 It can also be used as a general template or as an importable tool.
 
 ## Important Classes
 
 ### Environment
 
-[Environment](UnityPy/environment.py) loads and parses the given files.
+[Environment](ArisuFxPy/environment.py) loads and parses the given files.
 It can be initialized via:
 
 -   a file path - apk files can be loaded as well
@@ -187,7 +187,7 @@ It can be initialized via:
 -   a stream - e.g., `io.BytesIO`, file stream,...
 -   a bytes object - will be loaded into a stream
 
-UnityPy can detect if the file is a WebFile, BundleFile, Asset, or APK.
+ArisuFxPy can detect if the file is a WebFile, BundleFile, Asset, or APK.
 
 The unpacked assets will be loaded into `.files`, a dict consisting of `asset-name : asset`.
 
@@ -218,7 +218,7 @@ with open(dst, "wb") as f:
 
 ### Asset
 
-Assets \([SerializedFile class](UnityPy/files/SerializedFile.py)\) are a container that contains multiple objects.
+Assets \([SerializedFile class](ArisuFxPy/files/SerializedFile.py)\) are a container that contains multiple objects.
 One of these objects can be an AssetBundle, which contains a file path for some of the objects in the same asset.
 
 All objects can be found in the `.objects` dict - `{ID : object}`.
@@ -227,7 +227,7 @@ The objects with a file path can be found in the `.container` dict - `{path : ob
 
 ### Object
 
-Objects \([ObjectReader class](UnityPy/files/ObjectReader.py)\) contain the _actual_ files, e.g., textures, text files, meshes, settings, ...
+Objects \([ObjectReader class](ArisuFxPy/files/ObjectReader.py)\) contain the _actual_ files, e.g., textures, text files, meshes, settings, ...
 
 To acquire the actual data of an object it has to be parsed first.
 This happens via the parse functions mentioned below.
@@ -277,7 +277,7 @@ The modern versions are equivalent to them and have a more correct type hints.
 
 ## Important Object Types
 
-Now UnityPy uses [auto generated classes](UnityPy/classes/generated.py) with some useful extension methods and properties defined in [legacy_patch](UnityPy/classes/legacy_patch/). You can search for a specific classes in the module `ArisuFxPy.classes` with your IDE's autocompletion.
+Now ArisuFxPy uses [auto generated classes](ArisuFxPy/classes/generated.py) with some useful extension methods and properties defined in [legacy_patch](ArisuFxPy/classes/legacy_patch/). You can search for a specific classes in the module `ArisuFxPy.classes` with your IDE's autocompletion.
 
 ### Texture2D
 
@@ -306,7 +306,7 @@ for obj in env.objects:
 ### Sprite
 
 Sprites are part of a texture and can have a separate alpha-image as well.
-Unlike most other extractors (including AssetStudio), UnityPy merges those two images by itself.
+Unlike most other extractors (including AssetStudio), ArisuFxPy merges those two images by itself.
 
 -   `.m_Name`
 -   `.image` - converts the merged texture part into a `PIL.Image`
@@ -383,8 +383,8 @@ for obj in env.objects:
 
 **TypeTreeGenerator**
 
-UnityPy can generate the typetrees of MonoBehaviours from the game assemblies using an optional package, ``TypeTreeGeneratorAPI``, which has to be installed via pip.
-UnityPy will automatically try to generate the typetree of MonoBehaviours if the typetree is missing in the assets and ``env.typetree_generator`` is set.
+ArisuFxPy can generate the typetrees of MonoBehaviours from the game assemblies using an optional package, ``TypeTreeGeneratorAPI``, which has to be installed via pip.
+ArisuFxPy will automatically try to generate the typetree of MonoBehaviours if the typetree is missing in the assets and ``env.typetree_generator`` is set.
 
 ```python
 import ArisuFxPy
@@ -506,7 +506,7 @@ There're several configurations and interfaces that provide the customizability 
 
 ### Unity CN Decryption
 
-The Chinese version of Unity has its own builtin option to encrypt AssetBundles/BundleFiles. As it's a feature of Unity itself, and not a game specific protection, it is included in UnityPy as well.
+The Chinese version of Unity has its own builtin option to encrypt AssetBundles/BundleFiles. As it's a feature of Unity itself, and not a game specific protection, it is included in ArisuFxPy as well.
 To enable encryption simply use the code as follow, with `key` being the value that the game that loads the bundles passes to `AssetBundle.SetAssetBundleDecryptKey`.
 
 ```python
@@ -516,7 +516,7 @@ ArisuFxPy.set_assetbundle_decrypt_key(key)
 
 ### Unity Fallback Version
 
-In case UnityPy failed to detect the Unity version of the game assets, you can set a fallback version. e.g.
+In case ArisuFxPy failed to detect the Unity version of the game assets, you can set a fallback version. e.g.
 
 ```python
 import ArisuFxPy.config
@@ -550,8 +550,8 @@ CompressionHelper.DECOMPRESSION_MAP[flag] = custom_decompress
 
 ### Custom Filesystem
 
-UnityPy uses [fsspec](https://github.com/fsspec/filesystem_spec) under the hood to manage all filesystem interactions.
-This allows using various different types of filesystems without having to change UnityPy's code.
+ArisuFxPy uses [fsspec](https://github.com/fsspec/filesystem_spec) under the hood to manage all filesystem interactions.
+This allows using various different types of filesystems without having to change ArisuFxPy's code.
 It also means that you can use your own custom filesystem to e.g. handle indirection via catalog files, load assets on demand from a server, or decrypt files.
 
 Following methods of the filesystem have to be implemented for using it in ArisuFxPy.
@@ -566,11 +566,11 @@ Following methods of the filesystem have to be implemented for using it in Arisu
 
 ## Credits
 
-- **Original Author & Upstream:** [K0lb3](https://github.com/K0lb3) - [UnityPy](https://github.com/arisugpt/ArisuFxPy)
+- **Original Author & Upstream:** [K0lb3](https://github.com/K0lb3) - [UnityPy](https://github.com/K0lb3/UnityPy)
 - **Forked, Enhanced & Maintained by:** [ArisuGpt](https://github.com/arisugpt) - [ArisuFxPy](https://github.com/arisugpt/ArisuFxPy)
 
 First of all,
-thanks a lot to all contributors of UnityPy and all of its users.
+thanks a lot to all contributors of UnityPy and ArisuFxPy, and all of its users.
 
 Also, many thanks to:
 

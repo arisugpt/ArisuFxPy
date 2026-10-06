@@ -224,7 +224,7 @@ class MeshHandler:
             ]
 
         if self.m_BoneWeights is None and mesh.m_Skin:
-            # BoneInfluence == BoneWeight in terms of usage in UnityPy due to int simplification
+            # BoneInfluence == BoneWeight in terms of usage in ArisuFxPy due to int simplification
             self.m_BoneIndices = [
                 (skin.boneIndex_0_, skin.boneIndex_1_, skin.boneIndex_2_, skin.boneIndex_3_) for skin in mesh.m_Skin
             ]

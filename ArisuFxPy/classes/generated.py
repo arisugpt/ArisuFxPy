@@ -23,7 +23,7 @@ from .PPtr import PPtr
 T = TypeVar("T")
 
 
-def unitypy_define(cls: T) -> T:
+def arisufxpy_define(cls: T) -> T:
     """
     A hacky solution to bypass multiple problems related to attrs and inheritance.
 
@@ -43,8 +43,10 @@ def unitypy_define(cls: T) -> T:
         cls.__bases__ = bases
     return cls
 
+unitypy_define = arisufxpy_define
 
-@unitypy_define
+
+@arisufxpy_define
 class AnnotationManager(Object):
     m_CurrentPreset_m_AnnotationList: List[Annotation]
     m_RecentlyChanged: List[Annotation]
@@ -59,7 +61,7 @@ class AnnotationManager(Object):
     m_WorldIconSize: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AssetDatabaseV1(Object):
     m_AssetBundleNames: List[Tuple[int, AssetBundleFullName]]
     m_AssetTimeStamps: List[Tuple[str, AssetTimeStamp]]
@@ -70,7 +72,7 @@ class AssetDatabaseV1(Object):
     m_lastValidVersions: Optional[List[Tuple[AssetImporterHashKey, int]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AssetMetaData(Object):
     assetStoreRef: int
     guid: GUID
@@ -84,7 +86,7 @@ class AssetMetaData(Object):
     timeCreated: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AssetServerCache(Object):
     m_CachesInitialized: int
     m_CommitItemSelection: List[GUID]
@@ -96,25 +98,25 @@ class AssetServerCache(Object):
     m_WorkingItemMetaData: List[Tuple[GUID, CachedAssetMetaData]]
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioBuildInfo(Object):
     m_AudioClipCount: int
     m_AudioMixerCount: int
     m_IsAudioDisabled: bool
 
 
-@unitypy_define
+@arisufxpy_define
 class BlockShaderSourceArtifact(Object):
     shaderName: str
     shaderSource: str
 
 
-@unitypy_define
+@arisufxpy_define
 class BuiltAssetBundleInfoSet(Object):
     bundleInfos: List[BuiltAssetBundleInfo]
 
 
-@unitypy_define
+@arisufxpy_define
 class ContentSummary(Object):
     m_assetStatsList: List[AssetStats]
     m_headerSize: int
@@ -131,44 +133,44 @@ class ContentSummary(Object):
     m_sizeReusedContentInOutputDirectory: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Derived(Object):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class SubDerived(Derived):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class DifferentMarshallingTestObject(Object):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class EditorBuildSettings(Object):
     m_Scenes: List[Scene]
     m_UseUCBPForAssetBundles: Optional[bool] = None
     m_configObjects: Optional[List[Tuple[str, PPtr[Object]]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class EditorExtension(Object, ABC):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class Component(EditorExtension):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class Behaviour(Component):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class Animation(Behaviour):
     m_AnimatePhysics: bool
     m_Animation: PPtr[AnimationClip]
@@ -182,7 +184,7 @@ class Animation(Behaviour):
     m_UserAABB: Optional[AABB] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Animator(Behaviour):
     m_ApplyRootMotion: bool
     m_Avatar: PPtr[Avatar]
@@ -201,7 +203,7 @@ class Animator(Behaviour):
     m_WriteDefaultValuesOnDisable: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ArticulationBody(Behaviour):
     m_AnchorPosition: Vector3f
     m_AnchorRotation: Quaternionf
@@ -237,19 +239,19 @@ class ArticulationBody(Behaviour):
     m_UseGravity: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioBehaviour(Behaviour):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioListener(AudioBehaviour):
     m_Enabled: int
     m_GameObject: PPtr[GameObject]
     m_ExtensionPropertyValues: Optional[List[ExtensionPropertyValue]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioSource(AudioBehaviour):
     BypassEffects: bool
     DopplerLevel: float
@@ -279,12 +281,12 @@ class AudioSource(AudioBehaviour):
     reverbZoneMixCustomCurve: Optional[AnimationCurve] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioFilter(Behaviour):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioChorusFilter(AudioFilter):
     m_Delay: float
     m_Depth: float
@@ -298,14 +300,14 @@ class AudioChorusFilter(AudioFilter):
     m_FeedBack: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioDistortionFilter(AudioFilter):
     m_DistortionLevel: float
     m_Enabled: int
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioEchoFilter(AudioFilter):
     m_DecayRatio: float
     m_Delay: Union[float, int]
@@ -315,7 +317,7 @@ class AudioEchoFilter(AudioFilter):
     m_WetMix: float
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioHighPassFilter(AudioFilter):
     m_CutoffFrequency: float
     m_Enabled: int
@@ -323,7 +325,7 @@ class AudioHighPassFilter(AudioFilter):
     m_HighpassResonanceQ: float
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioLowPassFilter(AudioFilter):
     lowpassLevelCustomCurve: AnimationCurve
     m_Enabled: int
@@ -332,7 +334,7 @@ class AudioLowPassFilter(AudioFilter):
     m_CutoffFrequency: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioReverbFilter(AudioFilter):
     m_DecayHFRatio: float
     m_DecayTime: float
@@ -354,7 +356,7 @@ class AudioReverbFilter(AudioFilter):
     m_RoomRolloff: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioReverbZone(Behaviour):
     m_DecayHFRatio: float
     m_DecayTime: float
@@ -377,7 +379,7 @@ class AudioReverbZone(Behaviour):
     m_RoomRolloffFactor: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Camera(Behaviour):
     far_clip_plane: float
     field_of_view: float
@@ -418,7 +420,7 @@ class Camera(Behaviour):
     m_projectionMatrixMode: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ScriptableCamera(Camera):
     far_clip_plane: float
     field_of_view: float
@@ -451,7 +453,7 @@ class ScriptableCamera(Camera):
     orthographic_size: float
 
 
-@unitypy_define
+@arisufxpy_define
 class Canvas(Behaviour):
     m_Camera: PPtr[Camera]
     m_Enabled: int
@@ -475,7 +477,7 @@ class Canvas(Behaviour):
     m_VertexColorAlwaysGammaSpace: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class CanvasGroup(Behaviour):
     m_Alpha: float
     m_BlocksRaycasts: bool
@@ -485,7 +487,7 @@ class CanvasGroup(Behaviour):
     m_Enabled: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Cloth(Behaviour):
     m_GameObject: PPtr[GameObject]
     m_BendingStiffness: Optional[float] = None
@@ -514,7 +516,7 @@ class Cloth(Behaviour):
     m_WorldVelocityScale: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class InteractiveCloth(Cloth):
     m_AttachedColliders: List[ClothAttachment]
     m_AttachmentResponse: float
@@ -537,7 +539,7 @@ class InteractiveCloth(Cloth):
     m_UseGravity: bool
 
 
-@unitypy_define
+@arisufxpy_define
 class SkinnedCloth(Cloth):
     m_BendingStiffness: float
     m_Coefficients: List[ClothConstrainCoefficients]
@@ -554,18 +556,18 @@ class SkinnedCloth(Cloth):
     m_WorldVelocityScale: float
 
 
-@unitypy_define
+@arisufxpy_define
 class CloudServiceHandlerBehaviour(Behaviour):
     m_Enabled: int
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class Collider2D(Behaviour):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class BoxCollider2D(Collider2D):
     m_Enabled: int
     m_GameObject: PPtr[GameObject]
@@ -591,7 +593,7 @@ class BoxCollider2D(Collider2D):
     m_UsedByEffector: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class CapsuleCollider2D(Collider2D):
     m_Density: float
     m_Direction: int
@@ -614,7 +616,7 @@ class CapsuleCollider2D(Collider2D):
     m_UsedByComposite: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class CircleCollider2D(Collider2D):
     m_Enabled: int
     m_GameObject: PPtr[GameObject]
@@ -637,7 +639,7 @@ class CircleCollider2D(Collider2D):
     m_UsedByEffector: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class CompositeCollider2D(Collider2D):
     m_ColliderPaths: List[SubCollider]
     m_CompositePaths: Polygon2D
@@ -667,7 +669,7 @@ class CompositeCollider2D(Collider2D):
     m_UsedByComposite: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class CustomCollider2D(Collider2D):
     m_CustomShapes: PhysicsShapeGroup2D
     m_Density: float
@@ -689,7 +691,7 @@ class CustomCollider2D(Collider2D):
     m_UsedByComposite: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class EdgeCollider2D(Collider2D):
     m_Enabled: int
     m_GameObject: PPtr[GameObject]
@@ -716,7 +718,7 @@ class EdgeCollider2D(Collider2D):
     m_UsedByEffector: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PolygonCollider2D(Collider2D):
     m_Enabled: int
     m_GameObject: PPtr[GameObject]
@@ -742,12 +744,12 @@ class PolygonCollider2D(Collider2D):
     m_UsedByEffector: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PolygonColliderBase2D(Collider2D):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class TilemapCollider2D(Collider2D):
     m_Density: float
     m_Enabled: int
@@ -771,7 +773,7 @@ class TilemapCollider2D(Collider2D):
     m_UsedByComposite: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ConstantForce(Behaviour):
     m_Enabled: int
     m_Force: Vector3f
@@ -781,12 +783,12 @@ class ConstantForce(Behaviour):
     m_Torque: Vector3f
 
 
-@unitypy_define
+@arisufxpy_define
 class Effector2D(Behaviour):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class AreaEffector2D(Effector2D):
     m_ColliderMask: BitField
     m_Enabled: int
@@ -804,7 +806,7 @@ class AreaEffector2D(Effector2D):
     m_UseGlobalAngle: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class BuoyancyEffector2D(Effector2D):
     m_ColliderMask: BitField
     m_Density: float
@@ -821,7 +823,7 @@ class BuoyancyEffector2D(Effector2D):
     m_LinearDrag: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PlatformEffector2D(Effector2D):
     m_ColliderMask: BitField
     m_Enabled: int
@@ -840,7 +842,7 @@ class PlatformEffector2D(Effector2D):
     m_UseSideFriction: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PointEffector2D(Effector2D):
     m_ColliderMask: BitField
     m_DistanceScale: float
@@ -858,7 +860,7 @@ class PointEffector2D(Effector2D):
     m_UseColliderMask: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SurfaceEffector2D(Effector2D):
     m_ColliderMask: BitField
     m_Enabled: int
@@ -872,18 +874,18 @@ class SurfaceEffector2D(Effector2D):
     m_UseFriction: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class FlareLayer(Behaviour):
     m_Enabled: int
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class GUIElement(Behaviour):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class GUIText(GUIElement):
     m_Alignment: int
     m_Anchor: int
@@ -902,7 +904,7 @@ class GUIText(GUIElement):
     m_RichText: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class GUITexture(GUIElement):
     m_BottomBorder: int
     m_Color: ColorRGBA
@@ -915,18 +917,18 @@ class GUITexture(GUIElement):
     m_TopBorder: int
 
 
-@unitypy_define
+@arisufxpy_define
 class GUILayer(Behaviour):
     m_Enabled: int
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class GridLayout(Behaviour):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class Grid(GridLayout):
     m_CellGap: Vector3f
     m_CellLayout: int
@@ -936,7 +938,7 @@ class Grid(GridLayout):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class Tilemap(GridLayout):
     m_AnimatedTiles: List[Tuple[int3_storage, TileAnimationData]]
     m_AnimationFrameRate: float
@@ -956,7 +958,7 @@ class Tilemap(GridLayout):
     m_TileObjectToInstantiateArray: Optional[List[TilemapRefCountedData]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Halo(Behaviour):
     m_Color: ColorRGBA
     m_Enabled: int
@@ -964,18 +966,18 @@ class Halo(Behaviour):
     m_Size: float
 
 
-@unitypy_define
+@arisufxpy_define
 class HaloLayer(Behaviour):
     m_Enabled: int
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class IConstraint(Behaviour):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class AimConstraint(IConstraint):
     m_AffectRotationX: bool
     m_AffectRotationY: bool
@@ -995,7 +997,7 @@ class AimConstraint(IConstraint):
     m_IsContraintActive: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LookAtConstraint(IConstraint):
     m_Enabled: int
     m_GameObject: PPtr[GameObject]
@@ -1010,7 +1012,7 @@ class LookAtConstraint(IConstraint):
     m_IsContraintActive: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ParentConstraint(IConstraint):
     m_AffectRotationX: bool
     m_AffectRotationY: bool
@@ -1030,7 +1032,7 @@ class ParentConstraint(IConstraint):
     m_IsContraintActive: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PositionConstraint(IConstraint):
     m_AffectTranslationX: bool
     m_AffectTranslationY: bool
@@ -1045,7 +1047,7 @@ class PositionConstraint(IConstraint):
     m_IsContraintActive: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class RotationConstraint(IConstraint):
     m_AffectRotationX: bool
     m_AffectRotationY: bool
@@ -1060,7 +1062,7 @@ class RotationConstraint(IConstraint):
     m_IsContraintActive: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ScaleConstraint(IConstraint):
     m_AffectScalingX: bool
     m_AffectScalingY: bool
@@ -1075,17 +1077,17 @@ class ScaleConstraint(IConstraint):
     m_IsContraintActive: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Joint2D(Behaviour):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class AnchoredJoint2D(Joint2D):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class DistanceJoint2D(AnchoredJoint2D):
     m_Anchor: Vector2f
     m_ConnectedAnchor: Vector2f
@@ -1103,7 +1105,7 @@ class DistanceJoint2D(AnchoredJoint2D):
     m_MaxDistanceOnly: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class FixedJoint2D(AnchoredJoint2D):
     m_Anchor: Vector2f
     m_AutoConfigureConnectedAnchor: bool
@@ -1119,7 +1121,7 @@ class FixedJoint2D(AnchoredJoint2D):
     m_BreakAction: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class FrictionJoint2D(AnchoredJoint2D):
     m_Anchor: Vector2f
     m_AutoConfigureConnectedAnchor: bool
@@ -1135,7 +1137,7 @@ class FrictionJoint2D(AnchoredJoint2D):
     m_BreakAction: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class HingeJoint2D(AnchoredJoint2D):
     m_Anchor: Vector2f
     m_AngleLimits: Union[JointAngleLimit2D, JointAngleLimits2D]
@@ -1155,7 +1157,7 @@ class HingeJoint2D(AnchoredJoint2D):
     m_UseConnectedAnchor: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SliderJoint2D(AnchoredJoint2D):
     m_Anchor: Vector2f
     m_Angle: float
@@ -1176,7 +1178,7 @@ class SliderJoint2D(AnchoredJoint2D):
     m_EnableCollision: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SpringJoint2D(AnchoredJoint2D):
     m_Anchor: Vector2f
     m_ConnectedAnchor: Vector2f
@@ -1195,7 +1197,7 @@ class SpringJoint2D(AnchoredJoint2D):
     m_EnableCollision: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class WheelJoint2D(AnchoredJoint2D):
     m_Anchor: Vector2f
     m_ConnectedAnchor: Vector2f
@@ -1213,7 +1215,7 @@ class WheelJoint2D(AnchoredJoint2D):
     m_EnableCollision: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class RelativeJoint2D(Joint2D):
     m_AngularOffset: float
     m_AutoConfigureOffset: bool
@@ -1230,7 +1232,7 @@ class RelativeJoint2D(Joint2D):
     m_BreakAction: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TargetJoint2D(Joint2D):
     m_Anchor: Vector2f
     m_AutoConfigureTarget: bool
@@ -1247,7 +1249,7 @@ class TargetJoint2D(Joint2D):
     m_BreakAction: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LensFlare(Behaviour):
     m_Brightness: float
     m_Color: ColorRGBA
@@ -1259,7 +1261,7 @@ class LensFlare(Behaviour):
     m_FadeSpeed: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Light(Behaviour):
     m_Color: ColorRGBA
     m_Cookie: PPtr[Texture]
@@ -1300,13 +1302,13 @@ class Light(Behaviour):
     m_UseViewFrustumForShadowCasterCull: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LightProbeGroup(Behaviour):
     m_GameObject: PPtr[GameObject]
     m_Enabled: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LightProbeProxyVolume(Behaviour):
     m_BoundingBoxMode: int
     m_BoundingBoxOrigin: Vector3f
@@ -1324,7 +1326,7 @@ class LightProbeProxyVolume(Behaviour):
     m_QualityMode: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class MonoBehaviour(Behaviour):
     m_Enabled: int
     m_GameObject: PPtr[GameObject]
@@ -1332,7 +1334,7 @@ class MonoBehaviour(Behaviour):
     m_Script: PPtr[MonoScript]
 
 
-@unitypy_define
+@arisufxpy_define
 class NavMeshAgent(Behaviour):
     m_Acceleration: float
     m_AngularSpeed: float
@@ -1352,7 +1354,7 @@ class NavMeshAgent(Behaviour):
     m_AutoBraking: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class NavMeshObstacle(Behaviour):
     m_Enabled: int
     m_GameObject: PPtr[GameObject]
@@ -1367,7 +1369,7 @@ class NavMeshObstacle(Behaviour):
     m_TimeToStationary: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class NetworkView(Behaviour):
     m_Enabled: int
     m_GameObject: PPtr[GameObject]
@@ -1376,7 +1378,7 @@ class NetworkView(Behaviour):
     m_ViewID: NetworkViewID
 
 
-@unitypy_define
+@arisufxpy_define
 class OffMeshLink(Behaviour):
     m_Activated: bool
     m_BiDirectional: bool
@@ -1392,19 +1394,19 @@ class OffMeshLink(Behaviour):
     m_NavMeshLayer: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ParticleSystemForceField(Behaviour):
     m_Enabled: int
     m_GameObject: PPtr[GameObject]
     m_Parameters: ParticleSystemForceFieldParameters
 
 
-@unitypy_define
+@arisufxpy_define
 class PhysicsUpdateBehaviour2D(Behaviour):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class ConstantForce2D(PhysicsUpdateBehaviour2D):
     m_Enabled: int
     m_Force: Vector2f
@@ -1413,7 +1415,7 @@ class ConstantForce2D(PhysicsUpdateBehaviour2D):
     m_Torque: float
 
 
-@unitypy_define
+@arisufxpy_define
 class PlayableDirector(Behaviour):
     m_DirectorUpdateMode: int
     m_Enabled: int
@@ -1426,7 +1428,7 @@ class PlayableDirector(Behaviour):
     m_WrapMode: int
 
 
-@unitypy_define
+@arisufxpy_define
 class Projector(Behaviour):
     m_AspectRatio: float
     m_Enabled: int
@@ -1440,7 +1442,7 @@ class Projector(Behaviour):
     m_OrthographicSize: float
 
 
-@unitypy_define
+@arisufxpy_define
 class ReflectionProbe(Behaviour):
     m_BackGroundColor: ColorRGBA
     m_BakedTexture: PPtr[Texture]
@@ -1469,14 +1471,14 @@ class ReflectionProbe(Behaviour):
     m_BlendDistance: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Skybox(Behaviour):
     m_CustomSkybox: PPtr[Material]
     m_Enabled: int
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class SortingGroup(Behaviour):
     m_Enabled: int
     m_GameObject: PPtr[GameObject]
@@ -1487,14 +1489,14 @@ class SortingGroup(Behaviour):
     m_SortingLayerID: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class StreamingController(Behaviour):
     m_Enabled: int
     m_GameObject: PPtr[GameObject]
     m_StreamingMipmapBias: float
 
 
-@unitypy_define
+@arisufxpy_define
 class Terrain(Behaviour):
     m_BakeLightProbesForTrees: bool
     m_ChunkDynamicUVST: Vector4f
@@ -1541,7 +1543,7 @@ class Terrain(Behaviour):
     m_UseDefaultSmoothness: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VideoPlayer(Behaviour):
     m_AspectRatio: int
     m_AudioOutputMode: int
@@ -1574,7 +1576,7 @@ class VideoPlayer(Behaviour):
     m_VideoShaders: Optional[List[PPtr[Shader]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VisualEffect(Behaviour):
     m_Asset: PPtr[VisualEffectAsset]
     m_Enabled: int
@@ -1588,7 +1590,7 @@ class VisualEffect(Behaviour):
     m_ReleaseInstanceOnDisable: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class WindZone(Behaviour):
     m_Enabled: int
     m_GameObject: PPtr[GameObject]
@@ -1600,13 +1602,13 @@ class WindZone(Behaviour):
     m_WindTurbulence: float
 
 
-@unitypy_define
+@arisufxpy_define
 class CanvasRenderer(Component):
     m_GameObject: PPtr[GameObject]
     m_CullTransparentMesh: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Collider(Component):
     m_GameObject: Optional[PPtr[GameObject]] = None
     m_MaxLimitX: Optional[float] = None
@@ -1620,7 +1622,7 @@ class Collider(Component):
     m_ZMotionType: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class BoxCollider(Collider):
     m_Center: Vector3f
     m_Enabled: bool
@@ -1634,7 +1636,7 @@ class BoxCollider(Collider):
     m_ProvidesContacts: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class CapsuleCollider(Collider):
     m_Center: Vector3f
     m_Direction: int
@@ -1650,7 +1652,7 @@ class CapsuleCollider(Collider):
     m_ProvidesContacts: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class CharacterController(Collider):
     m_Center: Vector3f
     m_GameObject: PPtr[GameObject]
@@ -1669,7 +1671,7 @@ class CharacterController(Collider):
     m_ProvidesContacts: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class MeshCollider(Collider):
     m_Convex: bool
     m_Enabled: bool
@@ -1687,7 +1689,7 @@ class MeshCollider(Collider):
     m_SmoothSphereCollisions: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class RaycastCollider(Collider):
     m_Center: Vector3f
     m_Enabled: bool
@@ -1697,7 +1699,7 @@ class RaycastCollider(Collider):
     m_Material: PPtr[PhysicMaterial]
 
 
-@unitypy_define
+@arisufxpy_define
 class SphereCollider(Collider):
     m_Center: Vector3f
     m_Enabled: bool
@@ -1711,7 +1713,7 @@ class SphereCollider(Collider):
     m_ProvidesContacts: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TerrainCollider(Collider):
     m_Enabled: bool
     m_GameObject: PPtr[GameObject]
@@ -1726,7 +1728,7 @@ class TerrainCollider(Collider):
     m_ProvidesContacts: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class WheelCollider(Collider):
     m_Center: Vector3f
     m_ForwardFriction: WheelFrictionCurve
@@ -1745,17 +1747,17 @@ class WheelCollider(Collider):
     m_WheelDampingRate: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class FakeComponent(Component):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class Joint(Component):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class CharacterJoint(Joint):
     m_Anchor: Vector3f
     m_Axis: Vector3f
@@ -1783,7 +1785,7 @@ class CharacterJoint(Joint):
     m_TwistLimitSpring: Optional[SoftJointLimitSpring] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ConfigurableJoint(Joint):
     m_Anchor: Vector3f
     m_AngularXDrive: JointDrive
@@ -1832,7 +1834,7 @@ class ConfigurableJoint(Joint):
     m_SwapBodies: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class FixedJoint(Joint):
     m_BreakForce: float
     m_BreakTorque: float
@@ -1846,7 +1848,7 @@ class FixedJoint(Joint):
     m_MassScale: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class HingeJoint(Joint):
     m_Anchor: Vector3f
     m_Axis: Vector3f
@@ -1872,7 +1874,7 @@ class HingeJoint(Joint):
     m_UseAcceleration: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SpringJoint(Joint):
     m_Anchor: Vector3f
     m_BreakForce: float
@@ -1895,7 +1897,7 @@ class SpringJoint(Joint):
     m_Tolerance: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LODGroup(Component):
     m_Enabled: bool
     m_GameObject: PPtr[GameObject]
@@ -1909,20 +1911,20 @@ class LODGroup(Component):
     m_ScreenRelativeTransitionHeight: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class MeshFilter(Component):
     m_GameObject: PPtr[GameObject]
     m_Mesh: PPtr[Mesh]
 
 
-@unitypy_define
+@arisufxpy_define
 class MultiplayerRolesData(Component):
     m_ComponentsRolesMasks: List[ObjectRolePair]
     m_GameObject: PPtr[GameObject]
     m_GameObjectRolesMask: int
 
 
-@unitypy_define
+@arisufxpy_define
 class OcclusionArea(Component):
     m_Center: Vector3f
     m_GameObject: PPtr[GameObject]
@@ -1932,7 +1934,7 @@ class OcclusionArea(Component):
     m_TargetResolution: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class OcclusionPortal(Component):
     m_Center: Vector3f
     m_GameObject: PPtr[GameObject]
@@ -1940,7 +1942,7 @@ class OcclusionPortal(Component):
     m_Size: Vector3f
 
 
-@unitypy_define
+@arisufxpy_define
 class ParticleAnimator(Component):
     Does_Animate_Color: bool
     autodestruct: bool
@@ -1959,12 +1961,12 @@ class ParticleAnimator(Component):
     worldRotationAxis: Vector3f
 
 
-@unitypy_define
+@arisufxpy_define
 class ParticleEmitter(Component):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class EllipsoidParticleEmitter(ParticleEmitter):
     Simulate_in_Worldspace: bool
     angularVelocity: float
@@ -1989,7 +1991,7 @@ class EllipsoidParticleEmitter(ParticleEmitter):
     worldVelocity: Vector3f
 
 
-@unitypy_define
+@arisufxpy_define
 class MeshParticleEmitter(ParticleEmitter):
     Simulate_in_Worldspace: bool
     angularVelocity: float
@@ -2017,7 +2019,7 @@ class MeshParticleEmitter(ParticleEmitter):
     worldVelocity: Vector3f
 
 
-@unitypy_define
+@arisufxpy_define
 class ParticleSystem(Component):
     ClampVelocityModule: ClampVelocityModule
     CollisionModule: CollisionModule
@@ -2064,17 +2066,17 @@ class ParticleSystem(Component):
     useUnscaledTime: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Pipeline(Component):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class Renderer(Component):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class BillboardRenderer(Renderer):
     m_Billboard: PPtr[BillboardAsset]
     m_CastShadows: int
@@ -2112,7 +2114,7 @@ class BillboardRenderer(Renderer):
     m_UseLightProbes: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ClothRenderer(Renderer):
     m_CastShadows: bool
     m_Enabled: bool
@@ -2131,7 +2133,7 @@ class ClothRenderer(Renderer):
     m_UseLightProbes: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LineRenderer(Renderer):
     m_CastShadows: Union[bool, int]
     m_Enabled: bool
@@ -2174,7 +2176,7 @@ class LineRenderer(Renderer):
     m_UseLightProbes: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class RendererFake(LineRenderer):
     m_CastShadows: int
     m_DynamicOccludee: int
@@ -2206,7 +2208,7 @@ class RendererFake(LineRenderer):
     m_RayTracingMode: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class MeshRenderer(Renderer):
     m_CastShadows: Union[bool, int]
     m_Enabled: bool
@@ -2246,7 +2248,7 @@ class MeshRenderer(Renderer):
     m_UseLightProbes: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PanelRenderer(Renderer):
     m_CastShadows: int
     m_DynamicOccludee: int
@@ -2290,7 +2292,7 @@ class PanelRenderer(Renderer):
     sourceAsset: PPtr[MonoBehaviour]
 
 
-@unitypy_define
+@arisufxpy_define
 class ParticleRenderer(Renderer):
     UV_Animation: UVAnimation
     m_CameraVelocityScale: float
@@ -2324,7 +2326,7 @@ class ParticleRenderer(Renderer):
     m_UseLightProbes: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ParticleSystemRenderer(Renderer):
     m_CameraVelocityScale: float
     m_CastShadows: Union[bool, int]
@@ -2394,7 +2396,7 @@ class ParticleSystemRenderer(Renderer):
     m_VertexStreams: Optional[List[int]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class RenderAs2D(Renderer):
     m_CastShadows: int
     m_DynamicOccludee: int
@@ -2431,7 +2433,7 @@ class RenderAs2D(Renderer):
     m_OwningSortingGroup: Optional[PPtr[SortingGroup]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SkinnedMeshRenderer(Renderer):
     m_AABB: AABB
     m_Bones: List[PPtr[Transform]]
@@ -2478,7 +2480,7 @@ class SkinnedMeshRenderer(Renderer):
     m_UseLightProbes: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SpriteMask(Renderer):
     m_BackSortingLayer: int
     m_BackSortingOrder: int
@@ -2524,7 +2526,7 @@ class SpriteMask(Renderer):
     m_StaticShadowCaster: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SpriteRenderer(Renderer):
     m_CastShadows: Union[bool, int]
     m_Color: ColorRGBA
@@ -2573,7 +2575,7 @@ class SpriteRenderer(Renderer):
     m_WasSpriteAssigned: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SpriteShapeRenderer(Renderer):
     m_CastShadows: int
     m_Color: ColorRGBA
@@ -2613,7 +2615,7 @@ class SpriteShapeRenderer(Renderer):
     m_StaticShadowCaster: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TilemapRenderer(Renderer):
     m_CastShadows: int
     m_ChunkSize: int3_storage
@@ -2655,7 +2657,7 @@ class TilemapRenderer(Renderer):
     m_StaticShadowCaster: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TrailRenderer(Renderer):
     m_Autodestruct: bool
     m_CastShadows: Union[bool, int]
@@ -2702,7 +2704,7 @@ class TrailRenderer(Renderer):
     m_UseLightProbes: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class UIRenderer(Renderer):
     m_GameObject: PPtr[GameObject]
     m_CastShadows: Optional[int] = None
@@ -2737,7 +2739,7 @@ class UIRenderer(Renderer):
     m_StaticShadowCaster: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXRenderer(Renderer):
     m_CastShadows: int
     m_DynamicOccludee: int
@@ -2772,7 +2774,7 @@ class VFXRenderer(Renderer):
     m_StaticShadowCaster: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Rigidbody(Component):
     m_CollisionDetection: int
     m_Constraints: int
@@ -2794,7 +2796,7 @@ class Rigidbody(Component):
     m_LinearDamping: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Rigidbody2D(Component):
     m_CollisionDetection: int
     m_GameObject: PPtr[GameObject]
@@ -2818,7 +2820,7 @@ class Rigidbody2D(Component):
     m_UseFullKinematicContacts: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TextMesh(Component):
     m_Alignment: int
     m_Anchor: int
@@ -2835,7 +2837,7 @@ class TextMesh(Component):
     m_RichText: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Transform(Component):
     m_Children: List[PPtr[Transform]]
     m_Father: PPtr[Transform]
@@ -2845,7 +2847,7 @@ class Transform(Component):
     m_LocalScale: Vector3f
 
 
-@unitypy_define
+@arisufxpy_define
 class RectTransform(Transform):
     m_AnchorMax: Vector2f
     m_AnchorMin: Vector2f
@@ -2861,18 +2863,18 @@ class RectTransform(Transform):
     m_Position: Optional[Vector2f] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Tree(Component):
     m_GameObject: PPtr[GameObject]
     m_SpeedTreeWindAsset: Optional[PPtr[SpeedTreeWindAsset]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class WorldAnchor(Component):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class WorldParticleCollider(Component):
     m_BounceFactor: float
     m_CollidesWith: BitField
@@ -2882,7 +2884,7 @@ class WorldParticleCollider(Component):
     m_SendCollisionMessage: bool
 
 
-@unitypy_define
+@arisufxpy_define
 class GameObject(EditorExtension):
     m_Component: Union[List[ComponentPair], List[Tuple[int, PPtr[Component]]]]
     m_IsActive: Union[bool, int]
@@ -2891,12 +2893,12 @@ class GameObject(EditorExtension):
     m_Tag: int
 
 
-@unitypy_define
+@arisufxpy_define
 class NamedObject(EditorExtension, ABC):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class AnimatorState(NamedObject):
     m_CycleOffset: float
     m_IKOnFeet: bool
@@ -2919,7 +2921,7 @@ class AnimatorState(NamedObject):
     m_TimeParameterActive: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AnimatorStateMachine(NamedObject):
     m_AnyStatePosition: Vector3f
     m_AnyStateTransitions: List[PPtr[AnimatorStateTransition]]
@@ -2935,7 +2937,7 @@ class AnimatorStateMachine(NamedObject):
     m_StateMachineTransitions: List[Tuple[PPtr[AnimatorStateMachine], List[PPtr[AnimatorTransition]]]]
 
 
-@unitypy_define
+@arisufxpy_define
 class AnimatorTransitionBase(NamedObject):
     m_Conditions: List[AnimatorCondition]
     m_DstState: PPtr[AnimatorState]
@@ -2946,7 +2948,7 @@ class AnimatorTransitionBase(NamedObject):
     m_Solo: bool
 
 
-@unitypy_define
+@arisufxpy_define
 class AnimatorStateTransition(AnimatorTransitionBase):
     m_CanTransitionToSelf: bool
     m_Conditions: List[AnimatorCondition]
@@ -2965,7 +2967,7 @@ class AnimatorStateTransition(AnimatorTransitionBase):
     m_HasFixedDuration: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AnimatorTransition(AnimatorTransitionBase):
     m_Conditions: List[AnimatorCondition]
     m_DstState: PPtr[AnimatorState]
@@ -2976,7 +2978,7 @@ class AnimatorTransition(AnimatorTransitionBase):
     m_Solo: bool
 
 
-@unitypy_define
+@arisufxpy_define
 class AssetBundle(NamedObject):
     m_Container: List[Tuple[str, AssetInfo]]
     m_MainAsset: AssetInfo
@@ -2994,7 +2996,7 @@ class AssetBundle(NamedObject):
     m_ScriptCompatibility: Optional[List[AssetBundleScriptInfo]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AssetBundleManifest(NamedObject):
     AssetBundleInfos: List[Tuple[int, AssetBundleInfo]]
     AssetBundleNames: List[Tuple[int, str]]
@@ -3002,17 +3004,17 @@ class AssetBundleManifest(NamedObject):
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class AssetImportInProgressProxy(NamedObject):
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class AssetImporter(NamedObject, ABC):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class ASTCImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3020,7 +3022,7 @@ class ASTCImporter(AssetImporter):
     m_UserData: str
 
 
-@unitypy_define
+@arisufxpy_define
 class AndroidAssetPackImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3030,7 +3032,7 @@ class AndroidAssetPackImporter(AssetImporter):
     m_UserData: str
 
 
-@unitypy_define
+@arisufxpy_define
 class AssemblyDefinitionImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3040,7 +3042,7 @@ class AssemblyDefinitionImporter(AssetImporter):
     m_UsedFileIDs: Optional[List[int]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AssemblyDefinitionReferenceImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3050,7 +3052,7 @@ class AssemblyDefinitionReferenceImporter(AssetImporter):
     m_UserData: str
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioImporter(AssetImporter):
     m_3D: bool
     m_ForceToMono: bool
@@ -3080,7 +3082,7 @@ class AudioImporter(AssetImporter):
     m_UserData: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class BlockShaderImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3091,7 +3093,7 @@ class BlockShaderImporter(AssetImporter):
     m_UserData: str
 
 
-@unitypy_define
+@arisufxpy_define
 class BuildArchiveImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3101,7 +3103,7 @@ class BuildArchiveImporter(AssetImporter):
     m_UserData: str
 
 
-@unitypy_define
+@arisufxpy_define
 class BuildInstructionImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3111,7 +3113,7 @@ class BuildInstructionImporter(AssetImporter):
     m_UserData: str
 
 
-@unitypy_define
+@arisufxpy_define
 class BuildMetaDataImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3121,7 +3123,7 @@ class BuildMetaDataImporter(AssetImporter):
     m_UserData: str
 
 
-@unitypy_define
+@arisufxpy_define
 class C4DImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3131,7 +3133,7 @@ class C4DImporter(AssetImporter):
     m_UserData: str
 
 
-@unitypy_define
+@arisufxpy_define
 class ComputeShaderImporter(AssetImporter):
     m_Name: str
     m_UserData: str
@@ -3144,7 +3146,7 @@ class ComputeShaderImporter(AssetImporter):
     m_UsedFileIDs: Optional[List[int]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class DDSImporter(AssetImporter):
     m_Name: str
     m_AssetBundleName: Optional[str] = None
@@ -3156,7 +3158,7 @@ class DDSImporter(AssetImporter):
     m_UserData: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class DefaultImporter(AssetImporter):
     m_Name: str
     m_AssetBundleName: Optional[str] = None
@@ -3169,7 +3171,7 @@ class DefaultImporter(AssetImporter):
     m_UserData: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class IHVImageFormatImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3186,7 +3188,7 @@ class IHVImageFormatImporter(AssetImporter):
     m_sRGBTexture: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class KTXImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3194,7 +3196,7 @@ class KTXImporter(AssetImporter):
     m_UserData: str
 
 
-@unitypy_define
+@arisufxpy_define
 class LibraryAssetImporter(AssetImporter):
     m_Name: str
     m_AssetBundleName: Optional[str] = None
@@ -3207,7 +3209,7 @@ class LibraryAssetImporter(AssetImporter):
     m_UserData: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LocalizationImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3217,12 +3219,12 @@ class LocalizationImporter(AssetImporter):
     m_UsedFileIDs: Optional[List[int]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ModelImporter(AssetImporter, ABC):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class FBXImporter(ModelImporter):
     m_AddColliders: bool
     m_AnimationCompression: int
@@ -3357,7 +3359,7 @@ class FBXImporter(ModelImporter):
     weldVertices: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Mesh3DSImporter(ModelImporter):
     m_AddColliders: bool
     m_AnimationCompression: int
@@ -3492,7 +3494,7 @@ class Mesh3DSImporter(ModelImporter):
     weldVertices: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SketchUpImporter(ModelImporter):
     generateSecondaryUV: bool
     keepQuads: bool
@@ -3621,7 +3623,7 @@ class SketchUpImporter(ModelImporter):
     splitTangentsAcrossUV: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class MonoImporter(AssetImporter):
     executionOrder: int
     icon: PPtr[Texture2D]
@@ -3637,7 +3639,7 @@ class MonoImporter(AssetImporter):
     m_UserData: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class MovieImporter(AssetImporter):
     m_Name: str
     m_Quality: float
@@ -3652,7 +3654,7 @@ class MovieImporter(AssetImporter):
     m_UserData: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class MultiArtifactTestImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3662,7 +3664,7 @@ class MultiArtifactTestImporter(AssetImporter):
     m_UserData: str
 
 
-@unitypy_define
+@arisufxpy_define
 class NativeFormatImporter(AssetImporter):
     m_Name: str
     m_AssetBundleName: Optional[str] = None
@@ -3676,7 +3678,7 @@ class NativeFormatImporter(AssetImporter):
     m_UserData: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PVRImporter(AssetImporter):
     m_Name: str
     m_AssetBundleName: Optional[str] = None
@@ -3687,7 +3689,7 @@ class PVRImporter(AssetImporter):
     m_UserData: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PackageManifestImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3697,7 +3699,7 @@ class PackageManifestImporter(AssetImporter):
     m_UserData: str
 
 
-@unitypy_define
+@arisufxpy_define
 class PluginImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3716,7 +3718,7 @@ class PluginImporter(AssetImporter):
     m_ValidateReferences: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PrefabImporter(AssetImporter):
     m_AddedObjectFileIDs: List[int]
     m_AssetBundleName: str
@@ -3730,7 +3732,7 @@ class PrefabImporter(AssetImporter):
     m_VariantParentGUID: Optional[GUID] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PreviewImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3740,7 +3742,7 @@ class PreviewImporter(AssetImporter):
     m_UserData: str
 
 
-@unitypy_define
+@arisufxpy_define
 class RayTracingShaderImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3751,7 +3753,7 @@ class RayTracingShaderImporter(AssetImporter):
     m_CurrentAPIMask: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ReferencesArtifactGenerator(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3761,7 +3763,7 @@ class ReferencesArtifactGenerator(AssetImporter):
     m_UserData: str
 
 
-@unitypy_define
+@arisufxpy_define
 class RoslynAdditionalFileImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3771,7 +3773,7 @@ class RoslynAdditionalFileImporter(AssetImporter):
     m_UserData: str
 
 
-@unitypy_define
+@arisufxpy_define
 class RoslynAnalyzerConfigImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3781,7 +3783,7 @@ class RoslynAnalyzerConfigImporter(AssetImporter):
     m_UserData: str
 
 
-@unitypy_define
+@arisufxpy_define
 class RuleSetFileImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3791,7 +3793,7 @@ class RuleSetFileImporter(AssetImporter):
     m_UserData: str
 
 
-@unitypy_define
+@arisufxpy_define
 class ScriptedImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3804,7 +3806,7 @@ class ScriptedImporter(AssetImporter):
     m_UsedFileIDs: Optional[List[int]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ShaderImporter(AssetImporter):
     m_Name: str
     m_AssetBundleName: Optional[str] = None
@@ -3820,7 +3822,7 @@ class ShaderImporter(AssetImporter):
     m_UserData: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ShaderIncludeImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3830,7 +3832,7 @@ class ShaderIncludeImporter(AssetImporter):
     m_UserData: str
 
 
-@unitypy_define
+@arisufxpy_define
 class SpeedTreeImporter(AssetImporter):
     m_AlphaTestRef: float
     m_AssetBundleName: str
@@ -3870,7 +3872,7 @@ class SpeedTreeImporter(AssetImporter):
     m_UsedFileIDs: Optional[List[int]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SpriteAtlasImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3886,7 +3888,7 @@ class SpriteAtlasImporter(AssetImporter):
     m_VariantMultiplier: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class StyleSheetImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -3894,7 +3896,7 @@ class StyleSheetImporter(AssetImporter):
     m_UserData: str
 
 
-@unitypy_define
+@arisufxpy_define
 class SubstanceImporter(AssetImporter):
     m_Name: str
     m_AssetBundleName: Optional[str] = None
@@ -3911,7 +3913,7 @@ class SubstanceImporter(AssetImporter):
     m_UserData: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TextScriptImporter(AssetImporter):
     m_Name: str
     m_AssetBundleName: Optional[str] = None
@@ -3924,7 +3926,7 @@ class TextScriptImporter(AssetImporter):
     m_UserData: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TextureImporter(AssetImporter):
     m_BorderMipMap: int
     m_ConvertToNormalMap: int
@@ -4011,7 +4013,7 @@ class TextureImporter(AssetImporter):
     m_sRGBTexture: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TrueTypeFontImporter(AssetImporter):
     m_FontNames: List[str]
     m_FontSize: int
@@ -4042,7 +4044,7 @@ class TrueTypeFontImporter(AssetImporter):
     m_UserData: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VideoClipImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -4077,7 +4079,7 @@ class VideoClipImporter(AssetImporter):
     m_UsedFileIDs: Optional[List[int]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VisualEffectImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -4089,7 +4091,7 @@ class VisualEffectImporter(AssetImporter):
     m_UsedFileIDs: Optional[List[int]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioContainerElement(NamedObject):
     m_AudioClip: PPtr[AudioClip]
     m_Enabled: bool
@@ -4097,7 +4099,7 @@ class AudioContainerElement(NamedObject):
     m_Volume: float
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioMixer(NamedObject):
     m_EnableSuspend: bool
     m_MasterGroup: PPtr[AudioMixerGroup]
@@ -4110,7 +4112,7 @@ class AudioMixer(NamedObject):
     m_UpdateMode: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioMixerController(AudioMixer):
     m_EnableSuspend: bool
     m_MasterGroup: PPtr[AudioMixerGroup]
@@ -4123,7 +4125,7 @@ class AudioMixerController(AudioMixer):
     m_UpdateMode: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioMixerEffectController(NamedObject):
     m_Bypass: bool
     m_EffectID: GUID
@@ -4135,7 +4137,7 @@ class AudioMixerEffectController(NamedObject):
     m_SendTarget: PPtr[AudioMixerEffectController]
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioMixerGroup(NamedObject):
     m_AudioMixer: PPtr[AudioMixer]
     m_Children: List[PPtr[AudioMixerGroup]]
@@ -4143,7 +4145,7 @@ class AudioMixerGroup(NamedObject):
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioMixerGroupController(AudioMixerGroup):
     m_AudioMixer: PPtr[AudioMixer]
     m_Children: List[PPtr[AudioMixerGroup]]
@@ -4151,26 +4153,26 @@ class AudioMixerGroupController(AudioMixerGroup):
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioMixerSnapshot(NamedObject):
     m_AudioMixer: PPtr[AudioMixer]
     m_Name: str
     m_SnapshotID: GUID
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioMixerSnapshotController(AudioMixerSnapshot):
     m_AudioMixer: PPtr[AudioMixer]
     m_Name: str
     m_SnapshotID: GUID
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioResource(NamedObject):
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioRandomContainer(AudioResource):
     m_AutomaticTriggerMode: int
     m_AutomaticTriggerTime: float
@@ -4193,12 +4195,12 @@ class AudioRandomContainer(AudioResource):
     m_VolumeRandomizationRange: Vector2f
 
 
-@unitypy_define
+@arisufxpy_define
 class SampleClip(AudioResource):
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioClip(SampleClip):
     m_Name: str
     m_3D: Optional[bool] = None
@@ -4222,7 +4224,7 @@ class AudioClip(SampleClip):
     m_UseHardware: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Avatar(NamedObject):
     m_Avatar: AvatarConstant
     m_AvatarSize: int
@@ -4231,32 +4233,32 @@ class Avatar(NamedObject):
     m_HumanDescription: Optional[HumanDescription] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AvatarMask(NamedObject):
     m_Elements: List[TransformMaskElement]
     m_Mask: List[int]
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class AvatarSkeletonMask(NamedObject):
     elements: List[AvatarSkeletonMaskElement]
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class BaseAnimationTrack(NamedObject, ABC):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class NewAnimationTrack(BaseAnimationTrack):
     m_ClassID: int
     m_Curves: List[Channel]
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class BillboardAsset(NamedObject):
     bottom: float
     height: float
@@ -4269,7 +4271,7 @@ class BillboardAsset(NamedObject):
     rotated: Optional[List[int]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class BlobObject(NamedObject):
     m_BlobData: List[int]
     m_BlobTypeHash: int
@@ -4278,7 +4280,7 @@ class BlobObject(NamedObject):
     m_NestedBlobObjectReferences: List[PPtr[BlobObject]]
 
 
-@unitypy_define
+@arisufxpy_define
 class BlockShaderContainer(NamedObject):
     blob: List[int]
     dependencies: List[PPtr[BlockShaderContainer]]
@@ -4288,21 +4290,21 @@ class BlockShaderContainer(NamedObject):
     state: int
 
 
-@unitypy_define
+@arisufxpy_define
 class BlockShaderErrors(NamedObject):
     errors: List[Error]
     filePath: str
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class BlockShaderSyntaxTree(NamedObject):
     filePath: str
     m_Name: str
     source: str
 
 
-@unitypy_define
+@arisufxpy_define
 class BuildProfilePlayerSettings(NamedObject):
     AID: Hash128
     AndroidEnableSustainedPerformanceMode: bool
@@ -4489,7 +4491,7 @@ class BuildProfilePlayerSettings(NamedObject):
     webProgressiveAssetLoading: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class BuildReport(NamedObject):
     m_Appendices: List[PPtr[Object]]
     m_BuildSteps: List[BuildStepInfo]
@@ -4499,14 +4501,14 @@ class BuildReport(NamedObject):
     m_RootAssetPaths: Optional[List[str]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class CachedSpriteAtlas(NamedObject):
     frames: List[Tuple[Tuple[GUID, int], SpriteRenderData]]
     textures: List[PPtr[Texture2D]]
     alphaTextures: Optional[List[PPtr[Texture2D]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class CachedSpriteAtlasRuntimeData(NamedObject):
     alphaTextures: List[PPtr[Texture2D]]
     frames: List[Tuple[Tuple[GUID, int], SpriteAtlasData]]
@@ -4514,7 +4516,7 @@ class CachedSpriteAtlasRuntimeData(NamedObject):
     currentPackingHash: Optional[Hash128] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ComputeShader(NamedObject):
     m_Name: str
     constantBuffers: Optional[List[ComputeShaderCB]] = None
@@ -4522,7 +4524,7 @@ class ComputeShader(NamedObject):
     variants: Optional[Union[List[ComputeShaderPlatformVariant], List[ComputeShaderVariant]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class D3D12DeviceFilterLists(NamedObject):
     m_AllowFilterList: List[D3D12DeviceFilterData]
     m_DenyFilterList: List[D3D12DeviceFilterData]
@@ -4530,7 +4532,7 @@ class D3D12DeviceFilterLists(NamedObject):
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class DefaultAsset(NamedObject):
     m_Name: str
     m_ErrorCode: Optional[int] = None
@@ -4538,7 +4540,7 @@ class DefaultAsset(NamedObject):
     m_Message: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class BrokenPrefabAsset(DefaultAsset):
     m_BrokenParentPrefab: PPtr[BrokenPrefabAsset]
     m_IsPrefabFileValid: bool
@@ -4549,7 +4551,7 @@ class BrokenPrefabAsset(DefaultAsset):
     m_ErrorCode: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SceneAsset(DefaultAsset):
     m_Name: str
     m_ErrorCode: Optional[int] = None
@@ -4557,12 +4559,12 @@ class SceneAsset(DefaultAsset):
     m_Message: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class EditorProjectAccess(NamedObject):
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class Flare(NamedObject):
     m_Elements: List[FlareElement]
     m_FlareTexture: PPtr[Texture]
@@ -4571,7 +4573,7 @@ class Flare(NamedObject):
     m_UseFog: bool
 
 
-@unitypy_define
+@arisufxpy_define
 class Font(NamedObject):
     m_Ascent: float
     m_AsciiStartOffset: int
@@ -4602,12 +4604,12 @@ class Font(NamedObject):
     m_UseLegacyBoundsCalculation: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class GameObjectRecorder(NamedObject):
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class GraphicsStateCollection(NamedObject):
     m_DeviceRenderer: int
     m_Name: str
@@ -4620,19 +4622,19 @@ class GraphicsStateCollection(NamedObject):
     m_VertexLayoutInfoMap: List[Tuple[int, VertexLayoutInfo]]
 
 
-@unitypy_define
+@arisufxpy_define
 class HumanTemplate(NamedObject):
     m_BoneTemplate: List[Tuple[str, str]]
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class ImportLog(NamedObject):
     m_Logs: List[ImportLog_ImportLogEntry]
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class LightProbes(NamedObject):
     m_Name: str
     bakedCoefficients: Optional[List[LightmapData]] = None
@@ -4645,7 +4647,7 @@ class LightProbes(NamedObject):
     tetrahedra: Optional[List[Tetrahedron]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LightingDataAsset(NamedObject):
     m_BakedAmbientProbeInLinear: SphericalHarmonicsL2
     m_BakedReflectionProbeCubemaps: List[PPtr[Texture]]
@@ -4670,12 +4672,12 @@ class LightingDataAsset(NamedObject):
     m_SceneGUID: Optional[GUID] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LightingDataAssetParent(NamedObject):
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class LightingSettings(NamedObject):
     m_AlbedoBoost: float
     m_BounceScale: float
@@ -4731,7 +4733,7 @@ class LightingSettings(NamedObject):
     m_TrainingDataDestination: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LightmapParameters(NamedObject):
     AOAntiAliasingSamples: int
     AOQuality: int
@@ -4754,7 +4756,7 @@ class LightmapParameters(NamedObject):
     pushoff: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LocalizationAsset(NamedObject):
     Editor_Asset: bool
     Locale_ISO_Code: str
@@ -4762,7 +4764,7 @@ class LocalizationAsset(NamedObject):
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class Material(NamedObject):
     m_Name: str
     m_SavedProperties: UnityPropertySheet
@@ -4779,7 +4781,7 @@ class Material(NamedObject):
     stringTagMap: Optional[List[Tuple[str, str]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ProceduralMaterial(Material):
     m_Name: str
     m_SavedProperties: UnityPropertySheet
@@ -4809,7 +4811,7 @@ class ProceduralMaterial(Material):
     stringTagMap: Optional[List[Tuple[str, str]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Mesh(NamedObject):
     m_BindPose: List[Matrix4x4f]
     m_CompressedMesh: CompressedMesh
@@ -4852,12 +4854,12 @@ class Mesh(NamedObject):
     m_Vertices: Optional[List[Vector3f]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Motion(NamedObject, ABC):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class AnimationClip(Motion):
     m_Bounds: AABB
     m_Compressed: bool
@@ -4882,7 +4884,7 @@ class AnimationClip(Motion):
     m_UseHighQualityCurve: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PreviewAnimationClip(AnimationClip):
     m_Bounds: AABB
     m_ClipBindingConstant: AnimationClipBindingConstant
@@ -4906,7 +4908,7 @@ class PreviewAnimationClip(AnimationClip):
     m_HasMotionFloatCurves: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class BlendTree(Motion):
     m_Childs: Union[List[ChildMotion], List[Child]]
     m_MaxThreshold: float
@@ -4921,7 +4923,7 @@ class BlendTree(Motion):
     m_NormalizedBlendValues: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class NavMeshData(NamedObject):
     m_HeightMeshes: List[HeightMeshData]
     m_Heightmaps: List[HeightmapData]
@@ -4936,19 +4938,19 @@ class NavMeshData(NamedObject):
     m_SourceBounds: Optional[AABB] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class NavMeshObsolete(NamedObject):
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class OcclusionCullingData(NamedObject):
     m_Name: str
     m_PVSData: List[int]
     m_Scenes: List[OcclusionScene]
 
 
-@unitypy_define
+@arisufxpy_define
 class PhysicsMaterial(NamedObject):
     m_Name: str
     bounceCombine: Optional[int] = None
@@ -4963,7 +4965,7 @@ class PhysicsMaterial(NamedObject):
     staticFriction: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PhysicsMaterial2D(NamedObject):
     bounciness: float
     friction: float
@@ -4972,7 +4974,7 @@ class PhysicsMaterial2D(NamedObject):
     m_FrictionCombine: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PreloadData(NamedObject):
     m_Assets: List[PPtr[Object]]
     m_Name: str
@@ -4980,7 +4982,7 @@ class PreloadData(NamedObject):
     m_ExplicitDataLayout: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Preset(NamedObject):
     m_Name: str
     m_Properties: List[PropertyModification]
@@ -4990,7 +4992,7 @@ class Preset(NamedObject):
     m_ExcludedProperties: Optional[List[str]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class RayTracingShader(NamedObject):
     m_MaxRecursionDepth: int
     m_Name: str
@@ -4998,17 +5000,17 @@ class RayTracingShader(NamedObject):
     m_EnableRayPayloadSizeChecks: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class RoslynAdditionalFileAsset(NamedObject):
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class RoslynAnalyzerConfigAsset(NamedObject):
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class RuntimeAnimatorController(NamedObject):
     m_AnimationClips: List[PPtr[AnimationClip]]
     m_Controller: ControllerConstant
@@ -5017,7 +5019,7 @@ class RuntimeAnimatorController(NamedObject):
     m_TOS: List[Tuple[int, str]]
 
 
-@unitypy_define
+@arisufxpy_define
 class AnimatorController(RuntimeAnimatorController):
     m_AnimationClips: List[PPtr[AnimationClip]]
     m_Controller: ControllerConstant
@@ -5030,14 +5032,14 @@ class AnimatorController(RuntimeAnimatorController):
     m_StateMachineBehaviours: Optional[List[PPtr[MonoBehaviour]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AnimatorOverrideController(RuntimeAnimatorController):
     m_Clips: List[AnimationClipOverride]
     m_Controller: PPtr[RuntimeAnimatorController]
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class Shader(NamedObject):
     m_Name: str
     compressedBlob: Optional[List[int]] = None
@@ -5058,13 +5060,13 @@ class Shader(NamedObject):
     stageCounts: Optional[List[int]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ShaderVariantCollection(NamedObject):
     m_Name: str
     m_Shaders: List[Tuple[PPtr[Shader], ShaderInfo]]
 
 
-@unitypy_define
+@arisufxpy_define
 class SpeedTreeWindAsset(NamedObject):
     m_Name: str
     m_Config8: Optional[SpeedTreeWindConfig8] = None
@@ -5073,7 +5075,7 @@ class SpeedTreeWindAsset(NamedObject):
     m_eVersion: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Sprite(NamedObject):
     m_Extrude: int
     m_Name: str
@@ -5092,7 +5094,7 @@ class Sprite(NamedObject):
     m_SpriteAtlas: Optional[PPtr[SpriteAtlas]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SpriteAtlas(NamedObject):
     m_IsVariant: bool
     m_Name: str
@@ -5103,7 +5105,7 @@ class SpriteAtlas(NamedObject):
     m_PackedSprites: Optional[List[PPtr[Sprite]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SpriteAtlasAsset(NamedObject):
     m_ImporterData: Union[SpriteAtlasAssetData, SpriteAtlasEditorData]
     m_IsVariant: bool
@@ -5112,13 +5114,13 @@ class SpriteAtlasAsset(NamedObject):
     m_ScriptablePacker: Optional[PPtr[Object]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SubstanceArchive(NamedObject):
     m_Name: str
     m_PackageData: Optional[List[int]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TerrainData(NamedObject):
     m_DetailDatabase: DetailDatabase
     m_Heightmap: Heightmap
@@ -5127,7 +5129,7 @@ class TerrainData(NamedObject):
     m_PreloadShaders: Optional[List[PPtr[Shader]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TerrainLayer(NamedObject):
     m_DiffuseRemapMax: Vector4f
     m_DiffuseRemapMin: Vector4f
@@ -5146,26 +5148,26 @@ class TerrainLayer(NamedObject):
     m_SmoothnessSource: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TextAsset(NamedObject):
     m_Name: str
     m_Script: str
     m_PathName: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AssemblyDefinitionAsset(TextAsset):
     m_Name: str
     m_Script: str
 
 
-@unitypy_define
+@arisufxpy_define
 class AssemblyDefinitionReferenceAsset(TextAsset):
     m_Name: str
     m_Script: str
 
 
-@unitypy_define
+@arisufxpy_define
 class MonoScript(TextAsset):
     m_AssemblyName: str
     m_ClassName: str
@@ -5176,35 +5178,35 @@ class MonoScript(TextAsset):
     m_IsEditorScript: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PackageManifest(TextAsset):
     m_Name: str
     m_Script: str
 
 
-@unitypy_define
+@arisufxpy_define
 class RuleSetFileAsset(TextAsset):
     m_Name: str
     m_Script: str
 
 
-@unitypy_define
+@arisufxpy_define
 class ShaderInclude(TextAsset):
     m_Name: str
     m_Script: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Texture(NamedObject, ABC):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class BaseVideoTexture(Texture, ABC):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class WebCamTexture(BaseVideoTexture):
     m_Name: str
     m_DownscaleFallback: Optional[bool] = None
@@ -5212,7 +5214,7 @@ class WebCamTexture(BaseVideoTexture):
     m_IsAlphaChannelOptional: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class CubemapArray(Texture):
     image_data: bytes
     m_ColorSpace: int
@@ -5231,7 +5233,7 @@ class CubemapArray(Texture):
     m_UsageMode: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LowerResBlitTexture(Texture):
     m_Name: str
     m_DownscaleFallback: Optional[bool] = None
@@ -5239,7 +5241,7 @@ class LowerResBlitTexture(Texture):
     m_IsAlphaChannelOptional: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class MovieTexture(Texture):
     m_Name: str
     m_AudioClip: Optional[PPtr[AudioClip]] = None
@@ -5251,7 +5253,7 @@ class MovieTexture(Texture):
     m_MovieData: Optional[List[int]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ProceduralTexture(Texture):
     m_Name: str
     AlphaSource: Optional[int] = None
@@ -5274,7 +5276,7 @@ class ProceduralTexture(Texture):
     m_TextureSettings: Optional[GLTextureSettings] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class RenderTexture(Texture):
     m_ColorFormat: int
     m_Height: int
@@ -5303,7 +5305,7 @@ class RenderTexture(Texture):
     m_VolumeDepth: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class CustomRenderTexture(RenderTexture):
     m_AntiAliasing: int
     m_ColorFormat: int
@@ -5345,7 +5347,7 @@ class CustomRenderTexture(RenderTexture):
     m_UseDynamicScaleExplicit: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SparseTexture(Texture):
     m_ColorSpace: int
     m_Format: int
@@ -5359,7 +5361,7 @@ class SparseTexture(Texture):
     m_IsAlphaChannelOptional: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Texture2D(Texture):
     image_data: bytes
     m_CompleteImageSize: int
@@ -5390,7 +5392,7 @@ class Texture2D(Texture):
     m_StreamingMipmapsPriority: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Cubemap(Texture2D):
     image_data: bytes
     m_CompleteImageSize: int
@@ -5422,7 +5424,7 @@ class Cubemap(Texture2D):
     m_StreamingMipmapsPriority: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Texture2DArray(Texture):
     image_data: bytes
     m_ColorSpace: int
@@ -5445,7 +5447,7 @@ class Texture2DArray(Texture):
     m_UsageMode: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Texture3D(Texture):
     image_data: bytes
     m_Height: int
@@ -5472,13 +5474,13 @@ class Texture3D(Texture):
     m_UsageMode: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class UIAnimationClip(NamedObject):
     m_AnimationClip: PPtr[AnimationClip]
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class VideoClip(NamedObject):
     Height: int
     Width: int
@@ -5500,34 +5502,34 @@ class VideoClip(NamedObject):
     m_sRGB: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VisualEffectObject(NamedObject, ABC):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class VisualEffectAsset(VisualEffectObject):
     m_Infos: VisualEffectInfo
     m_Name: str
     m_Systems: List[VFXSystemDesc]
 
 
-@unitypy_define
+@arisufxpy_define
 class VisualEffectSubgraph(VisualEffectObject, ABC):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class VisualEffectSubgraphBlock(VisualEffectSubgraph):
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class VisualEffectSubgraphOperator(VisualEffectSubgraph):
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class VisualEffectResource(NamedObject):
     m_Graph: PPtr[MonoBehaviour]
     m_Infos: Union[VisualEffectInfo, VisualEffectSettings]
@@ -5536,7 +5538,7 @@ class VisualEffectResource(NamedObject):
     m_Systems: Optional[List[VFXEditorSystemDesc]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VulkanDeviceFilterLists(NamedObject):
     m_GfxJobFilterList: List[VulkanGraphicsJobsDeviceFilterData]
     m_Name: str
@@ -5544,14 +5546,14 @@ class VulkanDeviceFilterLists(NamedObject):
     m_VulkanDenyFilterList: List[AndroidDeviceFilterData]
 
 
-@unitypy_define
+@arisufxpy_define
 class WebGPUDeviceFilterLists(NamedObject):
     m_AllowFilterList: List[WebGPUDeviceFilterData]
     m_DenyFilterList: List[WebGPUDeviceFilterData]
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class EditorExtensionImpl(Object):
     gFlattenedTypeTree: Optional[List[int]] = None
     m_DataTemplate: Optional[PPtr[DataTemplate]] = None
@@ -5560,7 +5562,7 @@ class EditorExtensionImpl(Object):
     m_TemplateFather: Optional[PPtr[EditorExtensionImpl]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class EditorSettings(Object):
     m_AssetNamingUsesSpace: Optional[bool] = None
     m_AssetPipelineMode: Optional[int] = None
@@ -5623,7 +5625,7 @@ class EditorSettings(Object):
     m_WebSecurityEmulationHostUrl: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class EditorUserBuildSettings(Object):
     m_ActiveBuildTarget: int
     m_AllowDebugging: bool
@@ -5776,7 +5778,7 @@ class EditorUserBuildSettings(Object):
     m_macosXcodeBuildConfig: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class EditorUserSettings(Object):
     m_VCAutomaticAdd: bool
     m_VCDebugCmd: bool
@@ -5809,32 +5811,32 @@ class EditorUserSettings(Object):
     m_VCWorkspace: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class EmptyObject(Object):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class GUIDSerializer(Object):
     guidToPath: List[Tuple[GUID, str]]
 
 
-@unitypy_define
+@arisufxpy_define
 class GameManager(Object, ABC):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class GlobalGameManager(GameManager, ABC):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class AnimationManager(GlobalGameManager):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioManager(GlobalGameManager):
     Default_Speaker_Mode: int
     Doppler_Factor: float
@@ -5855,7 +5857,7 @@ class AudioManager(GlobalGameManager):
     m_VirtualizeEffects: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class BuildSettings(GlobalGameManager):
     hasAdvancedVersion: bool
     hasPROVersion: bool
@@ -5889,27 +5891,27 @@ class BuildSettings(GlobalGameManager):
     usesOnMouseEvents: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class CloudWebServicesManager(GlobalGameManager):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class ClusterInputManager(GlobalGameManager):
     m_Inputs: List[ClusterInput]
 
 
-@unitypy_define
+@arisufxpy_define
 class CrashReportManager(GlobalGameManager):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class DelayedCallManager(GlobalGameManager):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class GraphicsSettings(GlobalGameManager):
     m_AlwaysIncludedShaders: List[PPtr[Shader]]
     m_AdditionalWarmupCollections: Optional[List[PPtr[GraphicsStateCollection]]] = None
@@ -5957,18 +5959,18 @@ class GraphicsSettings(GlobalGameManager):
     m_WarmupProgressivelyLimit: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class InputManager(GlobalGameManager):
     m_Axes: List[InputAxis]
     m_UsePhysicalKeys: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class MasterServerInterface(GlobalGameManager):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class MonoManager(GlobalGameManager):
     m_Scripts: List[PPtr[MonoScript]]
     m_AssemblyNames: Optional[List[str]] = None
@@ -5977,13 +5979,13 @@ class MonoManager(GlobalGameManager):
     m_ScriptHashes: Optional[List[Tuple[Hash128, Hash128]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class MultiplayerManager(GlobalGameManager):
     m_ActiveMultiplayerRole: Optional[int] = None
     m_ActiveMultiplayerRoles: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class NavMeshProjectSettings(GlobalGameManager):
     areas: List[NavMeshAreaData]
     m_LastAgentTypeID: Optional[int] = None
@@ -5991,24 +5993,24 @@ class NavMeshProjectSettings(GlobalGameManager):
     m_Settings: Optional[List[NavMeshBuildSettings]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class NetworkManager(GlobalGameManager):
     m_AssetToPrefab: List[Tuple[GUID, PPtr[GameObject]]]
     m_DebugLevel: int
     m_Sendrate: float
 
 
-@unitypy_define
+@arisufxpy_define
 class NotificationManager(GlobalGameManager):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class PerformanceReportingManager(GlobalGameManager):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class Physics2DSettings(GlobalGameManager):
     m_DefaultMaterial: PPtr[PhysicsMaterial2D]
     m_Gravity: Vector2f
@@ -6049,12 +6051,12 @@ class Physics2DSettings(GlobalGameManager):
     m_VelocityThreshold: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PhysicsCoreProjectSettings2D(GlobalGameManager):
     m_PhysicsCoreSettings: PPtr[Object]
 
 
-@unitypy_define
+@arisufxpy_define
 class PhysicsManager(GlobalGameManager):
     m_BounceThreshold: float
     m_DefaultMaterial: Union[PPtr[PhysicMaterial], PPtr[PhysicsMaterial]]
@@ -6108,7 +6110,7 @@ class PhysicsManager(GlobalGameManager):
     m_WorldSubdivisions: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PlayerSettings(GlobalGameManager):
     AndroidProfiler: bool
     allowedAutorotateToLandscapeLeft: bool
@@ -6375,7 +6377,7 @@ class PlayerSettings(GlobalGameManager):
     xboxSpeechDB: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class QualitySettings(GlobalGameManager):
     Beautiful: Optional[QualitySetting] = None
     Fantastic: Optional[QualitySetting] = None
@@ -6393,13 +6395,13 @@ class QualitySettings(GlobalGameManager):
     m_TextureMipmapLimitGroupNames: Optional[List[str]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ResourceManager(GlobalGameManager):
     m_Container: List[Tuple[str, PPtr[Object]]]
     m_DependentAssets: Optional[List[ResourceManager_Dependency]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class RuntimeInitializeOnLoadManager(GlobalGameManager):
     m_AfterAssembliesLoadedMethodExecutionOrders: Optional[List[int]] = None
     m_AfterAssembliesLoadedUnityMethodExecutionOrders: Optional[List[int]] = None
@@ -6419,18 +6421,18 @@ class RuntimeInitializeOnLoadManager(GlobalGameManager):
     m_UnityMethodExecutionOrders: Optional[List[int]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ShaderNameRegistry(GlobalGameManager):
     m_PreloadShaders: bool
     m_Shaders: NameToObjectMap
 
 
-@unitypy_define
+@arisufxpy_define
 class StreamingManager(GlobalGameManager):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class TagManager(GlobalGameManager):
     tags: List[str]
     Builtin_Layer_0: Optional[str] = None
@@ -6470,7 +6472,7 @@ class TagManager(GlobalGameManager):
     m_SortingLayers: Optional[List[SortingLayerEntry]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TimeManager(GlobalGameManager):
     Fixed_Timestep: Union[RationalTime, float]
     Maximum_Allowed_Timestep: float
@@ -6478,12 +6480,12 @@ class TimeManager(GlobalGameManager):
     Maximum_Particle_Timestep: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class UnityAdsManager(GlobalGameManager):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class UnityAnalyticsManager(GlobalGameManager):
     m_Enabled: Optional[bool] = None
     m_InitializeOnStartup: Optional[bool] = None
@@ -6492,7 +6494,7 @@ class UnityAnalyticsManager(GlobalGameManager):
     m_TestMode: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class UnityConnectSettings(GlobalGameManager):
     UnityAnalyticsSettings: UnityAnalyticsSettings
     UnityPurchasingSettings: UnityPurchasingSettings
@@ -6511,7 +6513,7 @@ class UnityConnectSettings(GlobalGameManager):
     m_TestMode: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXManager(GlobalGameManager):
     m_CopyBufferShader: PPtr[ComputeShader]
     m_FixedTimeStep: float
@@ -6530,17 +6532,17 @@ class VFXManager(GlobalGameManager):
     m_StripUpdateShader: Optional[PPtr[ComputeShader]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LevelGameManager(GameManager, ABC):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class HaloManager(LevelGameManager):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class LightmapSettings(LevelGameManager):
     m_Lightmaps: List[LightmapData]
     m_LightmapsMode: int
@@ -6556,13 +6558,13 @@ class LightmapSettings(LevelGameManager):
     m_UseShadowmask: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class NavMeshSettings(LevelGameManager):
     m_NavMesh: Optional[PPtr[NavMesh]] = None
     m_NavMeshData: Optional[PPtr[NavMeshData]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class OcclusionCullingSettings(LevelGameManager):
     m_OcclusionCullingData: PPtr[OcclusionCullingData]
     m_Portals: List[PPtr[OcclusionPortal]]
@@ -6570,7 +6572,7 @@ class OcclusionCullingSettings(LevelGameManager):
     m_StaticRenderers: List[PPtr[Renderer]]
 
 
-@unitypy_define
+@arisufxpy_define
 class RenderSettings(LevelGameManager):
     m_FlareStrength: float
     m_Fog: bool
@@ -6604,7 +6606,7 @@ class RenderSettings(LevelGameManager):
     m_UseRadianceAmbientProbe: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class HierarchyState(Object):
     expanded: List[PPtr[Object]]
     selection: List[PPtr[Object]]
@@ -6614,32 +6616,32 @@ class HierarchyState(Object):
     scrollposition_y: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class InspectorExpandedState(Object):
     m_ExpandedData: List[ExpandedData]
 
 
-@unitypy_define
+@arisufxpy_define
 class MarshallingTestObject(Object):
     m_Prop: int
 
 
-@unitypy_define
+@arisufxpy_define
 class MemorySettings(Object):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class NScreenBridge(Object):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class NativeObjectType(Object):
     m_Inner: NativeType
 
 
-@unitypy_define
+@arisufxpy_define
 class PackedAssets(Object):
     m_Contents: List[BuildReportPackedAssetInfo]
     m_Overhead: int
@@ -6647,18 +6649,18 @@ class PackedAssets(Object):
     m_File: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PlatformModuleSetup(Object):
     modules: List[Module]
 
 
-@unitypy_define
+@arisufxpy_define
 class PluginBuildInfo(Object):
     m_EditorPlugins: List[str]
     m_RuntimePlugins: List[str]
 
 
-@unitypy_define
+@arisufxpy_define
 class Prefab(Object):
     m_RootGameObject: PPtr[GameObject]
     m_ContainsMissingSerializeReferenceTypes: Optional[bool] = None
@@ -6671,20 +6673,20 @@ class Prefab(Object):
     m_SourcePrefab: Optional[PPtr[Prefab]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PrefabInstance(Object):
     m_Modification: PrefabModification
     m_RootGameObject: PPtr[GameObject]
     m_SourcePrefab: PPtr[Prefab]
 
 
-@unitypy_define
+@arisufxpy_define
 class PresetManager(Object):
     m_DefaultList: Optional[List[DefaultPresetList]] = None
     m_DefaultPresets: Optional[List[Tuple[PresetType, List[DefaultPreset]]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PropertyModificationsTargetTestObject(Object):
     m_Array: List[PropertyModificationsTargetTestNativeObject]
     m_Data: PropertyModificationsTargetTestNativeObject
@@ -6695,17 +6697,17 @@ class PropertyModificationsTargetTestObject(Object):
     m_Floats: Optional[List[float]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class RenderPassAttachment(Object):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class SceneRoots(Object):
     m_Roots: List[PPtr[Object]]
 
 
-@unitypy_define
+@arisufxpy_define
 class SceneVisibilityState(Object):
     m_IsolationMode: Optional[bool] = None
     m_MainStageIsolated: Optional[bool] = None
@@ -6716,129 +6718,129 @@ class SceneVisibilityState(Object):
     m_SceneVisibilityDataIsolated: Optional[SceneDataContainer] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ScenesUsingAssets(Object):
     m_ListOfScenesUsingEachAsset: List[Tuple[str, List[str]]]
     m_ScenesUsingAssets: List[BuildReportScenesUsingAsset]
 
 
-@unitypy_define
+@arisufxpy_define
 class SerializableManagedHost(Object):
     m_Script: PPtr[MonoScript]
 
 
-@unitypy_define
+@arisufxpy_define
 class SerializableManagedRefTestClass(Object):
     m_Script: PPtr[MonoScript]
 
 
-@unitypy_define
+@arisufxpy_define
 class ShaderContainer(Object):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class ShaderIncludeReflection(Object):
     m_Functions: List[ReflectedFunction]
     m_ReflectionLog: ErrorLog
 
 
-@unitypy_define
+@arisufxpy_define
 class SiblingDerived(Object):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class SpriteAtlasDatabase(Object):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class TestObjectVectorPairStringBool(Object):
     m_Map: List[Tuple[str, bool]]
     m_String: str
 
 
-@unitypy_define
+@arisufxpy_define
 class TestObjectWithSerializedAnimationCurve(Object):
     m_Curve: AnimationCurve
 
 
-@unitypy_define
+@arisufxpy_define
 class TestObjectWithSerializedArray(Object):
     m_ClampTestValue: float
     m_IntegerArray: List[int]
 
 
-@unitypy_define
+@arisufxpy_define
 class TestObjectWithSerializedMapStringBool(Object):
     m_Map: List[Tuple[str, bool]]
     m_String: str
 
 
-@unitypy_define
+@arisufxpy_define
 class TestObjectWithSerializedMapStringNonAlignedStruct(Object):
     m_Map: List[Tuple[str, NonAlignedStruct]]
     m_String: str
 
 
-@unitypy_define
+@arisufxpy_define
 class TestObjectWithSpecialLayoutOne(Object):
     differentLayout: LayoutDataOne
     sameLayout: LayoutDataOne
 
 
-@unitypy_define
+@arisufxpy_define
 class TestObjectWithSpecialLayoutTwo(Object):
     differentLayout: LayoutDataTwo
     sameLayout: LayoutDataThree
 
 
-@unitypy_define
+@arisufxpy_define
 class TilemapEditorUserSettings(Object):
     m_FocusMode: int
     m_LastUsedPalette: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class UIAnimationBinder(Object):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class VersionControlSettings(Object):
     m_Mode: str
     m_CollabEditorSettings: Optional[CollabEditorSettings] = None
     m_TrackPackagesOutsideProject: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VideoBuildInfo(Object):
     m_IsVideoModuleDisabled: bool
     m_VideoClipCount: int
 
 
-@unitypy_define
+@arisufxpy_define
 class AABB:
     m_Center: Vector3f
     m_Extent: Vector3f
 
 
-@unitypy_define
+@arisufxpy_define
 class AddedComponent:
     addedObject: PPtr[Component]
     insertIndex: int
     targetCorrespondingSourceObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class AddedGameObject:
     addedObject: PPtr[Transform]
     insertIndex: int
     targetCorrespondingSourceObject: PPtr[Transform]
 
 
-@unitypy_define
+@arisufxpy_define
 class AndroidDeviceFilterData:
     androidOsVersionString: str
     brandName: str
@@ -6849,19 +6851,19 @@ class AndroidDeviceFilterData:
     vulkanApiVersionString: str
 
 
-@unitypy_define
+@arisufxpy_define
 class AnimationClipBindingConstant:
     genericBindings: List[GenericBinding]
     pptrCurveMapping: List[PPtr[Object]]
 
 
-@unitypy_define
+@arisufxpy_define
 class AnimationClipOverride:
     m_OriginalClip: PPtr[AnimationClip]
     m_OverrideClip: PPtr[AnimationClip]
 
 
-@unitypy_define
+@arisufxpy_define
 class AnimationCurve:
     m_Curve: List[Keyframe]
     m_PostInfinity: int
@@ -6869,7 +6871,7 @@ class AnimationCurve:
     m_RotationOrder: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AnimationEvent:
     data: str
     floatParameter: float
@@ -6880,14 +6882,14 @@ class AnimationEvent:
     time: float
 
 
-@unitypy_define
+@arisufxpy_define
 class AnimatorCondition:
     m_ConditionEvent: str
     m_ConditionMode: int
     m_EventTreshold: float
 
 
-@unitypy_define
+@arisufxpy_define
 class Annotation:
     m_ClassID: int
     m_Flags: int
@@ -6896,7 +6898,7 @@ class Annotation:
     m_ScriptClass: str
 
 
-@unitypy_define
+@arisufxpy_define
 class ArticulationDrive:
     damping: float
     forceLimit: float
@@ -6908,7 +6910,7 @@ class ArticulationDrive:
     driveType: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AspectRatios:
     Others: bool
     x16_10: bool
@@ -6917,14 +6919,14 @@ class AspectRatios:
     x5_4: bool
 
 
-@unitypy_define
+@arisufxpy_define
 class AssemblyJsonAsset(TextAsset):
     m_Name: str
     m_Script: str
     m_PathName: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AssemblyJsonImporter(AssetImporter):
     m_AssetBundleName: str
     m_AssetBundleVariant: str
@@ -6933,7 +6935,7 @@ class AssemblyJsonImporter(AssetImporter):
     m_ExternalObjects: Optional[List[Tuple[SourceAssetIdentifier, PPtr[Object]]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Asset:
     children: List[GUID]
     labels: AssetLabels
@@ -6956,19 +6958,19 @@ class Asset:
     scriptedImporterClassID: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AssetBundleFullName:
     m_AssetBundleName: str
     m_AssetBundleVariant: str
 
 
-@unitypy_define
+@arisufxpy_define
 class AssetBundleInfo:
     AssetBundleDependencies: List[int]
     AssetBundleHash: Hash128
 
 
-@unitypy_define
+@arisufxpy_define
 class AssetBundleScriptInfo:
     assemblyName: str
     className: str
@@ -6976,7 +6978,7 @@ class AssetBundleScriptInfo:
     nameSpace: str
 
 
-@unitypy_define
+@arisufxpy_define
 class AssetDatabase(Object):
     m_Assets: List[Tuple[GUID, Asset]]
     m_AssetBundleNames: Optional[List[Tuple[int, AssetBundleFullName]]] = None
@@ -6986,26 +6988,26 @@ class AssetDatabase(Object):
     m_lastValidVersionHashes: Optional[List[Tuple[int, int]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AssetDatabaseMetrics:
     totalAssetCount: int
     nonProAssetCount: Optional[int] = None
     nonProAssetsCreatedAfterProLicense: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AssetImporterHashKey:
     ScriptClass: str
     type: int
 
 
-@unitypy_define
+@arisufxpy_define
 class AssetImporterLog(NamedObject):
     m_Logs: List[AssetImporter_ImportError]
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class AssetImporter_ImportError:
     error: str
     file: str
@@ -7014,19 +7016,19 @@ class AssetImporter_ImportError:
     object: PPtr[Object]
 
 
-@unitypy_define
+@arisufxpy_define
 class AssetInfo:
     asset: PPtr[Object]
     preloadIndex: int
     preloadSize: int
 
 
-@unitypy_define
+@arisufxpy_define
 class AssetLabels:
     m_Labels: List[str]
 
 
-@unitypy_define
+@arisufxpy_define
 class AssetStats:
     objectCount: int
     resourceCount: int
@@ -7035,7 +7037,7 @@ class AssetStats:
     sourceAssetPath: str
 
 
-@unitypy_define
+@arisufxpy_define
 class AssetTimeStamp:
     metaModificationDate_0_: int
     metaModificationDate_1_: int
@@ -7043,13 +7045,13 @@ class AssetTimeStamp:
     modificationDate_1_: int
 
 
-@unitypy_define
+@arisufxpy_define
 class AttachmentIndexArray:
     activeAttachments: int
     attachments: List[int]
 
 
-@unitypy_define
+@arisufxpy_define
 class AttachmentInfo:
     format: int
     needsResolve: bool
@@ -7059,7 +7061,7 @@ class AttachmentInfo:
     storeAction: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioImporterOutput:
     editorOutputContainerFormat: int
     editorOutputSettings: SampleSettings
@@ -7068,7 +7070,7 @@ class AudioImporterOutput:
     playerResource: Optional[StreamedResource] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioMixerConstant:
     effectGUIDs: List[GUID]
     effects: List[EffectConstant]
@@ -7085,17 +7087,17 @@ class AudioMixerConstant:
     groupConnections: Optional[List[GroupConnection]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioMixerLiveUpdateBool(ABC):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class AudioMixerLiveUpdateFloat(ABC):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class AutoOffMeshLinkData:
     m_Area: int
     m_End: Vector3f
@@ -7105,13 +7107,13 @@ class AutoOffMeshLinkData:
     m_Start: Vector3f
 
 
-@unitypy_define
+@arisufxpy_define
 class AvatarBodyMask(NamedObject):
     m_Mask: List[int]
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class AvatarConstant:
     m_Human: OffsetPtr
     m_HumanSkeletonIndexArray: List[int]
@@ -7129,13 +7131,13 @@ class AvatarConstant:
     m_SkeletonPose: Optional[OffsetPtr] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class AvatarSkeletonMaskElement:
     path: str
     weight: float
 
 
-@unitypy_define
+@arisufxpy_define
 class Axes:
     m_Length: float
     m_Limit: Limit
@@ -7145,24 +7147,24 @@ class Axes:
     m_Type: int
 
 
-@unitypy_define
+@arisufxpy_define
 class Binding:
     m_Slot: int
     m_EncodedData: Optional[int] = None
     m_Set: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class BitField:
     m_Bits: int
 
 
-@unitypy_define
+@arisufxpy_define
 class Blend1dDataConstant:
     m_ChildThresholdArray: List[float]
 
 
-@unitypy_define
+@arisufxpy_define
 class Blend2dDataConstant:
     m_ChildMagnitudeArray: Optional[List[float]] = None
     m_ChildNeighborListArray: Optional[List[MotionNeighborList]] = None
@@ -7172,13 +7174,13 @@ class Blend2dDataConstant:
     m_ChildThresholdArray: Optional[List[float]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class BlendDirectDataConstant:
     m_ChildBlendEventIDArray: List[int]
     m_NormalizedBlendValues: bool
 
 
-@unitypy_define
+@arisufxpy_define
 class BlendShapeData:
     channels: List[MeshBlendShapeChannel]
     fullWeights: List[float]
@@ -7186,7 +7188,7 @@ class BlendShapeData:
     vertices: List[BlendShapeVertex]
 
 
-@unitypy_define
+@arisufxpy_define
 class BlendShapeVertex:
     index: int
     normal: Vector3f
@@ -7194,13 +7196,13 @@ class BlendShapeVertex:
     vertex: Vector3f
 
 
-@unitypy_define
+@arisufxpy_define
 class BlendTreeConstant:
     m_NodeArray: List[OffsetPtr]
     m_BlendEventArrayConstant: Optional[OffsetPtr] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class BlendTreeNodeConstant:
     m_BlendEventID: int
     m_ChildIndices: List[int]
@@ -7217,7 +7219,7 @@ class BlendTreeNodeConstant:
     m_Mirror: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class BoneInfluence:
     boneIndex_0_: int
     boneIndex_1_: int
@@ -7229,7 +7231,7 @@ class BoneInfluence:
     weight_3_: float
 
 
-@unitypy_define
+@arisufxpy_define
 class BoneWeights4:
     boneIndex_0_: int
     boneIndex_1_: int
@@ -7241,7 +7243,7 @@ class BoneWeights4:
     weight_3_: float
 
 
-@unitypy_define
+@arisufxpy_define
 class BranchWindLevel:
     m_afBend_0: float
     m_afBend_1: float
@@ -7346,14 +7348,14 @@ class BranchWindLevel:
     m_fIndependence: float
 
 
-@unitypy_define
+@arisufxpy_define
 class BufferBinding:
     m_Index: int
     m_NameIndex: int
     m_ArraySize: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class BufferBindingParameter:
     m_ArraySize: int
     m_NameIndex: int
@@ -7362,7 +7364,7 @@ class BufferBindingParameter:
     m_ResourceType: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class BuildReportFile:
     id: int
     path: str
@@ -7371,7 +7373,7 @@ class BuildReportFile:
     flags: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class BuildReportPackedAssetInfo:
     classID: int
     fileID: int
@@ -7381,13 +7383,13 @@ class BuildReportPackedAssetInfo:
     offset: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class BuildReportScenesUsingAsset:
     assetPath: str
     scenePaths: List[str]
 
 
-@unitypy_define
+@arisufxpy_define
 class BuildStepInfo:
     messages: List[BuildStepMessage]
     stepName: str
@@ -7396,13 +7398,13 @@ class BuildStepInfo:
     durationTicks: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class BuildStepMessage:
     content: str
     type: int
 
 
-@unitypy_define
+@arisufxpy_define
 class BuildSummary:
     assetBundleOptions: int
     crc: int
@@ -7432,7 +7434,7 @@ class BuildSummary:
     totalTimeTicks: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class BuildTargetSettings:
     m_BuildTarget: str
     m_TextureFormat: int
@@ -7444,33 +7446,33 @@ class BuildTargetSettings:
     m_TextureWidth: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class BuildTextureStackReference:
     groupName: str
     itemName: str
 
 
-@unitypy_define
+@arisufxpy_define
 class BuiltAssetBundleInfo:
     bundleArchiveFile: int
     bundleName: str
     packagedFileIndices: List[int]
 
 
-@unitypy_define
+@arisufxpy_define
 class BuiltinShaderSettings:
     m_Mode: int
     m_Shader: PPtr[Shader]
 
 
-@unitypy_define
+@arisufxpy_define
 class CGProgram(TextAsset):
     m_Name: str
     m_Script: str
     m_PathName: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class CachedAssetMetaData:
     guid: GUID
     originalChangeset: int
@@ -7480,14 +7482,14 @@ class CachedAssetMetaData:
     pathName: str
 
 
-@unitypy_define
+@arisufxpy_define
 class Channel:
     attributeName: str
     byteOffset: int
     curve: AnimationCurve
 
 
-@unitypy_define
+@arisufxpy_define
 class ChannelInfo:
     dimension: int
     format: int
@@ -7495,7 +7497,7 @@ class ChannelInfo:
     stream: int
 
 
-@unitypy_define
+@arisufxpy_define
 class CharacterInfo:
     index: int
     uv: Rectf
@@ -7505,7 +7507,7 @@ class CharacterInfo:
     width: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Child:
     m_IsAnim: bool
     m_Motion: PPtr[Motion]
@@ -7516,19 +7518,19 @@ class Child:
     m_Position: Optional[Vector2f] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ChildAnimatorState:
     m_Position: Vector3f
     m_State: PPtr[AnimatorState]
 
 
-@unitypy_define
+@arisufxpy_define
 class ChildAnimatorStateMachine:
     m_Position: Vector3f
     m_StateMachine: PPtr[AnimatorStateMachine]
 
 
-@unitypy_define
+@arisufxpy_define
 class ChildMotion:
     m_CycleOffset: float
     m_DirectBlendParameter: str
@@ -7539,7 +7541,7 @@ class ChildMotion:
     m_TimeScale: float
 
 
-@unitypy_define
+@arisufxpy_define
 class ClampVelocityModule:
     dampen: float
     enabled: bool
@@ -7554,7 +7556,7 @@ class ClampVelocityModule:
     multiplyDragByParticleVelocity: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ClassInfo:
     m_AssemblyNameIndex: int
     m_ClassName: str
@@ -7565,14 +7567,14 @@ class ClassInfo:
     m_NamespaceName: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ClassMethodInfo:
     m_ClassIndex: int
     m_MethodName: str
     m_OrderNumber: int
 
 
-@unitypy_define
+@arisufxpy_define
 class Clip:
     m_DenseClip: DenseClip
     m_StreamedClip: StreamedClip
@@ -7580,7 +7582,7 @@ class Clip:
     m_ConstantClip: Optional[ConstantClip] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ClipAnimationInfo:
     firstFrame: Union[float, int]
     lastFrame: Union[float, int]
@@ -7614,13 +7616,13 @@ class ClipAnimationInfo:
     transformMask: Optional[List[TransformMaskElement]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ClipAnimationInfoCurve:
     curve: AnimationCurve
     name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class ClipMuscleConstant:
     m_AverageAngularSpeed: float
     m_AverageSpeed: Union[float3, float4]
@@ -7654,14 +7656,14 @@ class ClipMuscleConstant:
     m_ValueArrayReferencePose: Optional[List[float]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ClothAttachment:
     m_Collider: PPtr[Collider]
     m_Tearable: bool
     m_TwoWayInteraction: bool
 
 
-@unitypy_define
+@arisufxpy_define
 class ClothConstrainCoefficients:
     collisionSphereDistance: float
     maxDistance: float
@@ -7669,13 +7671,13 @@ class ClothConstrainCoefficients:
     maxDistanceBias: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ClothSphereColliderPair:
     first: PPtr[SphereCollider]
     second: PPtr[SphereCollider]
 
 
-@unitypy_define
+@arisufxpy_define
 class ClusterInput:
     m_DeviceName: str
     m_Index: int
@@ -7684,22 +7686,22 @@ class ClusterInput:
     m_Type: int
 
 
-@unitypy_define
+@arisufxpy_define
 class CollabEditorSettings:
     inProgressEnabled: bool
 
 
-@unitypy_define
+@arisufxpy_define
 class Collision(ABC):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class Collision2D(ABC):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class CollisionModule:
     enabled: bool
     minKillSpeed: float
@@ -7734,25 +7736,25 @@ class CollisionModule:
     voxelSize: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ColorBySpeedModule:
     enabled: bool
     gradient: MinMaxGradient
     range: Vector2f
 
 
-@unitypy_define
+@arisufxpy_define
 class ColorModule:
     enabled: bool
     gradient: MinMaxGradient
 
 
-@unitypy_define
+@arisufxpy_define
 class ComponentPair:
     component: PPtr[Component]
 
 
-@unitypy_define
+@arisufxpy_define
 class CompressedAnimationCurve:
     m_Path: str
     m_PostInfinity: int
@@ -7762,7 +7764,7 @@ class CompressedAnimationCurve:
     m_Values: PackedBitVector
 
 
-@unitypy_define
+@arisufxpy_define
 class CompressedMesh:
     m_BoneIndices: PackedBitVector
     m_NormalSigns: PackedBitVector
@@ -7779,26 +7781,26 @@ class CompressedMesh:
     m_UVInfo: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ComputeBufferCounter:
     bindpoint: int
     offset: int
 
 
-@unitypy_define
+@arisufxpy_define
 class ComputeShaderBuiltinSampler:
     bindPoint: int
     sampler: int
 
 
-@unitypy_define
+@arisufxpy_define
 class ComputeShaderCB:
     byteSize: int
     name: Union[FastPropertyName, str]
     params: List[ComputeShaderParam]
 
 
-@unitypy_define
+@arisufxpy_define
 class ComputeShaderKernel:
     builtinSamplers: Union[List[ComputeShaderBuiltinSampler], List[SamplerParameter]]
     cbs: List[ComputeShaderResource]
@@ -7812,7 +7814,7 @@ class ComputeShaderKernel:
     threadGroupSize: Optional[List[int]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ComputeShaderKernelParent:
     name: str
     dynamicKeywords: Optional[List[str]] = None
@@ -7824,7 +7826,7 @@ class ComputeShaderKernelParent:
     variantMap: Optional[List[Tuple[str, ComputeShaderKernel]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ComputeShaderParam:
     arraySize: int
     colCount: int
@@ -7834,7 +7836,7 @@ class ComputeShaderParam:
     type: int
 
 
-@unitypy_define
+@arisufxpy_define
 class ComputeShaderPlatformVariant:
     constantBuffers: List[ComputeShaderCB]
     kernels: List[ComputeShaderKernelParent]
@@ -7843,7 +7845,7 @@ class ComputeShaderPlatformVariant:
     targetRenderer: int
 
 
-@unitypy_define
+@arisufxpy_define
 class ComputeShaderResource:
     name: Union[FastPropertyName, str]
     bindPoint: Optional[int] = None
@@ -7857,7 +7859,7 @@ class ComputeShaderResource:
     texDimension: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ComputeShaderVariant:
     constantBuffers: List[ComputeShaderCB]
     kernels: List[ComputeShaderKernel]
@@ -7866,7 +7868,7 @@ class ComputeShaderVariant:
     resourcesResolved: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Condition:
     m_ConditionEvent: str
     m_ConditionMode: int
@@ -7874,7 +7876,7 @@ class Condition:
     m_ExitTime: float
 
 
-@unitypy_define
+@arisufxpy_define
 class ConditionConstant:
     m_ConditionMode: int
     m_EventID: int
@@ -7882,13 +7884,13 @@ class ConditionConstant:
     m_ExitTime: float
 
 
-@unitypy_define
+@arisufxpy_define
 class ConfigSetting:
     flags: int
     value: str
 
 
-@unitypy_define
+@arisufxpy_define
 class ConstantBuffer:
     m_MatrixParams: List[MatrixParameter]
     m_NameIndex: int
@@ -7898,7 +7900,7 @@ class ConstantBuffer:
     m_StructParams: Optional[List[StructParameter]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ConstantBufferParameter:
     m_IsPartialCB: bool
     m_MatrixParams: List[MatrixParameter]
@@ -7908,18 +7910,18 @@ class ConstantBufferParameter:
     m_VectorParams: List[VectorParameter]
 
 
-@unitypy_define
+@arisufxpy_define
 class ConstantClip:
     data: List[float]
 
 
-@unitypy_define
+@arisufxpy_define
 class ConstraintSource:
     sourceTransform: PPtr[Transform]
     weight: float
 
 
-@unitypy_define
+@arisufxpy_define
 class ControllerConstant:
     m_DefaultValues: OffsetPtr
     m_StateMachineArray: List[OffsetPtr]
@@ -7928,7 +7930,7 @@ class ControllerConstant:
     m_LayerArray: Optional[List[OffsetPtr]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class CrashReportingSettings:
     m_EventUrl: str
     m_EnableCloudDiagnosticsReporting: Optional[bool] = None
@@ -7937,7 +7939,7 @@ class CrashReportingSettings:
     m_NativeEventUrl: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class CustomDataModule:
     color0: MinMaxGradient
     color1: MinMaxGradient
@@ -7956,7 +7958,7 @@ class CustomDataModule:
     vectorComponentCount1: int
 
 
-@unitypy_define
+@arisufxpy_define
 class D3D12DeviceFilterData:
     deviceName: str
     deviceType: int
@@ -7971,13 +7973,13 @@ class D3D12DeviceFilterData:
     vendorName: str
 
 
-@unitypy_define
+@arisufxpy_define
 class D3D12GraphicsJobsDeviceFilterData:
     filter: D3D12DeviceFilterData
     preferredMode: int
 
 
-@unitypy_define
+@arisufxpy_define
 class DataTemplate(NamedObject):
     m_Father: PPtr[DataTemplate]
     m_IsDataTemplate: bool
@@ -7986,25 +7988,25 @@ class DataTemplate(NamedObject):
     m_Objects: List[PPtr[EditorExtension]]
 
 
-@unitypy_define
+@arisufxpy_define
 class DateTime:
     ticks: int
 
 
-@unitypy_define
+@arisufxpy_define
 class DefaultPreset:
     m_Preset: PPtr[Preset]
     m_Disabled: Optional[bool] = None
     m_Filter: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class DefaultPresetList:
     defaultPresets: List[DefaultPreset]
     type: PresetType
 
 
-@unitypy_define
+@arisufxpy_define
 class DeletedItem:
     changeset: int
     digest: Union[Hash128, MdFour]
@@ -8014,7 +8016,7 @@ class DeletedItem:
     type: int
 
 
-@unitypy_define
+@arisufxpy_define
 class DenseClip:
     m_BeginTime: float
     m_CurveCount: int
@@ -8023,7 +8025,7 @@ class DenseClip:
     m_SampleRate: float
 
 
-@unitypy_define
+@arisufxpy_define
 class DetailDatabase:
     WavingGrassTint: ColorRGBA
     m_DetailPrototypes: List[DetailPrototype]
@@ -8046,7 +8048,7 @@ class DetailDatabase:
     m_RandomRotations: Optional[List[Vector3f]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class DetailPatch:
     layerIndices: List[int]
     bounds: Optional[AABB] = None
@@ -8054,7 +8056,7 @@ class DetailPatch:
     numberOfObjects: Optional[List[int]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class DetailPrototype:
     dryColor: ColorRGBA
     healthyColor: ColorRGBA
@@ -8080,23 +8082,23 @@ class DetailPrototype:
     useInstancing: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class DeviceNone:
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class DirectorGenericBinding:
     key: PPtr[Object]
     value: PPtr[Object]
 
 
-@unitypy_define
+@arisufxpy_define
 class DirectorPlayer(Behaviour):
     m_GameObject: PPtr[GameObject]
 
 
-@unitypy_define
+@arisufxpy_define
 class EffectConstant:
     bypass: bool
     groupConstantIndex: int
@@ -8107,13 +8109,13 @@ class EffectConstant:
     wetMixLevelIndex: int
 
 
-@unitypy_define
+@arisufxpy_define
 class EmbeddedNativeType:
     m_FloatArray: List[float]
     m_String: str
 
 
-@unitypy_define
+@arisufxpy_define
 class EmissionModule:
     enabled: bool
     m_BurstCount: int
@@ -8136,12 +8138,12 @@ class EmissionModule:
     time3: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class EnlightenCAHMap:
     m_Map: List[Tuple[LookupKey, Hash128]]
 
 
-@unitypy_define
+@arisufxpy_define
 class EnlightenRendererInformation:
     dynamicLightmapSTInSystem: Vector4f
     instanceHash: Hash128
@@ -8149,7 +8151,7 @@ class EnlightenRendererInformation:
     systemId: int
 
 
-@unitypy_define
+@arisufxpy_define
 class EnlightenSceneMapping:
     m_Renderers: List[EnlightenRendererInformation]
     m_SystemAtlases: List[EnlightenSystemAtlasInformation]
@@ -8159,14 +8161,14 @@ class EnlightenSceneMapping:
     m_Probesets: Optional[List[Hash128]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class EnlightenSystemAtlasInformation:
     atlasHash: Hash128
     atlasSize: int
     firstSystemId: int
 
 
-@unitypy_define
+@arisufxpy_define
 class EnlightenSystemInformation:
     atlasIndex: int
     atlasOffsetX: int
@@ -8177,19 +8179,19 @@ class EnlightenSystemInformation:
     rendererSize: int
 
 
-@unitypy_define
+@arisufxpy_define
 class EnlightenTerrainChunksInformation:
     firstSystemId: int
     numChunksInX: int
     numChunksInY: int
 
 
-@unitypy_define
+@arisufxpy_define
 class EntityId:
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class Error:
     filePath: str
     message: str
@@ -8198,13 +8200,13 @@ class Error:
     startLine: int
 
 
-@unitypy_define
+@arisufxpy_define
 class ErrorLog:
     m_HasErrors: bool
     m_Messages: List[Message]
 
 
-@unitypy_define
+@arisufxpy_define
 class ExpandedData:
     m_ClassID: int
     m_ExpandedProperties: List[str]
@@ -8212,12 +8214,12 @@ class ExpandedData:
     m_ScriptClass: str
 
 
-@unitypy_define
+@arisufxpy_define
 class ExposedReferenceTable:
     m_References: List[Tuple[str, PPtr[Object]]]
 
 
-@unitypy_define
+@arisufxpy_define
 class Expression:
     data_0_: int
     data_1_: int
@@ -8231,7 +8233,7 @@ class Expression:
     scalarSwitchCase: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ExtensionPropertyValue:
     extensionName: str
     pluginName: str
@@ -8239,7 +8241,7 @@ class ExtensionPropertyValue:
     propertyValue: float
 
 
-@unitypy_define
+@arisufxpy_define
 class ExternalForcesModule:
     enabled: bool
     influenceFilter: Optional[int] = None
@@ -8249,7 +8251,7 @@ class ExternalForcesModule:
     multiplierCurve: Optional[MinMaxCurve] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class FalloffTable:
     m_Table_0_: float
     m_Table_10_: float
@@ -8266,12 +8268,12 @@ class FalloffTable:
     m_Table_9_: float
 
 
-@unitypy_define
+@arisufxpy_define
 class FastPropertyName:
     name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class FlareElement:
     m_Color: ColorRGBA
     m_Fade: bool
@@ -8283,7 +8285,7 @@ class FlareElement:
     m_Zoom: bool
 
 
-@unitypy_define
+@arisufxpy_define
 class FloatCurve:
     attribute: str
     classID: int
@@ -8293,7 +8295,7 @@ class FloatCurve:
     flags: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ForceModule:
     enabled: bool
     inWorldSpace: bool
@@ -8303,7 +8305,7 @@ class ForceModule:
     z: MinMaxCurve
 
 
-@unitypy_define
+@arisufxpy_define
 class GISettings:
     m_AlbedoBoost: float
     m_BounceScale: float
@@ -8314,7 +8316,7 @@ class GISettings:
     m_TemporalCoherenceThreshold: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class GLTextureSettings:
     m_Aniso: int
     m_FilterMode: int
@@ -8325,7 +8327,7 @@ class GLTextureSettings:
     m_WrapW: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class GUID:
     data_0_: int
     data_1_: int
@@ -8333,7 +8335,7 @@ class GUID:
     data_3_: int
 
 
-@unitypy_define
+@arisufxpy_define
 class GenericBinding:
     attribute: int
     customType: int
@@ -8347,20 +8349,20 @@ class GenericBinding:
     typeID: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class GfxBlendState:
     alphaToMask: int
     rt: List[GfxRenderTargetBlendState]
     separateMRTBlend: int
 
 
-@unitypy_define
+@arisufxpy_define
 class GfxDepthState:
     depthFunc: int
     depthWrite: int
 
 
-@unitypy_define
+@arisufxpy_define
 class GfxRasterState:
     conservative: int
     cullMode: int
@@ -8369,7 +8371,7 @@ class GfxRasterState:
     slopeScaledDepthBias: float
 
 
-@unitypy_define
+@arisufxpy_define
 class GfxRenderTargetBlendState:
     blendOp: int
     blendOpAlpha: int
@@ -8380,7 +8382,7 @@ class GfxRenderTargetBlendState:
     writeMask: int
 
 
-@unitypy_define
+@arisufxpy_define
 class GfxStencilState:
     padding: int
     readMask: int
@@ -8396,7 +8398,7 @@ class GfxStencilState:
     writeMask: int
 
 
-@unitypy_define
+@arisufxpy_define
 class Google:
     depthFormat: int
     enableTransitionView: Optional[bool] = None
@@ -8407,7 +8409,7 @@ class Google:
     useSustainedPerformanceMode: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Gradient:
     atime0: Optional[int] = None
     atime1: Optional[int] = None
@@ -8444,7 +8446,7 @@ class Gradient:
     m_NumColorKeys: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class GradientNEW:
     atime0: int
     atime1: int
@@ -8474,7 +8476,7 @@ class GradientNEW:
     m_NumColorKeys: int
 
 
-@unitypy_define
+@arisufxpy_define
 class GraphicsStateInfo:
     appBackface: bool
     depthBias: float
@@ -8495,14 +8497,14 @@ class GraphicsStateInfo:
     unfilterableTextureBindings: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class GroupConnection:
     sendEffectIndex: int
     sourceGroupIndex: int
     targetGroupIndex: int
 
 
-@unitypy_define
+@arisufxpy_define
 class GroupConstant:
     bypassEffects: bool
     mute: bool
@@ -8513,12 +8515,12 @@ class GroupConstant:
     sendIndex: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Hand:
     m_HandBoneIndex: List[int]
 
 
-@unitypy_define
+@arisufxpy_define
 class HandPose:
     m_CloseOpen: float
     m_DoFArray: List[float]
@@ -8528,14 +8530,14 @@ class HandPose:
     m_Override: float
 
 
-@unitypy_define
+@arisufxpy_define
 class Handle:
     m_ID: int
     m_ParentHumanIndex: int
     m_X: xform
 
 
-@unitypy_define
+@arisufxpy_define
 class Hash128:
     bytes_0_: int
     bytes_10_: int
@@ -8555,7 +8557,7 @@ class Hash128:
     bytes_9_: int
 
 
-@unitypy_define
+@arisufxpy_define
 class HeightMeshBVNode:
     i: int
     max: Vector3f
@@ -8563,7 +8565,7 @@ class HeightMeshBVNode:
     n: int
 
 
-@unitypy_define
+@arisufxpy_define
 class HeightMeshData:
     m_Bounds: AABB
     m_Indices: List[int]
@@ -8571,7 +8573,7 @@ class HeightMeshData:
     m_Vertices: List[Vector3f]
 
 
-@unitypy_define
+@arisufxpy_define
 class Heightmap:
     m_Heights: List[int]
     m_Levels: int
@@ -8591,7 +8593,7 @@ class Heightmap:
     m_Width: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class HeightmapData:
     terrainData: PPtr[Object]
     isRotated: Optional[bool] = None
@@ -8599,24 +8601,24 @@ class HeightmapData:
     surfaceToTerrain: Optional[Matrix4x4f] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class HierarchicalSceneData:
     m_SceneGUID: GUID
 
 
-@unitypy_define
+@arisufxpy_define
 class Hint:
     m_Key: str
     m_Value: str
 
 
-@unitypy_define
+@arisufxpy_define
 class HoloLens:
     depthFormat: int
     depthBufferSharingEnabled: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Human:
     m_ArmStretch: float
     m_ArmTwist: float
@@ -8641,14 +8643,14 @@ class Human:
     m_HasTDoF: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class HumanBone:
     m_BoneName: str
     m_HumanName: str
     m_Limit: SkeletonBoneLimit
 
 
-@unitypy_define
+@arisufxpy_define
 class HumanDescription:
     m_ArmStretch: float
     m_ArmTwist: float
@@ -8668,7 +8670,7 @@ class HumanDescription:
     m_SkeletonHasParents: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class HumanGoal:
     m_WeightR: float
     m_WeightT: float
@@ -8677,7 +8679,7 @@ class HumanGoal:
     m_HintWeightT: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class HumanHandle:
     m_BoneName: str
     m_LookAt: bool
@@ -8687,7 +8689,7 @@ class HumanHandle:
     m_Scale: Vector3f
 
 
-@unitypy_define
+@arisufxpy_define
 class HumanLayerConstant:
     m_Binding: int
     m_BodyMask: HumanPoseMask
@@ -8700,7 +8702,7 @@ class HumanLayerConstant:
     m_SyncedLayerAffectsTiming: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class HumanPose:
     m_DoFArray: List[float]
     m_GoalArray: List[HumanGoal]
@@ -8712,14 +8714,14 @@ class HumanPose:
     m_TDoFArray: Optional[Union[List[float3], List[float4]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class HumanPoseMask:
     word0: int
     word1: int
     word2: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Image:
     image_data: bytes
     m_Format: int
@@ -8728,7 +8730,7 @@ class Image:
     m_Width: int
 
 
-@unitypy_define
+@arisufxpy_define
 class ImportLog_ImportLogEntry:
     file: str
     line: int
@@ -8737,14 +8739,14 @@ class ImportLog_ImportLogEntry:
     object: PPtr[Object]
 
 
-@unitypy_define
+@arisufxpy_define
 class InheritVelocityModule:
     enabled: bool
     m_Curve: MinMaxCurve
     m_Mode: int
 
 
-@unitypy_define
+@arisufxpy_define
 class InitialModule:
     enabled: bool
     gravityModifier: Union[MinMaxCurve, float]
@@ -8766,7 +8768,7 @@ class InitialModule:
     startSizeZ: Optional[MinMaxCurve] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class InputAxis:
     altNegativeButton: str
     altPositiveButton: str
@@ -8785,7 +8787,7 @@ class InputAxis:
     type: int
 
 
-@unitypy_define
+@arisufxpy_define
 class InputImportSettings:
     name: str
     alphaSource: Optional[int] = None
@@ -8795,7 +8797,7 @@ class InputImportSettings:
     wrapMode: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class InsightsSettings:
     m_Enabled: bool
     m_EngineDiagnosticsEnabled: bool
@@ -8803,13 +8805,13 @@ class InsightsSettings:
     m_StackTraceUrl: str
 
 
-@unitypy_define
+@arisufxpy_define
 class IntPoint:
     X: int
     Y: int
 
 
-@unitypy_define
+@arisufxpy_define
 class Item:
     changeFlags: Optional[int] = None
     changeset: Optional[int] = None
@@ -8826,19 +8828,19 @@ class Item:
     type: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class JointAngleLimit2D:
     m_LowerAngle: float
     m_UpperAngle: float
 
 
-@unitypy_define
+@arisufxpy_define
 class JointAngleLimits2D:
     m_LowerAngle: float
     m_UpperAngle: float
 
 
-@unitypy_define
+@arisufxpy_define
 class JointDrive:
     maximumForce: float
     positionDamper: float
@@ -8847,7 +8849,7 @@ class JointDrive:
     useAcceleration: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class JointLimits:
     max: float
     min: float
@@ -8858,40 +8860,40 @@ class JointLimits:
     minBounce: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class JointMotor:
     force: float
     freeSpin: int
     targetVelocity: float
 
 
-@unitypy_define
+@arisufxpy_define
 class JointMotor2D:
     m_MaximumMotorForce: float
     m_MotorSpeed: float
 
 
-@unitypy_define
+@arisufxpy_define
 class JointSpring:
     damper: float
     spring: float
     targetPosition: float
 
 
-@unitypy_define
+@arisufxpy_define
 class JointSuspension2D:
     m_Angle: float
     m_DampingRatio: float
     m_Frequency: float
 
 
-@unitypy_define
+@arisufxpy_define
 class JointTranslationLimits2D:
     m_LowerTranslation: float
     m_UpperTranslation: float
 
 
-@unitypy_define
+@arisufxpy_define
 class Keyframe:
     inSlope: Union[Quaternionf, Vector3f, float]
     outSlope: Union[Quaternionf, Vector3f, float]
@@ -8902,7 +8904,7 @@ class Keyframe:
     weightedMode: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LOD:
     renderers: List[LODRenderer]
     screenRelativeHeight: float
@@ -8910,12 +8912,12 @@ class LOD:
     fadeTransitionWidth: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LODRenderer:
     renderer: PPtr[Renderer]
 
 
-@unitypy_define
+@arisufxpy_define
 class LayerConstant:
     m_Binding: int
     m_BodyMask: HumanPoseMask
@@ -8929,29 +8931,29 @@ class LayerConstant:
     m_StateMachineSynchronizedLayerIndex: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LayoutDataOne:
     m_FloatArray: List[float]
 
 
-@unitypy_define
+@arisufxpy_define
 class LayoutDataThree:
     m_AnotherFloatArray: List[float]
 
 
-@unitypy_define
+@arisufxpy_define
 class LayoutDataTwo:
     m_FloatValue: float
     m_IntegerValue: int
 
 
-@unitypy_define
+@arisufxpy_define
 class LeafInfoConstant:
     m_IDArray: List[int]
     m_IndexOffset: int
 
 
-@unitypy_define
+@arisufxpy_define
 class LibraryRepresentation:
     name: str
     scriptClassName: str
@@ -8964,14 +8966,14 @@ class LibraryRepresentation:
     path: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LifetimeByEmitterSpeedModule:
     enabled: bool
     m_Curve: MinMaxCurve
     m_Range: Vector2f
 
 
-@unitypy_define
+@arisufxpy_define
 class LightBakingOutput:
     probeOcclusionLightIndex: int
     isBaked: Optional[bool] = None
@@ -8981,7 +8983,7 @@ class LightBakingOutput:
     shadowMaskChannel: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LightProbeData:
     m_NonTetrahedralizedProbeSetIndexMap: List[Tuple[Hash128, int]]
     m_Positions: List[Vector3f]
@@ -8989,7 +8991,7 @@ class LightProbeData:
     m_Tetrahedralization: ProbeSetTetrahedralization
 
 
-@unitypy_define
+@arisufxpy_define
 class LightProbeOcclusion:
     m_Occlusion: List[float]
     m_BakedLightIndex: Optional[List[int]] = None
@@ -8998,13 +9000,13 @@ class LightProbeOcclusion:
     m_ShadowMaskChannel: Optional[List[int]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LightmapBakeMode:
     lightmapBakeType: int
     mixedLightingMode: int
 
 
-@unitypy_define
+@arisufxpy_define
 class LightmapData:
     m_DirLightmap: Optional[PPtr[Texture2D]] = None
     m_IndirectLightmap: Optional[PPtr[Texture2D]] = None
@@ -9039,7 +9041,7 @@ class LightmapData:
     sh_9_: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LightmapSnapshot(NamedObject):
     m_BakedReflectionProbeCubemaps: List[PPtr[Texture]]
     m_BakedReflectionProbes: List[SceneObjectIdentifier]
@@ -9060,7 +9062,7 @@ class LightmapSnapshot(NamedObject):
     m_SceneGUID: Optional[GUID] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LightsModule:
     color: bool
     enabled: bool
@@ -9074,13 +9076,13 @@ class LightsModule:
     ratio: float
 
 
-@unitypy_define
+@arisufxpy_define
 class Limit:
     m_Max: Union[float3, float4]
     m_Min: Union[float3, float4]
 
 
-@unitypy_define
+@arisufxpy_define
 class LineParameters:
     alignment: Optional[int] = None
     colorGradient: Optional[Gradient] = None
@@ -9098,19 +9100,19 @@ class LineParameters:
     widthMultiplier: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class LodSelectionCurve:
     m_LodBias: float
     m_LodSlope: float
 
 
-@unitypy_define
+@arisufxpy_define
 class LookupKey:
     extension: str
     hash: Hash128
 
 
-@unitypy_define
+@arisufxpy_define
 class Lumin:
     depthFormat: int
     enableGLCache: bool
@@ -9119,13 +9121,13 @@ class Lumin:
     glCacheMaxFileSize: int
 
 
-@unitypy_define
+@arisufxpy_define
 class MaterialImportOutput:
     baked: int
     currentSettings: BuildTargetSettings
 
 
-@unitypy_define
+@arisufxpy_define
 class MaterialInstanceSettings:
     buildTargetSettings: List[BuildTargetSettings]
     inputs: List[InputImportSettings]
@@ -9142,7 +9144,7 @@ class MaterialInstanceSettings:
     textureAssignments: Optional[List[ProceduralTextureAssignment]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class MatrixParameter:
     m_ArraySize: int
     m_NameIndex: int
@@ -9152,12 +9154,12 @@ class MatrixParameter:
     m_OffsetInConstantBuffer: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class MdFour:
     md4_hash: bytes
 
 
-@unitypy_define
+@arisufxpy_define
 class MeshBlendShape:
     firstVertex: int
     hasNormals: bool
@@ -9168,7 +9170,7 @@ class MeshBlendShape:
     name: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class MeshBlendShapeChannel:
     frameCount: int
     frameIndex: int
@@ -9176,7 +9178,7 @@ class MeshBlendShapeChannel:
     nameHash: int
 
 
-@unitypy_define
+@arisufxpy_define
 class MeshBlendShapeVertex:
     index: int
     normal: Vector3f
@@ -9184,25 +9186,25 @@ class MeshBlendShapeVertex:
     vertex: Vector3f
 
 
-@unitypy_define
+@arisufxpy_define
 class MeshLodInfo:
     m_LodSelectionCurve: LodSelectionCurve
     m_NumLevels: int
     m_SubMeshes: List[MeshLodSubMesh]
 
 
-@unitypy_define
+@arisufxpy_define
 class MeshLodRange:
     m_IndexCount: int
     m_IndexStart: int
 
 
-@unitypy_define
+@arisufxpy_define
 class MeshLodSubMesh:
     m_Levels: List[MeshLodRange]
 
 
-@unitypy_define
+@arisufxpy_define
 class Message:
     m_Code: int
     m_Location: SourceLocation
@@ -9210,13 +9212,13 @@ class Message:
     m_Text: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class MinMaxAABB:
     m_Max: Vector3f
     m_Min: Vector3f
 
 
-@unitypy_define
+@arisufxpy_define
 class MinMaxCurve:
     maxCurve: AnimationCurve
     minCurve: AnimationCurve
@@ -9225,7 +9227,7 @@ class MinMaxCurve:
     minScalar: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class MinMaxGradient:
     maxColor: ColorRGBA
     maxGradient: Union[Gradient, GradientNEW]
@@ -9234,13 +9236,13 @@ class MinMaxGradient:
     minMaxState: int
 
 
-@unitypy_define
+@arisufxpy_define
 class MipmapLimitSettings:
     limitBias: int
     limitBiasMode: int
 
 
-@unitypy_define
+@arisufxpy_define
 class Module:
     dependencies: List[str]
     name: str
@@ -9248,7 +9250,7 @@ class Module:
     controlledByBuiltinPackage: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class MonoAssemblyImporter(AssetImporter):
     m_ExecutionOrder: List[Tuple[str, int]]
     m_IconMap: List[Tuple[str, PPtr[Texture2D]]]
@@ -9259,17 +9261,17 @@ class MonoAssemblyImporter(AssetImporter):
     m_UserData: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class MonoObject(ABC):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class MotionNeighborList:
     m_NeighborArray: List[int]
 
 
-@unitypy_define
+@arisufxpy_define
 class MultiModeParameter:
     mode: int
     speed: MinMaxCurve
@@ -9277,42 +9279,42 @@ class MultiModeParameter:
     value: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class NameToObjectMap:
     m_ObjectToName: List[Tuple[PPtr[Shader], str]]
 
 
-@unitypy_define
+@arisufxpy_define
 class NativeType:
     a: int
     b: float
     embedded: EmbeddedNativeType
 
 
-@unitypy_define
+@arisufxpy_define
 class NavMesh(NamedObject):
     m_Heightmaps: List[HeightmapData]
     m_MeshData: List[int]
     m_Name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class NavMeshAreaData:
     cost: float
     name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class NavMeshAreas(GlobalGameManager):
     areas: List[NavMeshAreaData]
 
 
-@unitypy_define
+@arisufxpy_define
 class NavMeshBuildDebugSettings:
     m_Flags: int
 
 
-@unitypy_define
+@arisufxpy_define
 class NavMeshBuildSettings:
     agentClimb: float
     agentHeight: float
@@ -9334,14 +9336,14 @@ class NavMeshBuildSettings:
     preserveTilesOutsideBounds: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class NavMeshLayerData:
     cost: float
     editType: int
     name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class NavMeshLayers(GlobalGameManager):
     Built_in_Layer_0: NavMeshLayerData
     Built_in_Layer_1: NavMeshLayerData
@@ -9377,7 +9379,7 @@ class NavMeshLayers(GlobalGameManager):
     User_Layer_9: NavMeshLayerData
 
 
-@unitypy_define
+@arisufxpy_define
 class NavMeshParams:
     cellSize: float
     tileSize: float
@@ -9386,25 +9388,25 @@ class NavMeshParams:
     walkableRadius: float
 
 
-@unitypy_define
+@arisufxpy_define
 class NavMeshTileData:
     m_MeshData: List[int]
     m_Hash: Optional[Hash128] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class NetworkViewID:
     m_ID: int
     m_Type: int
 
 
-@unitypy_define
+@arisufxpy_define
 class Node:
     m_AxesId: int
     m_ParentId: int
 
 
-@unitypy_define
+@arisufxpy_define
 class NoiseModule:
     damping: bool
     enabled: bool
@@ -9427,18 +9429,18 @@ class NoiseModule:
     sizeAmount: Optional[MinMaxCurve] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class NonAlignedStruct:
     m_Bool: bool
 
 
-@unitypy_define
+@arisufxpy_define
 class ObjectRolePair:
     m_Object: PPtr[Object]
     m_RolesMask: int
 
 
-@unitypy_define
+@arisufxpy_define
 class OcclusionScene:
     indexPortals: int
     indexRenderers: int
@@ -9447,7 +9449,7 @@ class OcclusionScene:
     sizeRenderers: int
 
 
-@unitypy_define
+@arisufxpy_define
 class Oculus:
     dashSupport: bool
     sharedDepthBuffer: bool
@@ -9456,19 +9458,19 @@ class Oculus:
     v2Signing: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class OffsetPtr:
     data: Union[Blend1dDataConstant, Blend2dDataConstant, BlendDirectDataConstant, BlendTreeConstant, BlendTreeNodeConstant, Clip, ConditionConstant, Hand, Human, HumanLayerConstant, LayerConstant, SelectorStateConstant, SelectorTransitionConstant, Skeleton, SkeletonMask, SkeletonPose, StateConstant, StateMachineConstant, TransitionConstant, ValueArray, ValueArrayConstant]
 
 
-@unitypy_define
+@arisufxpy_define
 class Output:
     hasEmptyFontData: Optional[bool] = None
     importedType: Optional[int] = None
     previewData: Optional[List[float]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PPtrCurve:
     attribute: str
     classID: int
@@ -9478,13 +9480,13 @@ class PPtrCurve:
     flags: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PPtrKeyframe:
     time: float
     value: PPtr[Object]
 
 
-@unitypy_define
+@arisufxpy_define
 class PackedBitVector:
     m_Data: List[int]
     m_NumItems: int
@@ -9493,7 +9495,7 @@ class PackedBitVector:
     m_Start: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PackingSettings:
     allowAlphaSplitting: bool
     blockOffset: int
@@ -9503,19 +9505,19 @@ class PackingSettings:
     enableAlphaDilation: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Parameter:
     m_GUID: GUID
     m_ParameterName: str
 
 
-@unitypy_define
+@arisufxpy_define
 class ParserBindChannels:
     m_Channels: List[ShaderBindChannel]
     m_SourceMap: int
 
 
-@unitypy_define
+@arisufxpy_define
 class ParticleSystemEmissionBurst:
     cycleCount: int
     repeatInterval: float
@@ -9526,7 +9528,7 @@ class ParticleSystemEmissionBurst:
     probability: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ParticleSystemForceFieldParameters:
     m_DirectionCurveX: MinMaxCurve
     m_DirectionCurveY: MinMaxCurve
@@ -9548,7 +9550,7 @@ class ParticleSystemForceFieldParameters:
     m_VectorFieldSpeedCurve: MinMaxCurve
 
 
-@unitypy_define
+@arisufxpy_define
 class PerLODSettings:
     castShadows: bool
     enableBump: bool
@@ -9562,12 +9564,12 @@ class PerLODSettings:
     enableSubsurface: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PerformanceReportingSettings:
     m_Enabled: bool
 
 
-@unitypy_define
+@arisufxpy_define
 class PhysicMaterial(NamedObject):
     bounceCombine: int
     bounciness: float
@@ -9580,7 +9582,7 @@ class PhysicMaterial(NamedObject):
     staticFriction2: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PhysicsJobOptions2D:
     m_ClearBodyForcesPerJob: int
     m_ClearFlagsPerJob: int
@@ -9603,7 +9605,7 @@ class PhysicsJobOptions2D:
     useMultithreading: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PhysicsShape:
     m_AdjacentEnd: Vector2f
     m_AdjacentStart: Vector2f
@@ -9615,13 +9617,13 @@ class PhysicsShape:
     m_VertexStartIndex: int
 
 
-@unitypy_define
+@arisufxpy_define
 class PhysicsShapeGroup2D:
     m_Shapes: List[PhysicsShape]
     m_Vertices: List[Vector2f]
 
 
-@unitypy_define
+@arisufxpy_define
 class PlatformSettings:
     m_AllowsAlphaSplitting: bool
     m_BuildTarget: str
@@ -9634,13 +9636,13 @@ class PlatformSettings:
     m_ResizeAlgorithm: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PlatformSettingsData:
     settings: List[Tuple[str, str]]
     enabled: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PlatformShaderDefines:
     defines_Tier1: List[int]
     defines_Tier2: List[int]
@@ -9648,25 +9650,25 @@ class PlatformShaderDefines:
     shaderPlatform: int
 
 
-@unitypy_define
+@arisufxpy_define
 class PlatformShaderSettings:
     useCascadedShadowMaps: Optional[bool] = None
     useScreenSpaceShadows: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PluginImportOutput:
     dllType: Optional[int] = None
     pluginType: Optional[int] = None
     scriptingRuntimeVersion: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Polygon2D(ABC):
     m_Paths: Optional[List[List[Vector2f]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PrefabModification:
     m_Modifications: List[PropertyModification]
     m_RemovedComponents: Union[List[PPtr[Component]], List[PPtr[Object]]]
@@ -9676,34 +9678,34 @@ class PrefabModification:
     m_RemovedGameObjects: Optional[List[PPtr[GameObject]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PresetType:
     m_ManagedTypeFallback: str
     m_ManagedTypePPtr: PPtr[MonoScript]
     m_NativeTypeID: int
 
 
-@unitypy_define
+@arisufxpy_define
 class PreviewData:
     m_CompSize: int
     m_OrigSize: int
     m_PreviewData: List[float]
 
 
-@unitypy_define
+@arisufxpy_define
 class ProbeSetIndex:
     m_Hash: Hash128
     m_Offset: int
     m_Size: int
 
 
-@unitypy_define
+@arisufxpy_define
 class ProbeSetTetrahedralization:
     m_HullRays: List[Vector3f]
     m_Tetrahedra: List[Tetrahedron]
 
 
-@unitypy_define
+@arisufxpy_define
 class ProceduralMaterialInformation:
     m_Offset: Vector2f
     m_Scale: Vector2f
@@ -9713,14 +9715,14 @@ class ProceduralMaterialInformation:
     m_GeneratedAtLoading: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ProceduralTextureAssignment:
     baseUID: int
     material: PPtr[ProceduralMaterial]
     shaderProp: Union[FastPropertyName, str]
 
 
-@unitypy_define
+@arisufxpy_define
 class ProgramParameters:
     m_BufferParams: List[BufferBindingParameter]
     m_ConstantBufferBindings: List[BufferBindingParameter]
@@ -9733,7 +9735,7 @@ class ProgramParameters:
     m_VectorParams: Optional[List[VectorParameter]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class PropertyModification:
     objectReference: PPtr[Object]
     propertyPath: str
@@ -9741,13 +9743,13 @@ class PropertyModification:
     value: str
 
 
-@unitypy_define
+@arisufxpy_define
 class PropertyModificationsTargetTestNativeObject:
     m_FloatValue: float
     m_IntegerValue: int
 
 
-@unitypy_define
+@arisufxpy_define
 class QualitySetting:
     anisotropicTextures: int
     antiAliasing: int
@@ -9804,25 +9806,25 @@ class QualitySetting:
     useLegacyDetailDistribution: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class QuaternionCurve:
     curve: AnimationCurve
     path: str
 
 
-@unitypy_define
+@arisufxpy_define
 class RationalTime:
     m_Count: int
     m_Rate: TicksPerSecond
 
 
-@unitypy_define
+@arisufxpy_define
 class RayTracingShaderBuiltinSampler:
     bindPoint: int
     sampler: int
 
 
-@unitypy_define
+@arisufxpy_define
 class RayTracingShaderConstantBuffer:
     byteSize: int
     name: str
@@ -9830,20 +9832,20 @@ class RayTracingShaderConstantBuffer:
     hash: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class RayTracingShaderFunctionDesc:
     attributeSizeInBytes: int
     identifier: RayTracingShaderID
     payloadSizeInBytes: int
 
 
-@unitypy_define
+@arisufxpy_define
 class RayTracingShaderID:
     name: str
     type: int
 
 
-@unitypy_define
+@arisufxpy_define
 class RayTracingShaderParam:
     arraySize: int
     colCount: int
@@ -9856,7 +9858,7 @@ class RayTracingShaderParam:
     type: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class RayTracingShaderPlatformVariant:
     dynamicKeywords: List[str]
     editorOnlyVariant: bool
@@ -9867,7 +9869,7 @@ class RayTracingShaderPlatformVariant:
     variantIndices: List[Tuple[str, int]]
 
 
-@unitypy_define
+@arisufxpy_define
 class RayTracingShaderReflectionData:
     code: List[int]
     functions: List[RayTracingShaderFunctionDesc]
@@ -9879,7 +9881,7 @@ class RayTracingShaderReflectionData:
     requirements: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class RayTracingShaderResource:
     bindPoint: int
     name: str
@@ -9891,7 +9893,7 @@ class RayTracingShaderResource:
     resType: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class RayTracingShaderResources:
     builtinSamplers: List[RayTracingShaderBuiltinSampler]
     constantBuffers: List[RayTracingShaderResource]
@@ -9901,14 +9903,14 @@ class RayTracingShaderResources:
     textures: List[RayTracingShaderResource]
 
 
-@unitypy_define
+@arisufxpy_define
 class RayTracingShaderVariant:
     resourceReflectionData: RayTracingShaderReflectionData
     targetRenderer: int
     editorOnlyVariant: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Rectf:
     height: float
     width: float
@@ -9916,7 +9918,7 @@ class Rectf:
     y: float
 
 
-@unitypy_define
+@arisufxpy_define
 class ReflectedFunction:
     m_Hints: List[Hint]
     m_Name: str
@@ -9926,7 +9928,7 @@ class ReflectedFunction:
     m_Namespace: Optional[List[str]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ReflectedParameter:
     m_Direction: int
     m_Hints: List[Hint]
@@ -9934,12 +9936,12 @@ class ReflectedParameter:
     m_TypeName: str
 
 
-@unitypy_define
+@arisufxpy_define
 class RenderManager(GlobalGameManager):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class RenderPassInfo:
     attachmentCount: int
     attachments: List[AttachmentInfo]
@@ -9953,7 +9955,7 @@ class RenderPassInfo:
     hasEyeTexture: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class RenderStateBlock:
     blendState: GfxBlendState
     depthState: GfxDepthState
@@ -9963,12 +9965,12 @@ class RenderStateBlock:
     stencilState: GfxStencilState
 
 
-@unitypy_define
+@arisufxpy_define
 class RenderStateInfo:
     renderState: RenderStateBlock
 
 
-@unitypy_define
+@arisufxpy_define
 class RendererData:
     lightmapIndex: int
     lightmapIndexDynamic: int
@@ -9980,13 +9982,13 @@ class RendererData:
     explicitProbeSetHash: Optional[Hash128] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ResourceManager_Dependency:
     m_Dependencies: List[PPtr[Object]]
     m_Object: PPtr[Object]
 
 
-@unitypy_define
+@arisufxpy_define
 class RippleGroup:
     m_afDirectional_0: float
     m_afDirectional_1: float
@@ -10072,12 +10074,12 @@ class RippleGroup:
     m_fShimmer: float
 
 
-@unitypy_define
+@arisufxpy_define
 class RootMotionData(ABC):
     pass
 
 
-@unitypy_define
+@arisufxpy_define
 class RotationBySpeedModule:
     curve: MinMaxCurve
     enabled: bool
@@ -10087,7 +10089,7 @@ class RotationBySpeedModule:
     y: Optional[MinMaxCurve] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class RotationModule:
     curve: MinMaxCurve
     enabled: bool
@@ -10096,7 +10098,7 @@ class RotationModule:
     y: Optional[MinMaxCurve] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SBranchWindLevel:
     m_afDirectionAdherence_0: float
     m_afDirectionAdherence_1: float
@@ -10133,7 +10135,7 @@ class SBranchWindLevel:
     m_fTwitchFreqScale: float
 
 
-@unitypy_define
+@arisufxpy_define
 class SParams:
     BranchLevel1: SBranchWindLevel
     BranchLevel2: SBranchWindLevel
@@ -10296,7 +10298,7 @@ class SParams:
     m_fStrengthResponse: float
 
 
-@unitypy_define
+@arisufxpy_define
 class SWindGroup:
     m_afRippleDistance_0: float
     m_afRippleDistance_1: float
@@ -10356,7 +10358,7 @@ class SWindGroup:
     m_fTwitchSharpness: float
 
 
-@unitypy_define
+@arisufxpy_define
 class SampleSettings:
     compressionFormat: int
     conversionMode: int
@@ -10367,14 +10369,14 @@ class SampleSettings:
     preloadAudioData: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SamplerParameter:
     sampler: int
     bindPoint: Optional[int] = None
     m_Binding: Optional[Binding] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Scene(LevelGameManager):
     enabled: Optional[bool] = None
     guid: Optional[GUID] = None
@@ -10385,24 +10387,24 @@ class Scene(LevelGameManager):
     path: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SceneDataContainer:
     m_SceneData: List[Tuple[SceneIdentifier, HierarchicalSceneData]]
 
 
-@unitypy_define
+@arisufxpy_define
 class SceneIdentifier:
     guid: GUID
     handle: Union[UnitySceneHandle, int]
 
 
-@unitypy_define
+@arisufxpy_define
 class SceneObjectIdentifier:
     targetObject: int
     targetPrefab: int
 
 
-@unitypy_define
+@arisufxpy_define
 class SceneSettings(LevelGameManager):
     m_PVSData: List[int]
     m_PVSObjectsArray: List[PPtr[Renderer]]
@@ -10410,49 +10412,49 @@ class SceneSettings(LevelGameManager):
     m_QueryMode: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SceneVisibilityData:
     m_SceneGUID: GUID
 
 
-@unitypy_define
+@arisufxpy_define
 class ScriptMapper(GlobalGameManager):
     m_Shaders: NameToObjectMap
     m_PreloadShaders: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SecondarySpriteTexture:
     name: str
     texture: PPtr[Texture2D]
 
 
-@unitypy_define
+@arisufxpy_define
 class SecondaryTextureSettings:
     platformSettings: List[TextureImporterPlatformSettings]
     sRGB: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SelectorStateConstant:
     m_FullPathID: int
     m_IsEntry: bool
     m_TransitionConstantArray: List[OffsetPtr]
 
 
-@unitypy_define
+@arisufxpy_define
 class SelectorTransitionConstant:
     m_ConditionConstantArray: List[OffsetPtr]
     m_Destination: int
 
 
-@unitypy_define
+@arisufxpy_define
 class SerializedCustomEditorForRenderPipeline:
     customEditorName: str
     renderPipelineType: str
 
 
-@unitypy_define
+@arisufxpy_define
 class SerializedPass:
     m_HasInstancingVariant: bool
     m_Name: str
@@ -10478,7 +10480,7 @@ class SerializedPass:
     progRayTracing: Optional[SerializedProgram] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SerializedPlayerSubProgram:
     m_BlobIndex: int
     m_GpuProgramType: int
@@ -10486,7 +10488,7 @@ class SerializedPlayerSubProgram:
     m_ShaderRequirements: int
 
 
-@unitypy_define
+@arisufxpy_define
 class SerializedProgram:
     m_SubPrograms: List[SerializedSubProgram]
     m_CommonParameters: Optional[Union[ProgramParameters, SerializedProgramParameters]] = None
@@ -10495,7 +10497,7 @@ class SerializedProgram:
     m_SerializedKeywordStateMask: Optional[List[int]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SerializedProgramParameters:
     m_BufferParams: List[BufferBinding]
     m_ConstantBufferBindings: List[BufferBinding]
@@ -10507,12 +10509,12 @@ class SerializedProgramParameters:
     m_VectorParams: List[VectorParameter]
 
 
-@unitypy_define
+@arisufxpy_define
 class SerializedProperties:
     m_Props: List[SerializedProperty]
 
 
-@unitypy_define
+@arisufxpy_define
 class SerializedProperty:
     m_Attributes: List[str]
     m_DefTexture: SerializedTextureProperty
@@ -10526,7 +10528,7 @@ class SerializedProperty:
     m_Type: int
 
 
-@unitypy_define
+@arisufxpy_define
 class SerializedShader:
     m_CustomEditorName: str
     m_Dependencies: List[SerializedShaderDependency]
@@ -10540,19 +10542,19 @@ class SerializedShader:
     m_KeywordNames: Optional[List[str]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SerializedShaderDependency:
     from_: str
     to: str
 
 
-@unitypy_define
+@arisufxpy_define
 class SerializedShaderFloatValue:
     name: Union[FastPropertyName, str]
     val: float
 
 
-@unitypy_define
+@arisufxpy_define
 class SerializedShaderRTBlendState:
     blendOp: SerializedShaderFloatValue
     blendOpAlpha: SerializedShaderFloatValue
@@ -10563,7 +10565,7 @@ class SerializedShaderRTBlendState:
     srcBlendAlpha: SerializedShaderFloatValue
 
 
-@unitypy_define
+@arisufxpy_define
 class SerializedShaderState:
     alphaToMask: SerializedShaderFloatValue
     culling: SerializedShaderFloatValue
@@ -10600,7 +10602,7 @@ class SerializedShaderState:
     zClip: Optional[SerializedShaderFloatValue] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SerializedShaderVectorValue:
     name: Union[FastPropertyName, str]
     w: SerializedShaderFloatValue
@@ -10609,7 +10611,7 @@ class SerializedShaderVectorValue:
     z: SerializedShaderFloatValue
 
 
-@unitypy_define
+@arisufxpy_define
 class SerializedStencilOp:
     comp: SerializedShaderFloatValue
     fail: SerializedShaderFloatValue
@@ -10617,7 +10619,7 @@ class SerializedStencilOp:
     zFail: SerializedShaderFloatValue
 
 
-@unitypy_define
+@arisufxpy_define
 class SerializedSubProgram:
     m_BlobIndex: int
     m_Channels: ParserBindChannels
@@ -10638,36 +10640,36 @@ class SerializedSubProgram:
     m_VectorParams: Optional[List[VectorParameter]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SerializedSubShader:
     m_LOD: int
     m_Passes: List[SerializedPass]
     m_Tags: SerializedTagMap
 
 
-@unitypy_define
+@arisufxpy_define
 class SerializedTagMap:
     tags: List[Tuple[str, str]]
 
 
-@unitypy_define
+@arisufxpy_define
 class SerializedTextureProperty:
     m_DefaultName: str
     m_TexDim: int
 
 
-@unitypy_define
+@arisufxpy_define
 class ShaderBindChannel:
     source: int
     target: int
 
 
-@unitypy_define
+@arisufxpy_define
 class ShaderInfo:
     variants: List[VariantInfo]
 
 
-@unitypy_define
+@arisufxpy_define
 class ShadowSettings:
     m_Bias: float
     m_Resolution: int
@@ -10682,7 +10684,7 @@ class ShadowSettings:
     m_UseCullingMatrixOverride: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ShapeModule:
     angle: float
     enabled: bool
@@ -10725,7 +10727,7 @@ class ShapeModule:
     sphericalDirectionAmount: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SizeBySpeedModule:
     curve: MinMaxCurve
     enabled: bool
@@ -10735,7 +10737,7 @@ class SizeBySpeedModule:
     z: Optional[MinMaxCurve] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SizeModule:
     curve: MinMaxCurve
     enabled: bool
@@ -10744,14 +10746,14 @@ class SizeModule:
     z: Optional[MinMaxCurve] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Skeleton:
     m_AxesArray: List[Axes]
     m_ID: List[int]
     m_Node: List[Node]
 
 
-@unitypy_define
+@arisufxpy_define
 class SkeletonBone:
     m_Name: str
     m_Position: Vector3f
@@ -10761,7 +10763,7 @@ class SkeletonBone:
     m_TransformModified: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SkeletonBoneLimit:
     m_Length: float
     m_Max: Vector3f
@@ -10772,24 +10774,24 @@ class SkeletonBoneLimit:
     m_PreQ: Optional[Quaternionf] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SkeletonMask:
     m_Data: List[SkeletonMaskElement]
 
 
-@unitypy_define
+@arisufxpy_define
 class SkeletonMaskElement:
     m_Weight: float
     m_Index: Optional[int] = None
     m_PathHash: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SkeletonPose:
     m_X: List[xform]
 
 
-@unitypy_define
+@arisufxpy_define
 class SketchUpImportCamera:
     aspectRatio: float
     fov: float
@@ -10802,19 +10804,19 @@ class SketchUpImportCamera:
     nearPlane: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SketchUpImportData:
     defaultCamera: SketchUpImportCamera
     scenes: List[SketchUpImportScene]
 
 
-@unitypy_define
+@arisufxpy_define
 class SketchUpImportScene:
     camera: SketchUpImportCamera
     name: str
 
 
-@unitypy_define
+@arisufxpy_define
 class SnapshotConstant:
     nameHash: int
     transitionIndices: List[int]
@@ -10822,7 +10824,7 @@ class SnapshotConstant:
     values: List[float]
 
 
-@unitypy_define
+@arisufxpy_define
 class SoftJointLimit:
     bounciness: float
     limit: float
@@ -10831,33 +10833,33 @@ class SoftJointLimit:
     spring: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SoftJointLimitSpring:
     damper: float
     spring: float
 
 
-@unitypy_define
+@arisufxpy_define
 class SortingLayerEntry:
     name: str
     uniqueID: int
     userID: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SourceAssetIdentifier:
     assembly: str
     name: str
     type: str
 
 
-@unitypy_define
+@arisufxpy_define
 class SourceLocation:
     m_File: str
     m_Position: int
 
 
-@unitypy_define
+@arisufxpy_define
 class SourceTextureInformation:
     doesTextureContainAlpha: bool
     height: int
@@ -10866,13 +10868,13 @@ class SourceTextureInformation:
     sourceWasHDR: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SpecializationConstantParameter:
     m_Binding: Binding
     m_NameIndex: int
 
 
-@unitypy_define
+@arisufxpy_define
 class SpeedTreeWind:
     BRANCH_DIRECTIONAL_1: bool
     BRANCH_DIRECTIONAL_2: bool
@@ -10909,7 +10911,7 @@ class SpeedTreeWind:
     m_sParams: SParams
 
 
-@unitypy_define
+@arisufxpy_define
 class SpeedTreeWindConfig8:
     BRANCH_DIRECTIONAL_1: bool
     BRANCH_DIRECTIONAL_2: bool
@@ -11104,7 +11106,7 @@ class SpeedTreeWindConfig8:
     m_fStrengthResponse: float
 
 
-@unitypy_define
+@arisufxpy_define
 class SpeedTreeWindConfig9:
     m_bDoBranch1: int
     m_bDoBranch2: int
@@ -11134,7 +11136,7 @@ class SpeedTreeWindConfig9:
     pad: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SphericalHarmonicsL2:
     sh_10_: float
     sh_11_: float
@@ -11165,13 +11167,13 @@ class SphericalHarmonicsL2:
     sh__9_: float
 
 
-@unitypy_define
+@arisufxpy_define
 class SplashScreenLogo:
     duration: float
     logo: PPtr[Sprite]
 
 
-@unitypy_define
+@arisufxpy_define
 class SplatDatabase:
     m_AlphaTextures: List[PPtr[Texture2D]]
     m_AlphamapResolution: int
@@ -11183,7 +11185,7 @@ class SplatDatabase:
     m_TerrainLayers: Optional[List[PPtr[TerrainLayer]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SplatPrototype:
     texture: PPtr[Texture2D]
     tileOffset: Vector2f
@@ -11193,12 +11195,12 @@ class SplatPrototype:
     specularMetallic: Optional[Vector4f] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SpriteAtlasAssetData:
     packables: List[PPtr[Object]]
 
 
-@unitypy_define
+@arisufxpy_define
 class SpriteAtlasData:
     alphaTexture: PPtr[Texture2D]
     downscaleMultiplier: float
@@ -11212,7 +11214,7 @@ class SpriteAtlasData:
     spriteInstanceData: Optional[SpriteInstanceData] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SpriteAtlasEditorData:
     bindAsDefault: bool
     cachedData: PPtr[CachedSpriteAtlasRuntimeData]
@@ -11227,7 +11229,7 @@ class SpriteAtlasEditorData:
     totalSpriteSurfaceArea: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SpriteBone:
     length: float
     name: str
@@ -11238,23 +11240,23 @@ class SpriteBone:
     guid: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SpriteCustomDataEntry:
     m_Key: str
     m_Value: str
 
 
-@unitypy_define
+@arisufxpy_define
 class SpriteCustomMetadata:
     m_Entries: List[SpriteCustomDataEntry]
 
 
-@unitypy_define
+@arisufxpy_define
 class SpriteData:
     sprite: PPtr[Object]
 
 
-@unitypy_define
+@arisufxpy_define
 class SpriteInstanceData:
     border: Vector4f
     m_Bindpose: List[Matrix4x4f]
@@ -11271,7 +11273,7 @@ class SpriteInstanceData:
     spriteName: str
 
 
-@unitypy_define
+@arisufxpy_define
 class SpriteMetaData:
     m_Alignment: int
     m_Name: str
@@ -11291,7 +11293,7 @@ class SpriteMetaData:
     m_Weights: Optional[List[BoneWeights4]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SpriteRenderData:
     settingsRaw: int
     texture: PPtr[Texture2D]
@@ -11312,7 +11314,7 @@ class SpriteRenderData:
     vertices: Optional[List[SpriteVertex]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SpriteSheetMetaData:
     m_Sprites: List[SpriteMetaData]
     m_Bones: Optional[List[SpriteBone]] = None
@@ -11330,7 +11332,7 @@ class SpriteSheetMetaData:
     m_Weights: Optional[List[BoneWeights4]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SpriteTilingProperty:
     adaptiveTiling: bool
     adaptiveTilingThreshold: float
@@ -11341,13 +11343,13 @@ class SpriteTilingProperty:
     pivot: Vector2f
 
 
-@unitypy_define
+@arisufxpy_define
 class SpriteVertex:
     pos: Vector3f
     uv: Optional[Vector2f] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class State(NamedObject):
     m_IKOnFeet: bool
     m_Motions: List[PPtr[Motion]]
@@ -11360,7 +11362,7 @@ class State(NamedObject):
     m_Mirror: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class StateConstant:
     m_BlendTreeConstantArray: List[OffsetPtr]
     m_BlendTreeConstantIndexArray: List[int]
@@ -11383,13 +11385,13 @@ class StateConstant:
     m_WriteDefaultValues: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class StateKey:
     m_LayerIndex: int
     m_StateID: int
 
 
-@unitypy_define
+@arisufxpy_define
 class StateMachine(NamedObject):
     m_AnyStatePosition: Vector3f
     m_ChildStateMachine: List[PPtr[StateMachine]]
@@ -11403,13 +11405,13 @@ class StateMachine(NamedObject):
     m_LocalTransitions: Optional[List[Tuple[PPtr[State], List[PPtr[Transition]]]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class StateMachineBehaviourVectorDescription:
     m_StateMachineBehaviourIndices: List[int]
     m_StateMachineBehaviourRanges: List[Tuple[StateKey, StateRange]]
 
 
-@unitypy_define
+@arisufxpy_define
 class StateMachineConstant:
     m_AnyStateTransitionConstantArray: List[OffsetPtr]
     m_DefaultState: int
@@ -11420,19 +11422,19 @@ class StateMachineConstant:
     m_SynchronizedLayerCount: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class StateRange:
     m_Count: int
     m_StartIndex: int
 
 
-@unitypy_define
+@arisufxpy_define
 class StaticBatchInfo:
     firstSubMesh: int
     subMeshCount: int
 
 
-@unitypy_define
+@arisufxpy_define
 class StreamInfo:
     channelMask: int
     offset: int
@@ -11442,28 +11444,28 @@ class StreamInfo:
     frequency: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class StreamedClip:
     curveCount: int
     data: List[int]
     discreteCurveCount: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class StreamedResource:
     m_Offset: int
     m_Size: int
     m_Source: str
 
 
-@unitypy_define
+@arisufxpy_define
 class StreamingInfo:
     offset: int
     path: str
     size: int
 
 
-@unitypy_define
+@arisufxpy_define
 class StructParameter:
     m_ArraySize: int
     m_MatrixMembers: List[MatrixParameter]
@@ -11474,13 +11476,13 @@ class StructParameter:
     m_OffsetInConstantBuffer: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SubCollider:
     m_Collider: PPtr[Collider2D]
     m_ColliderPaths: List[List[IntPoint]]
 
 
-@unitypy_define
+@arisufxpy_define
 class SubEmitterData:
     emitter: PPtr[ParticleSystem]
     properties: int
@@ -11488,7 +11490,7 @@ class SubEmitterData:
     emitProbability: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SubMesh:
     firstByte: int
     firstVertex: int
@@ -11501,7 +11503,7 @@ class SubMesh:
     triangleCount: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SubModule:
     enabled: bool
     subEmitterBirth: Optional[PPtr[ParticleSystem]] = None
@@ -11513,20 +11515,20 @@ class SubModule:
     subEmitters: Optional[List[SubEmitterData]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SubPassDescriptor:
     colorOutputs: AttachmentIndexArray
     flags: int
     inputs: AttachmentIndexArray
 
 
-@unitypy_define
+@arisufxpy_define
 class SubstanceEnumItem:
     text: str
     value: int
 
 
-@unitypy_define
+@arisufxpy_define
 class SubstanceInput:
     alteredTexturesUID: List[int]
     enumValues: List[SubstanceEnumItem]
@@ -11546,7 +11548,7 @@ class SubstanceInput:
     visibleIf: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class SubstanceValue:
     scalar_0_: float
     scalar_1_: float
@@ -11556,7 +11558,7 @@ class SubstanceValue:
     stringvalue: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TakeInfo:
     bakeStartTime: float
     bakeStopTime: float
@@ -11569,7 +11571,7 @@ class TakeInfo:
     internalID: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Tetrahedron:
     indices_0_: int
     indices_1_: int
@@ -11582,7 +11584,7 @@ class Tetrahedron:
     neighbors_3_: int
 
 
-@unitypy_define
+@arisufxpy_define
 class TextureImportInstructions:
     colorSpace: int
     compressedFormat: int
@@ -11602,14 +11604,14 @@ class TextureImportInstructions:
     vtOnly: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TextureImportOutput:
     sourceTextureInformation: SourceTextureInformation
     textureImportInstructions: TextureImportInstructions
     importInspectorWarnings: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TextureImporterPlatformSettings:
     m_AllowsAlphaSplitting: bool
     m_AndroidETC2FallbackOverride: int
@@ -11625,7 +11627,7 @@ class TextureImporterPlatformSettings:
     m_IgnorePlatformSupport: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TextureParameter:
     m_Dim: int
     m_NameIndex: int
@@ -11636,7 +11638,7 @@ class TextureParameter:
     m_SamplerIndex: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TextureParameters:
     height: int
     mipLevels: int
@@ -11644,7 +11646,7 @@ class TextureParameters:
     width: int
 
 
-@unitypy_define
+@arisufxpy_define
 class TextureSettings:
     anisoLevel: int
     compressionQuality: int
@@ -11657,13 +11659,13 @@ class TextureSettings:
     textureCompression: int
 
 
-@unitypy_define
+@arisufxpy_define
 class TicksPerSecond:
     m_Denominator: int
     m_Numerator: int
 
 
-@unitypy_define
+@arisufxpy_define
 class TierGraphicsSettings:
     renderingPath: int
     useCascadedShadowMaps: bool
@@ -11674,7 +11676,7 @@ class TierGraphicsSettings:
     useHDR: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Tile:
     m_TileColorIndex: int
     m_TileIndex: int
@@ -11688,7 +11690,7 @@ class Tile:
     m_TileObjectToInstantiateIndex: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TileAnimationData:
     m_AnimatedSprites: List[PPtr[Sprite]]
     m_AnimationSpeed: float
@@ -11697,13 +11699,13 @@ class TileAnimationData:
     m_IsLooping: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TilemapRefCountedData:
     m_Data: Union[ColorRGBA, Matrix4x4f, PPtr[GameObject], PPtr[Object], PPtr[Sprite]]
     m_RefCount: int
 
 
-@unitypy_define
+@arisufxpy_define
 class TrailModule:
     colorOverLifetime: MinMaxGradient
     colorOverTrail: MinMaxGradient
@@ -11727,13 +11729,13 @@ class TrailModule:
     textureScale: Optional[Vector2f] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TransformMaskElement:
     m_Path: str
     m_Weight: float
 
 
-@unitypy_define
+@arisufxpy_define
 class Transition(NamedObject):
     m_Atomic: bool
     m_Conditions: List[Condition]
@@ -11747,7 +11749,7 @@ class Transition(NamedObject):
     m_CanTransitionToSelf: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TransitionConstant:
     m_ConditionConstantArray: List[OffsetPtr]
     m_DestinationState: int
@@ -11765,7 +11767,7 @@ class TransitionConstant:
     m_OrderedInterruption: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TreeInstance:
     color: ColorRGBA
     heightScale: float
@@ -11776,14 +11778,14 @@ class TreeInstance:
     rotation: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TreePrototype:
     bendFactor: float
     prefab: PPtr[GameObject]
     navMeshLod: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TriggerModule:
     enabled: bool
     enter: int
@@ -11801,7 +11803,7 @@ class TriggerModule:
     primitives: Optional[List[PPtr[Component]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class TypeStats:
     classID: int
     objectCount: int
@@ -11809,7 +11811,7 @@ class TypeStats:
     size: int
 
 
-@unitypy_define
+@arisufxpy_define
 class UAVParameter:
     m_NameIndex: int
     m_Binding: Optional[Binding] = None
@@ -11818,14 +11820,14 @@ class UAVParameter:
     m_OriginalIndex: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class UVAnimation:
     cycles: float
     x_Tile: int
     y_Tile: int
 
 
-@unitypy_define
+@arisufxpy_define
 class UVModule:
     animationType: int
     cycles: float
@@ -11847,7 +11849,7 @@ class UVModule:
     uvChannelMask: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class UnityAdsSettings(GlobalGameManager):
     m_Enabled: bool
     m_InitializeOnStartup: bool
@@ -11858,7 +11860,7 @@ class UnityAdsSettings(GlobalGameManager):
     m_IosGameId: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class UnityAnalyticsSettings:
     m_Enabled: bool
     m_TestMode: bool
@@ -11868,7 +11870,7 @@ class UnityAnalyticsSettings:
     m_TestEventUrl: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class UnityPropertySheet:
     m_Colors: Union[List[Tuple[FastPropertyName, ColorRGBA]], List[Tuple[str, ColorRGBA]]]
     m_Floats: Union[List[Tuple[FastPropertyName, float]], List[Tuple[str, float]]]
@@ -11876,25 +11878,25 @@ class UnityPropertySheet:
     m_Ints: Optional[List[Tuple[str, int]]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class UnityPurchasingSettings:
     m_Enabled: bool
     m_TestMode: bool
 
 
-@unitypy_define
+@arisufxpy_define
 class UnitySceneHandle:
     value: EntityId
 
 
-@unitypy_define
+@arisufxpy_define
 class UnityTexEnv:
     m_Offset: Vector2f
     m_Scale: Vector2f
     m_Texture: PPtr[Texture]
 
 
-@unitypy_define
+@arisufxpy_define
 class UpdateZoneInfo:
     needSwap: bool
     passIndex: int
@@ -11903,12 +11905,12 @@ class UpdateZoneInfo:
     updateZoneSize: Vector3f
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXCPUBufferData:
     data: List[int]
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXCPUBufferDesc:
     capacity: int
     initialData: VFXCPUBufferData
@@ -11917,7 +11919,7 @@ class VFXCPUBufferDesc:
     debugName: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXEditorSystemDesc:
     buffers: List[VFXMapping]
     capacity: int
@@ -11929,7 +11931,7 @@ class VFXEditorSystemDesc:
     name: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXEditorTaskDesc:
     buffers: List[VFXMapping]
     params: List[VFXMapping]
@@ -11940,20 +11942,20 @@ class VFXEditorTaskDesc:
     temporaryBuffers: Optional[List[VFXMappingTemporary]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXEntryExposed:
     m_Name: str
     m_Overridden: bool
     m_Value: Union[AnimationCurve, Gradient, Matrix4x4f, PPtr[NamedObject], PPtr[Object], Vector2f, Vector3f, Vector4f, bool, float, int]
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXEntryExpressionValue:
     m_ExpressionIndex: int
     m_Value: Union[AnimationCurve, Gradient, Matrix4x4f, PPtr[NamedObject], PPtr[Object], Vector2f, Vector3f, Vector4f, bool, float, int]
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXEventDesc:
     name: str
     playSystems: List[int]
@@ -11961,13 +11963,13 @@ class VFXEventDesc:
     initSystems: Optional[List[int]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXExposedMapping:
     mapping: VFXMapping
     space: int
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXExpressionContainer:
     m_Expressions: List[Expression]
     m_NeedsLocalToWorld: bool
@@ -11981,12 +11983,12 @@ class VFXExpressionContainer:
     m_NeedsMainCamera: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXField:
     m_Array: Union[List[VFXEntryExposed], List[VFXEntryExpressionValue]]
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXGPUBufferDesc:
     capacity: int
     layout: List[VFXLayoutElementDesc]
@@ -11998,39 +12000,39 @@ class VFXGPUBufferDesc:
     type: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXInstanceSplitDesc:
     values: List[int]
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXLayoutElementDesc:
     name: str
     offset: VFXLayoutOffset
     type: int
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXLayoutOffset:
     bucket: int
     element: int
     structure: int
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXMapping:
     index: int
     nameId: str
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXMappingTemporary:
     mapping: VFXMapping
     pastFrameIndex: int
     perCameraBuffer: bool
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXPropertySheetSerializedBase:
     m_AnimationCurve: VFXField
     m_Bool: VFXField
@@ -12045,7 +12047,7 @@ class VFXPropertySheetSerializedBase:
     m_Vector4f: VFXField
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXRendererSettings:
     motionVectorGenerationMode: int
     shadowCastingMode: int
@@ -12056,14 +12058,14 @@ class VFXRendererSettings:
     transparencyPriority: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXShaderSourceDesc:
     compute: bool
     name: str
     source: str
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXSystemDesc:
     buffers: List[VFXMapping]
     capacity: int
@@ -12076,7 +12078,7 @@ class VFXSystemDesc:
     name: Optional[str] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXTaskDesc:
     buffers: List[VFXMapping]
     params: List[VFXMapping]
@@ -12087,7 +12089,7 @@ class VFXTaskDesc:
     temporaryBuffers: Optional[List[VFXMappingTemporary]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXTemplate:
     category: str
     description: str
@@ -12097,13 +12099,13 @@ class VFXTemplate:
     order: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VFXTemporaryGPUBufferDesc:
     desc: VFXGPUBufferDesc
     frameCount: int
 
 
-@unitypy_define
+@arisufxpy_define
 class VRSettings:
     cardboard: Optional[Google] = None
     daydream: Optional[Google] = None
@@ -12114,7 +12116,7 @@ class VRSettings:
     oculus: Optional[Oculus] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ValueArray:
     m_BoolValues: List[bool]
     m_FloatValues: List[float]
@@ -12126,12 +12128,12 @@ class ValueArray:
     m_VectorValues: Optional[List[float4]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ValueArrayConstant:
     m_ValueArray: List[ValueConstant]
 
 
-@unitypy_define
+@arisufxpy_define
 class ValueConstant:
     m_ID: int
     m_Index: int
@@ -12139,18 +12141,18 @@ class ValueConstant:
     m_TypeID: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class ValueDelta:
     m_Start: float
     m_Stop: float
 
 
-@unitypy_define
+@arisufxpy_define
 class VariableBoneCountWeights:
     m_Data: List[int]
 
 
-@unitypy_define
+@arisufxpy_define
 class VariantInfo:
     graphicsStateInfoSet: Optional[List[GraphicsStateInfo]] = None
     keywordNames: Optional[str] = None
@@ -12164,13 +12166,13 @@ class VariantInfo:
     subShaderIndex: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class Vector3Curve:
     curve: AnimationCurve
     path: str
 
 
-@unitypy_define
+@arisufxpy_define
 class VectorParameter:
     m_ArraySize: int
     m_Dim: int
@@ -12180,7 +12182,7 @@ class VectorParameter:
     m_OffsetInConstantBuffer: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VelocityModule:
     enabled: bool
     inWorldSpace: bool
@@ -12197,7 +12199,7 @@ class VelocityModule:
     speedModifier: Optional[MinMaxCurve] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VertexData:
     m_DataSize: bytes
     m_VertexCount: int
@@ -12210,14 +12212,14 @@ class VertexData:
     m_Streams_3_: Optional[StreamInfo] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VertexLayoutInfo:
     vertexChannelsInfo: List[ChannelInfo]
     vertexStreamCount: int
     vertexStrides: List[int]
 
 
-@unitypy_define
+@arisufxpy_define
 class VideoClipImporterOutput:
     encodedEndFrame: Optional[int] = None
     encodedHeight: Optional[int] = None
@@ -12240,7 +12242,7 @@ class VideoClipImporterOutput:
     transcodeSkipped: Optional[bool] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VideoClipImporterTargetSettings:
     aspectRatio: int
     bitrateMode: int
@@ -12252,7 +12254,7 @@ class VideoClipImporterTargetSettings:
     spatialQuality: int
 
 
-@unitypy_define
+@arisufxpy_define
 class VisualEffectInfo:
     m_Buffers: List[VFXGPUBufferDesc]
     m_CPUBuffers: List[VFXCPUBufferDesc]
@@ -12274,7 +12276,7 @@ class VisualEffectInfo:
     m_TemporaryBuffers: Optional[List[VFXTemporaryGPUBufferDesc]] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VisualEffectSettings:
     m_CullingFlags: int
     m_InitialEventName: str
@@ -12287,13 +12289,13 @@ class VisualEffectSettings:
     m_InstancingMode: Optional[int] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class VulkanGraphicsJobsDeviceFilterData:
     filter: AndroidDeviceFilterData
     preferredMode: int
 
 
-@unitypy_define
+@arisufxpy_define
 class WebGPUDeviceFilterData:
     browserName: str
     browserVersion: str
@@ -12303,14 +12305,14 @@ class WebGPUDeviceFilterData:
     limits: List[WebGPUDeviceFilterLimit]
 
 
-@unitypy_define
+@arisufxpy_define
 class WebGPUDeviceFilterLimit:
     comparator: int
     limit: int
     value: int
 
 
-@unitypy_define
+@arisufxpy_define
 class WheelFrictionCurve:
     asymptoteSlip: Optional[float] = None
     asymptoteValue: Optional[float] = None
@@ -12324,26 +12326,26 @@ class WheelFrictionCurve:
     stiffnessFactor: Optional[float] = None
 
 
-@unitypy_define
+@arisufxpy_define
 class bitset:
     bitCount: int
     bitblocks: bytes
 
 
-@unitypy_define
+@arisufxpy_define
 class int2_storage:
     x: int
     y: int
 
 
-@unitypy_define
+@arisufxpy_define
 class int3_storage:
     x: int
     y: int
     z: int
 
 
-@unitypy_define
+@arisufxpy_define
 class xform:
     q: float4
     s: Union[float3, float4]

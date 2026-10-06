@@ -306,7 +306,7 @@ class ObjectReader(Generic[T]):
             raise TypeTreeError("There are no TypeTree nodes for this object.")
         return node
 
-    # UnityPy 2 syntax early implementation
+    # ArisuFxPy 2 syntax early implementation
     def parse_as_object(self, node: Optional[NodeInput] = None, check_read: bool = True) -> T:
         return self.read_typetree(nodes=node, wrap=True, check_read=check_read)  # type: ignore
 

@@ -1,4 +1,4 @@
-"""Generates the classes for the UnityPy objects from the TypeTree of the TPK files."""
+"""Generates the classes for the ArisuFxPy objects from the TypeTree of the TPK files."""
 
 from __future__ import annotations
 
@@ -67,7 +67,7 @@ from .PPtr import PPtr
 T = TypeVar("T")
 
 
-def unitypy_define(cls: T) -> T:
+def arisufxpy_define(cls: T) -> T:
     \"\"\"
     A hacky solution to bypass multiple problems related to attrs and inheritance.
 
@@ -188,7 +188,7 @@ class NodeClass:
             )
         return "\n".join(
             [
-                "@unitypy_define",
+                "@arisufxpy_define",
                 f"class {self.name}{parentsString}:",
                 *field_strings,
             ]

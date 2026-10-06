@@ -20,4 +20,4 @@ A description of what you expect to happen/see and what actually happens.
 - a copy of the file that causes the problem
 - following data:
   - Python version
-  - UnityPy version
+  - ArisuFxPy version
