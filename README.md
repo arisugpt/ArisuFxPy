@@ -1,10 +1,10 @@
 # ArisuFxPy
 
-[![Discord server invite](https://discordapp.com/api/guilds/603359898507673630/embed.png)](https://discord.gg/C6txv7M)
-[![PyPI supported Python versions](https://img.shields.io/pypi/pyversions/ArisuFxPy.svg)](https://pypi.python.org/pypi/UnityPy)
-[![Win/Mac/Linux](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-informational)]()
-[![MIT](https://img.shields.io/github/license/arisugpt/ArisuFxPy)](https://github.com/arisugpt/ArisuFxPy/blob/master/LICENSE)
-![Test](https://github.com/arisugpt/ArisuFxPy/workflows/Test/badge.svg)
+[![Telegram Channel](https://img.shields.io/badge/Telegram-hackinjectlab-2CA5E0?logo=telegram&logoColor=white)](https://t.me/hackinjectlab)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-3776AB.svg?logo=python&logoColor=white)](https://www.python.org)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20Android%20Termux-blue)]()
+[![MIT License](https://img.shields.io/badge/license-MIT-green)](https://github.com/arisugpt/ArisuFxPy/blob/main/LICENSE)
+[![CI Tests](https://github.com/arisugpt/ArisuFxPy/actions/workflows/test.yml/badge.svg)](https://github.com/arisugpt/ArisuFxPy/actions/workflows/test.yml)
 
 A Unity asset extractor for Python based on [AssetStudio](https://github.com/Perfare/AssetStudio).
 
@@ -22,8 +22,8 @@ Via the typetree structure all object types can be edited in their native forms.
     obj.patch(instance)
 ```
 
-If you need advice or if you want to talk about (game) data-mining,
-feel free to join the [UnityPy Discord](https://discord.gg/C6txv7M).
+If you need advice, want to discuss game modding / data-mining, or need support,
+feel free to join our official **[Telegram Group (@hackinjectlab)](https://t.me/hackinjectlab)**.
 
 If you're using UnityPy for a commercial project,
 a donation to a charitable cause or a sponsorship of this project is expected.
@@ -50,18 +50,54 @@ if ArisuFxPy.__version__ != '1.9.6':
 
 **Python 3.8 or higher is required.**
 
-Install via PyPI:
+### 💻 PC (Windows / Linux / macOS)
 
+Quick install directly from GitHub:
 ```bash
-pip install ArisuFxPy
+pip install git+https://github.com/arisugpt/ArisuFxPy.git
 ```
 
-Install from source code:
-
+Or install from source:
 ```bash
 git clone https://github.com/arisugpt/ArisuFxPy.git
-cd UnityPy
+cd ArisuFxPy
 python -m pip install .
+```
+
+---
+
+### 📱 Android (Termux) Installation Guide
+
+> [!IMPORTANT]
+> **Do NOT install Termux from Google Play Store** (the Play Store build is obsolete and packages fail to install).  
+> Always download the official, actively maintained Termux APK from **F-Droid** or **GitHub Releases**:
+> - 📥 **[Download Termux (F-Droid)](https://f-droid.org/packages/com.termux/)**
+> - 📥 **[Download Termux APK (GitHub Releases)](https://github.com/termux/termux-app/releases)**
+
+#### ⚡ 1-Line Auto Installer (Recommended):
+Open Termux on your phone and run this single command:
+```bash
+curl -sSL https://raw.githubusercontent.com/arisugpt/ArisuFxPy/main/install.sh | bash
+```
+*This automatically installs Python, Clang, Git, builds dependencies, and installs ArisuFxPy.*
+
+#### 🛠️ Manual Termux Installation:
+If you prefer running commands manually:
+```bash
+# 1. Update Termux and install required tools
+pkg update -y
+pkg install python git clang make -y
+
+# 2. Install ArisuFxPy and CLI table viewer
+pip install git+https://github.com/arisugpt/ArisuFxPy.git
+pip install tabulate
+```
+
+#### 🎮 Interactive Unity Asset Modder & Dumper:
+To run the interactive bundle modding tool on Android / PC:
+```bash
+curl -sSL https://raw.githubusercontent.com/arisugpt/ArisuFxPy/main/bundle_modder.py -o bundle_modder.py
+python bundle_modder.py
 ```
 
 ### Notes
