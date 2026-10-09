@@ -1,15 +1,18 @@
-import os
-import sys
 import json
+import os
+import shutil
 import struct
+import sys
 
 # Smart import for ArisuFxPy (with folder-shadowing fix & fallback)
 try:
     import ArisuFxPy
+
     # If shadowed by parent directory named 'ArisuFxPy'
     if not hasattr(ArisuFxPy, "load"):
         try:
             import ArisuFxPy.ArisuFxPy as _mod
+
             ArisuFxPy = _mod
         except ImportError:
             pass
@@ -27,33 +30,34 @@ except ImportError:
 try:
     from tabulate import tabulate
 except ImportError:
+
     def tabulate(data, headers, tablefmt="grid"):
         lines = ["\t".join(headers), "-" * 50]
         for row in data:
             lines.append("\t".join(str(c) for c in row))
         return "\n".join(lines)
 
+
 # Self-healing hook: Automatically fixes upstream UnityPy false-positive encryption bug (Flag 0x200 / Unity < 2020)
 def _patch_unitypy_encryption():
     try:
-        from ArisuFxPy.files import BundleFile as BF_mod
-        from ArisuFxPy.enums.BundleFile import ArchiveFlags
         import ArisuFxPy.helpers.ArchiveStorageManager as ASM
         import ArisuFxPy.helpers.CompressionHelper as CompressionHelper
+        from ArisuFxPy.enums.BundleFile import ArchiveFlags
+        from ArisuFxPy.files import BundleFile as BF_mod
         from ArisuFxPy.streams import EndianBinaryReader
 
         BF_class = getattr(BF_mod, "BundleFile", BF_mod)
         if hasattr(BF_class, "read_fs"):
             _orig_read_fs = BF_class.read_fs
+
             def _fixed_read_fs(self, reader):
                 version = self.parse_version()
-                is_legacy_cn_candidate = (
-                    self.version < 7 and (
-                        version < (2020,)
-                        or (version[0] == 2020 and version < (2020, 3, 34))
-                        or (version[0] == 2021 and version < (2021, 3, 2))
-                        or (version[0] == 2022 and version < (2022, 1, 1))
-                    )
+                is_legacy_cn_candidate = self.version < 7 and (
+                    version < (2020,)
+                    or (version[0] == 2020 and version < (2020, 3, 34))
+                    or (version[0] == 2021 and version < (2021, 3, 2))
+                    or (version[0] == 2022 and version < (2022, 1, 1))
                 )
                 if not (is_legacy_cn_candidate and getattr(ASM, "DECRYPT_KEY", None) is not None):
                     pos = reader.Position
@@ -81,7 +85,7 @@ def _patch_unitypy_encryption():
                             blocksInfoBytes = reader.read_bytes(compressedSize)
                         blocksInfoBytes = self.decompress_data(blocksInfoBytes, uncompressedSize, self.dataflags)
                         blocksInfoReader = EndianBinaryReader(blocksInfoBytes, offset=start)
-                        uncompressedDataHash = blocksInfoReader.read_bytes(16)
+                        uncompressedDataHash = blocksInfoReader.read_bytes(16)  # noqa: F841
                         blocksInfoCount = blocksInfoReader.read_int()
                         m_BlocksInfo = [
                             CompressionHelper.BlockInfo.from_reader(blocksInfoReader, self.version)
@@ -102,7 +106,10 @@ def _patch_unitypy_encryption():
                         ]
                         if m_BlocksInfo:
                             self._block_info_flags = m_BlocksInfo[0].flags
-                        if isinstance(self.dataflags, ArchiveFlags) and self.dataflags & ArchiveFlags.BlockInfoNeedPaddingAtStart:
+                        if (
+                            isinstance(self.dataflags, ArchiveFlags)
+                            and self.dataflags & ArchiveFlags.BlockInfoNeedPaddingAtStart
+                        ):
                             reader.align_stream(16)
                         base_offset = reader.Position
                         blocksReader = EndianBinaryReader(
@@ -114,17 +121,21 @@ def _patch_unitypy_encryption():
                         )
                         return m_DirectoryInfo, blocksReader
                 return _orig_read_fs(self, reader)
+
             BF_class.read_fs = _fixed_read_fs
     except Exception:
         pass
 
+
 _patch_unitypy_encryption()
+
 
 def get_download_path():
     termux_down = "/sdcard/Download"
     if os.path.exists(termux_down):
         return termux_down
     return os.path.expanduser("~/Downloads")
+
 
 def is_valid_unity_file(file_path):
     """Checks header signatures and magic bytes for valid Unity asset/bundle files"""
@@ -143,6 +154,7 @@ def is_valid_unity_file(file_path):
     except Exception:
         return False
     return False
+
 
 def dict_to_simple_txt(data, indent=0):
     lines = []
@@ -171,10 +183,11 @@ def dict_to_simple_txt(data, indent=0):
                 lines.append(f"{prefix}[{i}] = {json.dumps(item)}")
     return "\n".join(lines)
 
+
 def parse_simple_txt(text):
     root = {}
     stack = [(root, -1)]
-    
+
     for line in text.splitlines():
         if not line.strip():
             continue
@@ -199,15 +212,17 @@ def parse_simple_txt(text):
             if isinstance(parent, dict):
                 parent[content] = new_dict
             stack.append((new_dict, indent))
-            
+
     def rebuild_lists(node):
         if isinstance(node, dict):
             for k in list(node.keys()):
                 node[k] = rebuild_lists(node[k])
-            
+
             if len(node) > 0:
                 keys = list(node.keys())
-                if all(isinstance(k, str) and k.startswith('[') and k.endswith(']') and k[1:-1].isdigit() for k in keys):
+                if all(
+                    isinstance(k, str) and k.startswith("[") and k.endswith("]") and k[1:-1].isdigit() for k in keys
+                ):
                     sorted_keys = sorted(keys, key=lambda x: int(x[1:-1]))
                     return [node[k] for k in sorted_keys]
             return node
@@ -215,8 +230,9 @@ def parse_simple_txt(text):
             return [rebuild_lists(x) for x in node]
         else:
             return node
-            
+
     return rebuild_lists(root)
+
 
 def resolve_asset_name(obj, env):
     try:
@@ -242,26 +258,23 @@ def resolve_asset_name(obj, env):
         pass
     return "Unnamed asset"
 
+
 def dump_info_table(env, base_name, out_dir):
     table_data = []
     print("[*] Parsing asset names and creating index table...")
     for obj in env.objects:
         name = resolve_asset_name(obj, env)
-        table_data.append([
-            name,
-            obj.type.name,
-            obj.path_id,
-            obj.byte_size
-        ])
+        table_data.append([name, obj.type.name, obj.path_id, obj.byte_size])
 
     headers = ["Asset Name", "Type", "Path ID", "Size (Bytes)"]
     formatted_table = tabulate(table_data, headers=headers, tablefmt="grid")
-    
+
     out_file = os.path.join(out_dir, f"{base_name}_info_table.txt")
     with open(out_file, "w", encoding="utf-8") as f:
         f.write(formatted_table)
-    
+
     print(f"[+] Info Table saved: {out_file}")
+
 
 def parse_path_ids(input_str):
     pids = []
@@ -274,6 +287,72 @@ def parse_path_ids(input_str):
             except ValueError:
                 print(f"[-] Skipped invalid Path ID format: {clean}")
     return pids
+
+
+def manual_hex_padding(default_file=""):
+    print("\n" + "=" * 48)
+    print("   Manual Target Byte Padder (0x00 Injector)   ")
+    print("=" * 48)
+
+    prompt = (
+        "Enter Modified File Path (or press Enter for currently loaded file): "
+        if default_file
+        else "Enter Modified File Path: "
+    )
+    mod_path = input(prompt).strip().strip('"').strip("'")
+    if not mod_path and default_file:
+        mod_path = default_file
+
+    if not os.path.isfile(mod_path):
+        print("[-] Error: Modified file not found!")
+        return
+
+    current_size = os.path.getsize(mod_path)
+    print(f"\n[*] Current File Size: {current_size} bytes")
+
+    try:
+        target_size = int(input("Enter Target Byte Size (e.g. 999147): ").strip())
+    except ValueError:
+        print("[-] Error: Invalid number! Please enter numbers only.")
+        return
+
+    if current_size == target_size:
+        print("\n[+] Status: File is already exactly equal to target bytes.")
+        print("[+] No padding required.")
+        return
+    elif current_size > target_size:
+        extra_bytes = current_size - target_size
+        print(
+            f"\n[-] Error: Current file ({current_size} bytes) is BIGGER than target ({target_size} bytes) "
+            f"by {extra_bytes} bytes."
+        )
+        print("[-] Cannot reduce size by padding null bytes.")
+        return
+
+    padding_needed = target_size - current_size
+    print(f"\n[*] Padding Needed: {padding_needed} null bytes (0x00)")
+
+    out_name = input("Enter Custom Output File Name (or press Enter to overwrite): ").strip()
+
+    if out_name:
+        out_dir = os.path.dirname(mod_path)
+        final_path = os.path.join(out_dir, out_name)
+        shutil.copyfile(mod_path, final_path)
+    else:
+        final_path = mod_path
+
+    try:
+        with open(final_path, "ab") as f:
+            f.write(b"\x00" * padding_needed)
+
+        new_size = os.path.getsize(final_path)
+        print("-" * 48)
+        print(f"[+] Success! File saved: {final_path}")
+        print(f"[+] Final Verified Size: {new_size} bytes (Target: {target_size})")
+        print("=" * 48)
+    except Exception as e:
+        print(f"[-] Write Error: {e}")
+
 
 def main():
     file_path = input("Enter Asset/Bundle File Path: ").strip().strip('"').strip("'")
@@ -299,17 +378,18 @@ def main():
     obj_dict = {obj.path_id: obj for obj in env.objects}
 
     while True:
-        print("\n" + "="*40)
+        print("\n" + "=" * 40)
         print("ARISUFXPY BUNDLE MODDER OPTIONS:")
         print("1. Export Dump (.txt / .json)")
         print("2. Import Dump (.txt / .json)")
         print("3. Export Raw Asset Data (.dat)")
         print("4. Import Raw Asset Data (.dat)")
         print("5. Save & Compress (LZ4 / LZMA / None)")
-        print("6. Exit")
-        print("="*40)
-        
-        choice = input("Select option (1-6): ").strip()
+        print("6. Hex Padding")
+        print("7. Exit")
+        print("=" * 40)
+
+        choice = input("Select option (1-7): ").strip()
 
         if choice == "1":
             pid_input = input("Enter Path ID to Export (e.g. ID1, ID2): ").strip()
@@ -442,7 +522,7 @@ def main():
             print("\nCompression Modes: [1] LZ4  [2] LZMA  [3] None (Uncompressed)")
             comp_choice = input("Select compression (1/2/3): ").strip()
             packer_type = "lz4" if comp_choice == "1" else ("lzma" if comp_choice == "2" else "none")
-            
+
             save_name = input("Enter output file name: ").strip()
             save_dest = os.path.join(out_dir, save_name)
 
@@ -454,10 +534,14 @@ def main():
                 print(f"[-] Save Error: {e}")
 
         elif choice == "6":
+            manual_hex_padding(file_path)
+
+        elif choice == "7":
             print("[*] Exiting script.")
             break
         else:
             print("[-] Invalid option.")
+
 
 if __name__ == "__main__":
     main()

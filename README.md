@@ -28,10 +28,14 @@ Via the typetree structure all object types can be edited in their native forms.
 
 - 🛡️ **UABE Avalonia-Grade Compatibility (Zero False Encryption Errors):**  
   Fixed a longstanding upstream UnityPy bug where normal Unity AssetBundles with engine version `< 2020` or modern archives using 16-byte alignment (`0x200`) were falsely treated as encrypted (*"The BundleFile is encrypted, but no key was provided!"*). **ArisuFxPy accurately distinguishes alignment padding from Unity CN DRM**, opening and saving all standard bundles seamlessly without requiring fake keys.
+- 📦 **Trailing Padding & Robust Offset Handling (`BlocksInfoAtTheEnd`):**  
+  Fixed critical LZ4 decompression errors (`Decompression failed: corrupt input or insufficient space in destination buffer. Error code: 62`) on AssetBundles containing trailing padding or appended container metadata. ArisuFxPy calculates exact block index offsets from the internal UnityFS header size, matching UABE Avalonia.
+- 🔧 **Manual Target Byte Padder (Hex Padding):**  
+  Built-in utility in `bundle_modder.py` (Option 6) to automatically inject null bytes (`0x00`) to match exact target file sizes required for anti-cheat verification and strict game integrity checks.
 - 📱 **Android & Termux 1st-Class Support:**  
   Designed for mobile game modders and data-miners. Includes 1-line installation (`install.sh`), Termux-friendly pure Python fallbacks, and directory-shadowing fixes.
 - 🎮 **Interactive Modder Tool (`bundle_modder.py`):**  
-  A built-in interactive CLI tool to inspect asset tables, export/import text and JSON dumps, modify raw asset data, and re-pack bundles with LZ4/LZMA on PC and Android.
+  A built-in interactive CLI tool to inspect asset tables, export/import text and JSON dumps, modify raw asset data, re-pack bundles with LZ4/LZMA, and apply custom hex padding on PC and Android.
 
 If you need advice, want to discuss game modding / data-mining, or need support,
 feel free to join our official **[Telegram Group (@hackinjectlab)](https://t.me/hackinjectlab)**.
