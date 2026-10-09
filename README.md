@@ -588,3 +588,10 @@ Also, many thanks to:
 -   [Razmoth](https://github.com/Razmoth) for figuring out and sharing Unity CN's AssetBundle decryption ([src](https://github.com/Razmoth/PGRStudio)).
 -   [nesrak1](https://github.com/nesrak1) for figuring out the [Switch texture swizzling](https://github.com/nesrak1/UABEA/blob/master/TexturePlugin/Texture2DSwitchDeswizzler.cs)
 -   xiop_13690 (discord) for figuring out unsolved issues of the ManagedReferencesRegistry
+
+## ⚖️ Legal Disclaimer & Fair Use Notice
+
+> [!IMPORTANT]
+> This repository and tool are created strictly for **educational, academic research, and interoperability purposes**.
+> - **No Proprietary Assets:** This project does not distribute or host any copyrighted game files, proprietary assets, or unauthorized code. All trademarks and registered trademarks are properties of their respective owners.
+> - **Fair Use & EULA:** Users are solely responsible for ensuring their usage complies with relevant local laws and third-party software terms of service. The authors and contributors assume no liability and are not responsible for any misuse or damages resulting from the use of this software.
