@@ -59,62 +59,60 @@ def _patch_unitypy_encryption():
                     pos = reader.Position
                     try:
                         return _orig_read_fs(self, reader)
-                    except LookupError as e:
-                        if "BundleFile is encrypted" in str(e):
-                            reader.Position = pos
-                            size = reader.read_long()
-                            compressedSize = reader.read_u_int()
-                            uncompressedSize = reader.read_u_int()
-                            dataflagsValue = reader.read_u_int()
-                            if self.signature != "UnityFS":
-                                reader.read_byte()
-                            self.dataflags = ArchiveFlags(dataflagsValue)
-                            if self.version >= 7 or (version[0] == 2019 and version >= (2019, 4, 15)):
-                                reader.align_stream(16)
-                                self._uses_block_alignment = True
-                            start = reader.Position
-                            if self.dataflags & ArchiveFlags.BlocksInfoAtTheEnd:
-                                target_pos = (size - compressedSize) if size > 0 else (reader.Length - compressedSize)
-                                reader.Position = target_pos
-                                blocksInfoBytes = reader.read_bytes(compressedSize)
-                                reader.Position = start
-                            else:
-                                blocksInfoBytes = reader.read_bytes(compressedSize)
-                            blocksInfoBytes = self.decompress_data(blocksInfoBytes, uncompressedSize, self.dataflags)
-                            blocksInfoReader = EndianBinaryReader(blocksInfoBytes, offset=start)
-                            uncompressedDataHash = blocksInfoReader.read_bytes(16)
-                            blocksInfoCount = blocksInfoReader.read_int()
-                            m_BlocksInfo = [
-                                CompressionHelper.BlockInfo.from_reader(blocksInfoReader, self.version)
-                                for _ in range(blocksInfoCount)
-                            ]
-                            nodesCount = blocksInfoReader.read_int()
-                            dir_info_cls = getattr(BF_mod, "DirectoryInfoFS", None)
-                            if dir_info_cls is None:
-                                from ArisuFxPy.files.BundleFile import DirectoryInfoFS as dir_info_cls
-                            m_DirectoryInfo = [
-                                dir_info_cls(
-                                    blocksInfoReader.read_long(),
-                                    blocksInfoReader.read_long(),
-                                    blocksInfoReader.read_u_int(),
-                                    blocksInfoReader.read_string_to_null(),
-                                )
-                                for _ in range(nodesCount)
-                            ]
-                            if m_BlocksInfo:
-                                self._block_info_flags = m_BlocksInfo[0].flags
-                            if isinstance(self.dataflags, ArchiveFlags) and self.dataflags & ArchiveFlags.BlockInfoNeedPaddingAtStart:
-                                reader.align_stream(16)
-                            base_offset = reader.Position
-                            blocksReader = EndianBinaryReader(
-                                b"".join(
-                                    self.decompress_block(i, blockInfo, reader, base_offset)
-                                    for i, blockInfo in enumerate(m_BlocksInfo)
-                                ),
-                                offset=(blocksInfoReader.real_offset()),
+                    except Exception:
+                        reader.Position = pos
+                        size = reader.read_long()
+                        compressedSize = reader.read_u_int()
+                        uncompressedSize = reader.read_u_int()
+                        dataflagsValue = reader.read_u_int()
+                        if self.signature != "UnityFS":
+                            reader.read_byte()
+                        self.dataflags = ArchiveFlags(dataflagsValue)
+                        if self.version >= 7 or (version[0] == 2019 and version >= (2019, 4, 15)):
+                            reader.align_stream(16)
+                            self._uses_block_alignment = True
+                        start = reader.Position
+                        if self.dataflags & ArchiveFlags.BlocksInfoAtTheEnd:
+                            target_pos = (size - compressedSize) if size > 0 else (reader.Length - compressedSize)
+                            reader.Position = target_pos
+                            blocksInfoBytes = reader.read_bytes(compressedSize)
+                            reader.Position = start
+                        else:
+                            blocksInfoBytes = reader.read_bytes(compressedSize)
+                        blocksInfoBytes = self.decompress_data(blocksInfoBytes, uncompressedSize, self.dataflags)
+                        blocksInfoReader = EndianBinaryReader(blocksInfoBytes, offset=start)
+                        uncompressedDataHash = blocksInfoReader.read_bytes(16)
+                        blocksInfoCount = blocksInfoReader.read_int()
+                        m_BlocksInfo = [
+                            CompressionHelper.BlockInfo.from_reader(blocksInfoReader, self.version)
+                            for _ in range(blocksInfoCount)
+                        ]
+                        nodesCount = blocksInfoReader.read_int()
+                        dir_info_cls = getattr(BF_mod, "DirectoryInfoFS", None)
+                        if dir_info_cls is None:
+                            from ArisuFxPy.files.BundleFile import DirectoryInfoFS as dir_info_cls
+                        m_DirectoryInfo = [
+                            dir_info_cls(
+                                blocksInfoReader.read_long(),
+                                blocksInfoReader.read_long(),
+                                blocksInfoReader.read_u_int(),
+                                blocksInfoReader.read_string_to_null(),
                             )
-                            return m_DirectoryInfo, blocksReader
-                        raise
+                            for _ in range(nodesCount)
+                        ]
+                        if m_BlocksInfo:
+                            self._block_info_flags = m_BlocksInfo[0].flags
+                        if isinstance(self.dataflags, ArchiveFlags) and self.dataflags & ArchiveFlags.BlockInfoNeedPaddingAtStart:
+                            reader.align_stream(16)
+                        base_offset = reader.Position
+                        blocksReader = EndianBinaryReader(
+                            b"".join(
+                                self.decompress_block(i, blockInfo, reader, base_offset)
+                                for i, blockInfo in enumerate(m_BlocksInfo)
+                            ),
+                            offset=(blocksInfoReader.real_offset()),
+                        )
+                        return m_DirectoryInfo, blocksReader
                 return _orig_read_fs(self, reader)
             BF_class.read_fs = _fixed_read_fs
     except Exception:
