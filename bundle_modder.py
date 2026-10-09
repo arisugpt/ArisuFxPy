@@ -74,7 +74,8 @@ def _patch_unitypy_encryption():
                                 self._uses_block_alignment = True
                             start = reader.Position
                             if self.dataflags & ArchiveFlags.BlocksInfoAtTheEnd:
-                                reader.Position = reader.Length - compressedSize
+                                target_pos = (size - compressedSize) if size > 0 else (reader.Length - compressedSize)
+                                reader.Position = target_pos
                                 blocksInfoBytes = reader.read_bytes(compressedSize)
                                 reader.Position = start
                             else:
