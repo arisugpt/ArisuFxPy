@@ -119,6 +119,13 @@ curl -sSL https://raw.githubusercontent.com/arisugpt/ArisuFxPy/main/bundle_modde
 python bundle_modder.py
 ```
 
+> [!TIP]
+> **Extending `bundle_modder.py` (Audio, Images, and Custom Assets):**  
+> Developers can easily add custom export/import options to `bundle_modder.py` using ArisuFxPy's high-level object APIs:
+> - **Images & Textures:** Call `obj.parse_as_object().image.save("out.png")` to export PNGs, or assign `data.image = new_img; obj.save()` to replace.
+> - **Audio (AudioClip):** Iterate over `clip.samples.items()` to save `.wav` audio files directly to disk.
+> - **3D Meshes & Text:** Export 3D models via `mesh.export()` as Wavefront `.obj`, or read/replace text via `text_asset.m_Script`.
+
 ### Notes
 
 #### Windows
