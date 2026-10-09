@@ -115,14 +115,20 @@ class BundleFile(File.File):
         version = self.parse_version()
         # https://issuetracker.unity3d.com/issues/files-within-assetbundles-do-not-start-on-aligned-boundaries-breaking-patching-on-nintendo-switch
         # Unity CN introduced encryption before the alignment fix was introduced.
-        # Unity CN used the same flag for the encryption as later on the alignment fix,
-        # so we have to check the version to determine the correct flag set.
-        if (
-            version < (2020,)
-            or (version[0] == 2020 and version < (2020, 3, 34))
-            or (version[0] == 2021 and version < (2021, 3, 2))
-            or (version[0] == 2022 and version < (2022, 1, 1))
-        ):
+        # Unity CN used the same flag (0x200) for encryption as later standard Unity used for alignment padding.
+        # Upstream UnityPy mistakenly treated standard bundles (version < 2020 or repacked archives) as encrypted.
+        # In ArisuFxPy, only treat as legacy Unity CN encryption if header version is < 7 AND a decrypt key is actually provided.
+        is_legacy_cn_candidate = (
+            self.version < 7
+            and (
+                version < (2020,)
+                or (version[0] == 2020 and version < (2020, 3, 34))
+                or (version[0] == 2021 and version < (2021, 3, 2))
+                or (version[0] == 2022 and version < (2022, 1, 1))
+            )
+        )
+
+        if is_legacy_cn_candidate and ArchiveStorageManager.DECRYPT_KEY is not None:
             self.dataflags = ArchiveFlagsOld(dataflagsValue)
         else:
             self.dataflags = ArchiveFlags(dataflagsValue)

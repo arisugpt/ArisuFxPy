@@ -24,6 +24,15 @@ Via the typetree structure all object types can be edited in their native forms.
     obj.patch(instance)
 ```
 
+## 🚀 Why ArisuFxPy? (Key Enhancements over UnityPy)
+
+- 🛡️ **UABE Avalonia-Grade Compatibility (Zero False Encryption Errors):**  
+  Fixed a longstanding upstream UnityPy bug where normal Unity AssetBundles with engine version `< 2020` or modern archives using 16-byte alignment (`0x200`) were falsely treated as encrypted (*"The BundleFile is encrypted, but no key was provided!"*). **ArisuFxPy accurately distinguishes alignment padding from Unity CN DRM**, opening and saving all standard bundles seamlessly without requiring fake keys.
+- 📱 **Android & Termux 1st-Class Support:**  
+  Designed for mobile game modders and data-miners. Includes 1-line installation (`install.sh`), Termux-friendly pure Python fallbacks, and directory-shadowing fixes.
+- 🎮 **Interactive Modder Tool (`bundle_modder.py`):**  
+  A built-in interactive CLI tool to inspect asset tables, export/import text and JSON dumps, modify raw asset data, and re-pack bundles with LZ4/LZMA on PC and Android.
+
 If you need advice, want to discuss game modding / data-mining, or need support,
 feel free to join our official **[Telegram Group (@hackinjectlab)](https://t.me/hackinjectlab)**.
 
