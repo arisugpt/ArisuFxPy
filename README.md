@@ -118,6 +118,14 @@ To run the interactive bundle modding tool on Android / PC:
 curl -sSL https://raw.githubusercontent.com/arisugpt/ArisuFxPy/main/bundle_modder.py -o bundle_modder.py
 python bundle_modder.py
 ```
+## 📱 Related Project: ArisuFxBot
+
+If you don’t want to use Termux or command-line tools directly, you can use [ArisuFxBot](https://github.com/arisugpt/ArisuFxBot).
+
+ArisuFxBot is a Telegram bot powered by ArisuFxPy. It allows users to extract, inspect, mod, repack, and hex-pad Unity AssetBundles directly through Telegram.
+
+- GitHub: https://github.com/arisugpt/ArisuFxBot
+- Best for users who prefer Telegram over Termux/CLI setup
 
 > [!TIP]
 > **Extending `bundle_modder.py` (Audio, Images, and Custom Assets):**  
